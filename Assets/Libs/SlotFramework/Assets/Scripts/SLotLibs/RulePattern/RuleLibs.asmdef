@@ -1,0 +1,4 @@
+﻿{
+	"name": "RuleLibs",
+	"references":[ "GUID:343deaaf83e0cee4ca978e7df0b80d21", "GUID:3a9781db4804a9945b9883f3a7c46d45", "GUID:2bafac87e7f4b9b418d9448d219b01ab" ]
+}

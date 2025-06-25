@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CardSystem
+  m_EditorClassIdentifier: 
+  m_GroupName: CardSystem
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 66327441bcf0f4e84b96ea58606ba308
+  m_SerializeEntries:
+  - m_GUID: e088d0cc4c4a44998b6f5b084cd35e18
+    m_Address: Cards
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardSystem
+  - m_GUID: 4017d899e32d94facaddf148e1236d6a
+    m_Address: CardSystemCommon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardSystem
+  - m_GUID: 7dca95a16694f49939c58527be2afea0
+    m_Address: CardSystemIcon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardSystem
+  - m_GUID: 1860980920dd34748b9045d1a7d1aaf3
+    m_Address: CardSystemLuckyDraw.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardSystem
+  - m_GUID: cda6d4475330049cfb8aa3ac2e47ecc8
+    m_Address: CardSystem/Animation
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardSystem
+  - m_GUID: 134a65ae4f80a4936b6a87eb53226ca0
+    m_Address: CardSystem/Font
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardSystem
+  - m_GUID: ae78ae4563d5044cdbafde52802cda7b
+    m_Address: CardSystem/Prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardSystem
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 67ebd437924c54d5c84d3e37d536ee12, type: 2}
+    - {fileID: 11400000, guid: 0fb5f8d990ca44c88acb53a50ef80b4a, type: 2}

@@ -1,0 +1,75 @@
+MachineName	RequiredLevel	CardType	IsTempUnlock 	IsNew
+15X5-Line	5000	SmallCard	YES	
+FireRed7	5000	Card	YES	
+FireWildRespin	5000	Card	YES	
+Fire_red_7_5Lines	3	Card		YES
+Diamond7	6	Card		YES
+SuperStarsSevens	9	Card		
+Clover7	12	Card		
+5XRewind	15	Card		
+100X	18	Card		
+10XDiamond	21	Card		
+5XDiamond	24	Card		
+Lucky7Vault	27	Card		
+Diamond7_5thReel	30	Card		
+QuickBuck	35	Card		
+RainbowTreasure	40	Card		
+HotRed7	45	Card		
+TriplePay	50	Card		
+PiggyTreasure	55	Card		
+BigOil	5000	Card	YES	
+WelcomeVegas	5000	Card	YES	
+RedWhiteBlue	60	Card		
+SuperWheel3X4X5X	65	Card		
+Super10X5_Lines	70	Card		
+JackpotJewels	75	Card		
+SuperWheel3Spins	80	Card		
+HawaiiSunset	85	Card		
+SuperRoll	90	Card		
+FruitBar	95	Card		
+DoubleDiamond	100	Card		
+Crazy7s	105	Card		
+DiamondRush7	110	Card		
+HotHotChili	115	Card		
+PowerGrid	120	Card		
+SuperWheelEmerald	125	Card		
+SuperTimesWin	130	Card		
+Wrestling	135	Card		
+TripleDoubleButterfly	140	Card		
+RockAndBuck	145	Card		
+DiamondRespin	150	Card		
+SuperDoubleDiamond5lines	155	Card		
+Jackpot777	160	Card		
+SlidingWild	165	Card		
+FireReels	170	Card		
+GoldMine	175	Card		
+MardiGras	180	Card		
+MerryChristmas	185	Card		
+RoyalWild	190	Card		
+20X	195	Card		
+20XWild	200	Card		
+HappyEaster	205	Card		
+SuperWheel5Reels	210	Card		
+3XDiamond	215	Card		
+OrientalDragon	220	Card		
+PinkDiamond	225	Card		
+DoubleStar	230	Card		
+IceAndFire	235	Card		
+Spotlight	240	Card		
+SuperReel	245	Card		
+Super5	250	Card		
+3x2xDiamond	255	Card		
+LuckyRainbow	260	Card		
+GlidingDiamond2x	265	Card		
+RoyaleGold	270	Card		
+ChineseNewYear	275	Card		
+TempleOfEgypt	280	Card		
+ValentinesDay	285	Card		
+TripAfrica	290	Card		
+2XDiamond5Reels	295	Card		
+alloweenRespin	1	Card		
+SuperCurrents	1	Card		
+LuckyWinner	1	Card		
+BlackDiamond5X	1	Card		
+KittyCat	1	Card		
+NinjaMaster	1	Card		

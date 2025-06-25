@@ -1,0 +1,251 @@
+﻿using Libs;
+using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using Classic;
+
+public class WesternTreasureMiniDialog : UIDialog
+{
+
+    [Header("LinkGame结束按钮")]
+    public Button EndBtn;
+    [Header("FreeGame结算奖励")]
+    public UIText FreeGameWinCoins;
+    [Header("Cash结算奖励")]
+    public UIText BonusGameWinCash;
+    [Header("看广告按钮")]
+    public Button WatchADBtn;
+    private Tween tween = null;
+    private double curCoins = 0;
+    private long totalCoins = 0;
+    private bool isStop = false;
+    private int totalCash = 0;
+    private Tween Cashtween = null;
+    private int curCash = 0;
+
+    public Transform cashFlyPosition;
+    public Transform coinFlyPosition;
+    protected override void Awake()
+    {
+        base.Awake();
+        AudioManager.Instance.StopMusicAudio("Jackpot");
+        if (EndBtn != null)
+        {
+            EndBtn.onClick.AddListener(OnNotWatchADButtonClick); 
+        }
+        this.bResponseBackButton = false;
+        if (WatchADBtn!=null)
+        {
+            WatchADBtn.onClick.AddListener(OnWatchADButtonClick);
+        }
+    }
+
+    public void OnStart(double coins,int jackpotType = 0)
+    {
+        totalCoins = Utils.Utilities.CastValueLong(coins);
+        //根据 jackpot类型获取奖励值
+        totalCash = OnLineEarningMgr.Instance.GetJackpotGameWinReward(jackpotType);
+        BonusGameWinCash.gameObject.SetActive(totalCash>0);
+        // if (totalCash>0)
+        // {
+        //     BonusGameWinCash.SetText(OnLineEarningMgr.Instance.GetMoneyStr(totalCash));
+        // }
+        
+        AudioEntity.Instance.PlayRollUpEffect();
+        tween = Utils.Utilities.AnimationTo(this.curCoins, coins, 3f, UpdateTextUI, null, () =>
+        {
+            AudioEntity.Instance.StopRollingUpEffect();
+            tween = null;
+        }).SetUpdate(true);
+        //金币滚动
+        Cashtween = Utils.Utilities.AnimationTo(curCash, totalCash, 2f, SetCashCoins, null, () =>
+        {
+            SetCashCoins(totalCash);
+            Cashtween = null;
+        });
+    }
+    
+    private void SetCashCoins(int cash)
+    {
+        this.curCash = cash;
+        this.BonusGameWinCash.SetText(OnLineEarningMgr.Instance.GetMoneyStr(cash));
+    }
+    void OnEnable()
+    {
+        Messenger.AddListener<int>(ADConstants.PlayJackPotGameAD,AdIsPlaySuccessful);
+    }
+    void OnDisable()
+    {
+        Messenger.RemoveListener<int>(ADConstants.PlayJackPotGameAD,AdIsPlaySuccessful);
+    }
+    void AdIsPlaySuccessful(int type)
+    {
+        //激励广告
+        if (type == 0)
+        {
+            RewardADIsPlaySuccess();
+        }
+        //插屏广告
+        else if (type == 1)
+        {
+            DoneADCallBack();
+        }
+    }
+    
+    void RewardADIsPlaySuccess()
+    {
+        int multiple = ADManager.Instance.GetADRewardMultiple(ADEntrances.REWARD_VIDEO_ENTRANCE_BONUSGAMEWIN);
+        totalCash *= multiple;
+        //钱已经加过一次了，所以需要倍数减1
+        totalCoins *= (multiple-1);
+        DoneADCallBack();
+    }
+    private void DoneADCallBack()
+    {
+        bool needFly = true;
+        //加钱动画
+        FlyCash(needFly);
+        //加金币动画
+        FlyCoins(false);
+        Messenger.Broadcast(SlotControllerConstants.AUTO_SPIN_RESUME);
+        Libs.AudioEntity.Instance.StopAllEffect();
+        Libs.AudioEntity.Instance.PlayCoinCollectionEffect();
+        new DelayAction( .8f, null, () =>
+        {
+            Messenger.Broadcast(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL);
+            this.Close();
+        }).Play();
+    }
+
+    private bool isPlayAd;
+    //是否选择过按钮，要么点击关闭，要么点击看广告
+    private bool HasClicked = false;
+    private void OnWatchADButtonClick()
+    {
+        if (!WatchADBtn.enabled)
+        {
+            return;
+        }
+        WatchADBtn.enabled = false;
+        if (HasClicked)
+        {
+            return;
+        }
+
+        HasClicked = true;
+        if (isPlayAd)
+        {
+            return;
+        }
+        isPlayAd = true;
+        this.OnClickStopUpdate();
+        bool rewardADIsReady = ADManager.Instance.RewardAdIsOk(ADEntrances.REWARD_VIDEO_ENTRANCE_BONUSGAMEWIN);
+        //广告未加载好
+        if (!rewardADIsReady)
+        {
+            //展示未加载好广告的提示,给看过广告成功的奖励
+            ADManager.Instance.ShowLoadingADsUI(endCallBack:this.RewardADIsPlaySuccess);
+        }
+        else
+        {
+            ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_BONUSGAMEWIN);
+        }
+    }
+
+    private void OnNotWatchADButtonClick()
+    {
+        if (!EndBtn.enabled)
+        {
+            return;
+        }
+        EndBtn.enabled = false;
+        if (HasClicked)
+        {
+            return;
+        }
+        HasClicked = true;
+        this.OnClickStopUpdate();
+        //只有通过 claim点击关闭的弹窗才计入插屏广告的累计次数
+        // OnLineEarningMgr.Instance.AddADNum();
+        // if (OnLineEarningMgr.Instance.CheckCanPopAD())
+        // {
+        //     //加钱之后重置计数
+        //     OnLineEarningMgr.Instance.ResetADNum();
+        //     bool interstitialADIsReady = ADManager.Instance.InterstitialAdIsOk(ADEntrances.Interstitial_Entrance_CLOSEBONUSGAMEEND);
+        //     //广告未加载好
+        //     if (!interstitialADIsReady)
+        //     {
+        //         //展示未加载好广告的提示,直接给奖励
+        //         ADManager.Instance.ShowLoadingADsUI(endCallBack:this.DoneADCallBack);
+        //     }
+        //     else
+        //     {
+        //         //播放广告
+        //         Messenger.Broadcast(ADEntrances.Interstitial_Entrance_CLOSEBONUSGAMEEND);
+        //     }
+        // }
+        // else
+        // {
+            //不播广告直接加钱
+            DoneADCallBack();
+        // }
+    }
+
+    public void Close()
+    {
+        base.Close();
+        tween?.Kill();
+    }
+    
+    private void FlyCash(bool showAni = true)
+    {
+        //此处直接加钱
+        OnLineEarningMgr.Instance.IncreaseCash(totalCash);
+        PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.UpdateLevel,OnLineEarningMgr.Instance.GetCashTime());
+        if (showAni)
+        {
+            Messenger.Broadcast<Transform, Libs.CoinsBezier.BezierType, System.Action, CoinsBezier.BezierObjectType>(
+                GameConstants.CollectBonusWithType, cashFlyPosition, Libs.CoinsBezier.BezierType.DailyBonus, null,
+                CoinsBezier.BezierObjectType.Cash);
+        }
+        Messenger.Broadcast(SlotControllerConstants.OnCashChangeForDisPlay);
+    }
+    
+    private void FlyCoins(bool showAni=true)
+    {
+        //金币已经在GetResultAward()计算奖励时加过了，看完广告之后因为翻倍所以需要再加一次
+        if (isPlayAd)
+        {
+            UserManager.GetInstance().IncreaseBalance(totalCoins);
+        }
+        if (showAni)
+        {
+            Messenger.Broadcast<Transform, Libs.CoinsBezier.BezierType, System.Action>(
+                GameConstants.CollectBonusWithType, coinFlyPosition.transform, Libs.CoinsBezier.BezierType.DailyBonus, null);
+        }
+        Messenger.Broadcast(SlotControllerConstants.OnBlanceChangeForDisPlay);
+    }
+    
+    private void UpdateTextUI(double num)
+    {
+        this.curCoins = num;
+        FreeGameWinCoins.SetText(string.Format("<sprite name=\"coin\">{0}",Utils.Utilities.ThousandSeparatorNumber(curCoins)));
+    }
+
+    
+    public void OnClickStopUpdate()
+    {
+        if (tween == null) return;
+        isStop = true;
+        tween.Kill(true);
+        AudioEntity.Instance.StopRollingUpEffect();
+        this.UpdateTextUI(totalCoins);
+        if (Cashtween!=null)
+        {
+            Cashtween.Kill(true);
+            this.SetCashCoins(totalCash);
+        }
+    }
+}

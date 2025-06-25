@@ -1,0 +1,325 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Audio
+  m_EditorClassIdentifier: 
+  m_GroupName: Audio
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 430404963a4314380939a8da84440040
+  m_SerializeEntries:
+  - m_GUID: 422072484422e45cda76304948d1a034
+    m_Address: Audio/AdjustBet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 569d582e7f4e84bc08bc613b14fa459f
+    m_Address: Audio/Anticipation-sound.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a1d1dcbfbb0c4a8bb23e5514d84d442
+    m_Address: Audio/AwardSet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: be9faf27347194be99ca76628b156b48
+    m_Address: Audio/bet_1.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3776a2cb59fb44fbca6ebfdf4aeeffdf
+    m_Address: Audio/bet_1_5.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 399ec144f0c2f4415abb0b64d8d67e6e
+    m_Address: Audio/bet_5.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2644a162faa1b442b9d1a195905c28b4
+    m_Address: Audio/bet_max.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ffde4c2c0268f48759014d0f98521e6c
+    m_Address: Audio/bet_max2.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a24a01fbca62642b48a8467eeed9c6f1
+    m_Address: Audio/bet_minus.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6c8d2540f7e7d452b85266003ada8f88
+    m_Address: Audio/bet_plus.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: acd730d1786e244fd9ba49df72e5c015
+    m_Address: Audio/bet_sound_0.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: af46cd5f8f5a249f2b74d15b9193ccfb
+    m_Address: Audio/bet_sound_1.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a34daf5fa58c7456586b7d19917e4441
+    m_Address: Audio/bet_sound_2.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7eed0e0ef4c1b4d518eda1f316a2173d
+    m_Address: Audio/bet_sound_3.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 387075923ec42471d951f7a7278f6035
+    m_Address: Audio/bet_sound_4.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7c9cfd78c854449af9678cb42b7f510a
+    m_Address: Audio/bet_sound_5.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 46b5bd5a2557f4e0789cf3a51a499d5f
+    m_Address: Audio/bet_sound_6.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d0f648b141996494eb2adb7affafc031
+    m_Address: Audio/big_win.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d3dab83cc293c487fa01d1d0ff46cdbe
+    m_Address: Audio/bonusgame_end_dialog.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 705ea1aea7fd346069e88d9a04b6a03f
+    m_Address: Audio/bonusgame_start_dialog.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 04df1132c4cf14cb482134e86c514da6
+    m_Address: Audio/BonusOrFreeSpinGainCoins.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 102c0d35dff39475eb544af457df487d
+    m_Address: Audio/BonusSet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cd77d0266fae74ddf8d9a022adde1815
+    m_Address: Audio/BonusTrigger.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 68afc2697d38c4d2ca10817277af9e5d
+    m_Address: Audio/circleHit.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9fe531976b86347909283f3f0082faeb
+    m_Address: Audio/Click.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5f36b3c70a7a14b9dad9f3a53877eb8c
+    m_Address: Audio/close_dialog.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5b920056dff71490095841b824b2e6af
+    m_Address: Audio/Coin1.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 27ce42c9a01c04b79830cea0d66eb3cb
+    m_Address: Audio/Coin2.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7d42aee334c354637a0ecec4678293eb
+    m_Address: Audio/CoinCollection.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: de14df498e38549919ee907866c83e9a
+    m_Address: Audio/collect_coin.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cc6160b09fa3f4fa8b9dac9c65c9a09a
+    m_Address: Audio/collect_collision.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f67a6396840184ce0a2918fec347f3b6
+    m_Address: Audio/CollectSet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8ae82cea3dad1471782a60b70ee786ea
+    m_Address: Audio/CommonJackpotBGM.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1274822ed7232490a9189a1bcb825288
+    m_Address: Audio/CommonJackpotLock.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f204fa83d615b47cbaba7c7ccc5a24c4
+    m_Address: Audio/CommonJackpotRising.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 597a31b4e075f468891a508a14f6e79b
+    m_Address: Audio/CommonJackPotSpinClicked.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c7a8c9c34bb4543fe8bdec0bffc6eb4e
+    m_Address: Audio/CommonJackpotWin.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 49e1cc1e7aba2465aab3e4bf87f480f0
+    m_Address: Audio/CommonJackPotWinCoins.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 77da9906e66974a8eb6aa128d84c9e1f
+    m_Address: Audio/CommonJackPotWinMajor.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e953705077be348ef942501fe9078095
+    m_Address: Audio/CommonJackPotWinMiniAndMinor.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b5f51dd44eb2243a5a81bd0b36ef6402
+    m_Address: Audio/CompletedSet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a945d13aa60154f55856d55fc5304196
+    m_Address: Audio/cupBreakon.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c838cab22f6e14044b8aba07db46fb38
+    m_Address: Audio/DisappearSet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8ae1ec7d1b7fe477fb88ce2d03df5f64
+    m_Address: Audio/DropSet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4507ae983d33d4323851e04df5bab68a
+    m_Address: Audio/EnterRoom.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7b5bcccef20704d36bd9eb484c2b3ea2
+    m_Address: Audio/epic_win.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bb38323c2a1b74dcda7a27c44b909d1d
+    m_Address: Audio/feature_dialog_btn.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 25c69669952de465bb3e686aa8ffee1e
+    m_Address: Audio/freegame_end_dialog.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 63f718cea17bc4a598d999e43dc485c2
+    m_Address: Audio/freegame_start_dialog.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eafc789a04a24443fa695064ba1fff97
+    m_Address: Audio/gather_collect_coins.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f18685ff4ffb475aa4059790f363e77
+    m_Address: Audio/Hotroll.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fa131945fe31e4aa787f7eaf3882af9f
+    m_Address: Audio/mega_win.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e2ea52182812f413f9b5a14f52ac3d48
+    m_Address: Audio/MoveSet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ce57e7c105a7d40fead0422e49307406
+    m_Address: Audio/Multiplier.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1b27669d87a774911b97e5216ed069ff
+    m_Address: Audio/NumSet.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a44ca8cb3b48442b4b89840086c4f660
+    m_Address: Audio/of_kind_dialog.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 68da2ae93e5b640feb66c339e6e7ce79
+    m_Address: Audio/open_dialog.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3f2b04354029a426a99186901e229ca3
+    m_Address: Audio/open_function_switch.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae3d4f78184c340bda406b7744724f7c
+    m_Address: Audio/open_shop.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 959556f442ed94e37b311a89152fbd2d
+    m_Address: Audio/paytable_close.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 27750b7f39d4e4fbba2a3036f26170e1
+    m_Address: Audio/paytable_open.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 489433374b8444c40bc011c1e366a7b1
+    m_Address: Audio/paytable_scroll.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6fda0140154f84bdca9a364c62bf0d19
+    m_Address: Audio/ReelStop.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6172d7cc7926f4acbaa2e5a1bc6953e4
+    m_Address: Audio/RollingEnd.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7f71e3240f49b432fb609e1f48ea9ead
+    m_Address: Audio/RollingUp.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6276a316ee0f14e29a555c75cd08cbc7
+    m_Address: Audio/SmartSound0.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8b88aec2b944e4afd9c0576553eba87a
+    m_Address: Audio/SmartSound1.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 161fce5a2880f4b5d8111d02643af2a8
+    m_Address: Audio/SmartSound2.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f24bf27d0bf21466ca59fa1391e40a0d
+    m_Address: Audio/SmartSound3.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb64bd19672ae41e98ac8f6245e16eaf
+    m_Address: Audio/SmartSound4.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cec5d62853afc46dea7aa7d7843ac861
+    m_Address: Audio/SmartSound5.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 278317b2ab6ab40b3a31d0ef37f6ec49
+    m_Address: Audio/Special.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d401f62054b8d4c719ad6f0d5e1e086b
+    m_Address: Audio/Spin.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d507f652dd8054529843fba725800d87
+    m_Address: Audio/spin_auto_end.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2cfb2d7c5d18f4991af27f6cf6e1ef76
+    m_Address: Audio/spin_auto_start.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1ea193712eb67424f85858a33093d740, type: 2}
+    - {fileID: 11400000, guid: fa6f71bf71fd44531806da35870538bf, type: 2}

@@ -1,0 +1,29 @@
+﻿{
+  "WesternTreasure": {
+    "PackageName": "trl.sfo.ryv.WESTERNTREASURESLOTSUTA",
+    "UToAMethodName": "westernTreasureSlotsCallAn",
+    "ResourceName": "WesternTreasure",
+    "SceneName": "WesternTreasure",
+    "IsPortrait": true,
+    "Language": "EN",
+    "isSelect": true
+  },
+  "WildWest": {
+    "PackageName": "trl.sfo.ryv.WESTERNTREASURESLOTSUTA",
+    "UToAMethodName": "westernTreasureSlotsCallAn",
+    "ResourceName": "WildWest",
+    "SceneName": "WildWest",
+    "IsPortrait": false,
+    "Language": "EN",
+    "isSelect": false
+  },
+  "CandyFantasy": {
+    "PackageName": "krs.jdw.top.CANDYFANTASYSLOTSUTA",
+    "UToAMethodName": "candyFantasySlotsCalAn",
+    "ResourceName": "CandyFantasy",
+    "SceneName": "CandyFantasy",
+    "IsPortrait": true,
+    "Language": "EN",
+    "isSelect": false
+  }
+}

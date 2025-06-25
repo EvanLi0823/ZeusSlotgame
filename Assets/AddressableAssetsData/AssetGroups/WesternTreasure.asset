@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: WesternTreasure
+  m_EditorClassIdentifier: 
+  m_GroupName: WesternTreasure
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6c936ec0d0dcb4b8984e1b3003fd389d
+  m_SerializeEntries:
+  - m_GUID: de35d31105b31314387ba02a36711eac
+    m_Address: Animation
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  - m_GUID: 7def39f6e2a02544fbd3c7edd5876ae2
+    m_Address: Fonts
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  - m_GUID: c170e392b09310c4399a1a17a69b7549
+    m_Address: Material
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  - m_GUID: bd00a8bb825624ec1bcd08f8ce98a3f9
+    m_Address: WesternTreasure
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  - m_GUID: 5741d99c845993245a9735203973e6e0
+    m_Address: Background
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  - m_GUID: bbb9a958536f143aba7caa53ab11f675
+    m_Address: SpinSpeedPrefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  - m_GUID: 9c51a80c0dd904b199273bcea6a3f47e
+    m_Address: WesternTreasure.unity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  - m_GUID: dc32a794f8155d44ea208570620ffff7
+    m_Address: Symbols
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  - m_GUID: cb27ad541ce824efb9b24821b4fc1015
+    m_Address: Spine
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Machines
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b55d223334bc740d0a694b3372b8853f, type: 2}
+    - {fileID: 11400000, guid: 4946e726f83d14524bf42ddabe13b45a, type: 2}

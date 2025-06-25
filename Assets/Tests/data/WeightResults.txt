@@ -1,0 +1,37 @@
+BigWin
+W01,Blank,S05,Blank,S01	S06,Blank,W01,Blank,S05	S06,Blank,W01,Blank,S05	3
+S05,Blank,S01,Blank,S07	S06,Blank,W01,Blank,S05	S06,Blank,W01,Blank,S05	1
+S07,Blank,B02,Blank,S04	S07,Blank,B02,Blank,S04	Blank,B02,Blank,S02,Blank	2
+S06,Blank,W01,Blank,S05	S06,Blank,W01,Blank,S05	B02,Blank,S02,Blank,S06	2
+MidWin
+S06,Blank,W01,Blank,S05	S06,Blank,W01,Blank,S05	S01,Blank,S07,Blank,B02	1
+S02,Blank,S06,Blank,W01	S06,Blank,W01,Blank,S05	S02,Blank,S06,Blank,W01	1
+S03,Blank,B02,Blank,S02	S03,Blank,B02,Blank,S02	Blank,S03,Blank,B02,Blank	1
+S01,Blank,S07,Blank,B02	S01,Blank,S07,Blank,B02	S01,Blank,S07,Blank,B02	1
+S03,Blank,B02,Blank,S02	Blank,S03,Blank,B02,Blank	S07,Blank,B02,Blank,S04	1
+S02,Blank,S06,Blank,W01	S02,Blank,S06,Blank,W01	S02,Blank,S06,Blank,W01	1
+S07,Blank,B02,Blank,S04	S03,Blank,B02,Blank,S02	S07,Blank,B02,Blank,S04	1
+S01,Blank,S07,Blank,B02	S06,Blank,W01,Blank,S05	S01,Blank,S07,Blank,B02	1
+SmallWin
+S01,Blank,S07,Blank,B02	S02,Blank,S06,Blank,W01	S06,Blank,W01,Blank,S05	1
+S01,Blank,S07,Blank,B02	S01,Blank,S07,Blank,B02	W01,Blank,S05,Blank,S01	1
+S01,Blank,S07,Blank,B02	W01,Blank,S05,Blank,S01	W01,Blank,S05,Blank,S01	1
+W01,Blank,S05,Blank,S01	S01,Blank,S07,Blank,B02	W01,Blank,S05,Blank,S01	1
+S02,Blank,S06,Blank,W01	W01,Blank,S05,Blank,S01	S01,Blank,S07,Blank,B02	1
+W01,Blank,S05,Blank,S01	W01,Blank,S05,Blank,S01	S01,Blank,S07,Blank,B02	1
+S02,Blank,S06,Blank,W01	W01,Blank,S05,Blank,S01	W01,Blank,S05,Blank,S01	1
+S01,Blank,S07,Blank,B02	W01,Blank,S05,Blank,S01	S01,Blank,S07,Blank,B02	1
+NoWin
+B02,Blank,S04,Blank,B01	S06,Blank,W01,Blank,S05	S02,Blank,S06,Blank,W01	1
+S01,Blank,S07,Blank,B02	S06,Blank,W01,Blank,S05	B02,Blank,S02,Blank,S06	1
+S04,Blank,B01,Blank,S03	S05,Blank,S01,Blank,S07	S07,Blank,B02,Blank,S04	1
+S07,Blank,B02,Blank,S04	S07,Blank,B02,Blank,S04	W01,Blank,S05,Blank,S01	1
+B02,Blank,S02,Blank,S06	S05,Blank,S01,Blank,S07	Blank,B01,Blank,S03,Blank	1
+S04,Blank,B01,Blank,S03	S01,Blank,S07,Blank,B02	W01,Blank,S05,Blank,S01	1
+W01,Blank,S05,Blank,S01	S02,Blank,S06,Blank,W01	B02,Blank,S04,Blank,B01	1
+S07,Blank,B02,Blank,S04	S02,Blank,S06,Blank,W01	S02,Blank,S06,Blank,W01	1
+W01,Blank,S05,Blank,S01	B02,Blank,S04,Blank,B01	S02,Blank,S06,Blank,W01	1
+W01,Blank,S05,Blank,S01	S04,Blank,B01,Blank,S03	S03,Blank,B02,Blank,S02	1
+S03,Blank,B02,Blank,S02	S05,Blank,S01,Blank,S07	W01,Blank,S05,Blank,S01	1
+S06,Blank,W01,Blank,S05	S07,Blank,B02,Blank,S04	S06,Blank,W01,Blank,S05	1
+S07,Blank,B02,Blank,S04	S03,Blank,B02,Blank,S02	B02,Blank,S02,Blank,S06	1
