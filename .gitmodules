@@ -1,0 +1,3 @@
+[submodule "Assets/AssetResources"]
+	path = Assets/AssetResources
+	url = git@github.com:EvanLi0823/AssetResources.git
