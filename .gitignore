@@ -1,0 +1,52 @@
+i===============
+from http://unity3d.com/learn/tutorials/modules/beginner/architecture/folders-in-version-control
+Unity generated
+===============
+Temp/
+Library/
+UserSettings/
+=====================================
+Visual Studio / MonoDevelop generated
+=====================================
+ExportedObj/
+Assets/test-results/
+test-results/
+obj/
+ProjectSettings/EditorBuildSettings.asset
+*.svd
+*.userprefs
+/*.csproj
+*.pidb
+*.suo
+/*.sln
+*.user
+*.unityproj
+*.booproj
+*.dwlt
+*.cs~
+test-results/
+============
+OS generated
+============
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+.gradle
+Assets/*\ copy
+Assets/*\ copy.meta
+.vs/
+.vscode
+*.idea/*
+ .idea
+Assets/Plugins/Editor/JetBrains
+PackageTextAssets/
+Logs/
+#hook
+.install.sh
+.install.bat
+.pre-commit
