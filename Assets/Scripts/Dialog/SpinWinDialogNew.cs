@@ -80,8 +80,8 @@ public class SpinWinDialogNew : UIDialog
         // SetCashCoins(totalCash);
         // UpdateTextUI(totalCoins);
         //设置图片
-        winImage[0].sprite = winType[(int)type];
-        foreach (var item in winImage) item.SetNativeSize();
+        // winImage[0].sprite = winType[(int)type];
+        // foreach (var item in winImage) item.SetNativeSize();
         //播放spine动画
         PlaySpineShowAni(1);
         this.PlayWinTypeEffect();

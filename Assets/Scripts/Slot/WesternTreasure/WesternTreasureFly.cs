@@ -161,22 +161,22 @@ public class WesternTreasureFly : MonoBehaviour
         {
             treeManager.spinResult.wildNum = 40000;
             treeManager.spinResult.curTreeLevel = 4;
-            PlayGirlAni(1);
-            yield return new WaitForSeconds(1.0f);
+            // PlayGirlAni(1);
+            // yield return new WaitForSeconds(1.0f);
             PlayAnimation(2);
             // AudioManager.Instance.AsyncPlayEffectAudio("treelevelup");
             yield return new WaitForSeconds(0.6f);
             ChangeSkin(4);
             yield return new WaitForSeconds(1);
-            PlayGirlAni(0);
+            // PlayGirlAni(0);
             //此粒子特效先关闭
             //SetTriggerEffect(true);
             PlayAnimation(3);
             AudioManager.Instance.AsyncPlayEffectAudio("treelevelup");
             yield return new WaitForSeconds(1f);
-            JackPotAni.AnimationState.SetAnimation(0, "animation2", false);
-            AudioManager.Instance.AsyncPlayEffectAudio("JackPotStart");
-            yield return new WaitForSeconds(5.21f);
+            // JackPotAni.AnimationState.SetAnimation(0, "animation2", false);
+            // AudioManager.Instance.AsyncPlayEffectAudio("JackPotStart");
+            // yield return new WaitForSeconds(5.21f);
             //SetTriggerEffect(false);
             treeManager.OpenJackpotGame();
         }
@@ -225,14 +225,14 @@ public class WesternTreasureFly : MonoBehaviour
             }
         }
 
-        if(GirlGraphic != null)
-        {
-            GirlGraphic.startingAnimation = "hu xi";
-            if(GirlGraphic.AnimationState != null)
-            {
-                GirlGraphic.AnimationState.Complete += OnGirlPlayComplete;
-            }
-        }
+        // if(GirlGraphic != null)
+        // {
+        //     GirlGraphic.startingAnimation = "hu xi";
+        //     if(GirlGraphic.AnimationState != null)
+        //     {
+        //         GirlGraphic.AnimationState.Complete += OnGirlPlayComplete;
+        //     }
+        // }
     }
 
     private void OnComplete(Spine.TrackEntry entry)
@@ -249,7 +249,6 @@ public class WesternTreasureFly : MonoBehaviour
         string aniName = GetAnimationName(animationId);
         if (!string.IsNullOrEmpty(aniName))
             skeletonGraphic.AnimationState.SetAnimation(0, aniName, false);
-            // CandyJarGraphic.AnimationState.SetAnimation(0, aniName, false);
     }
 
     public void ChangeSkin(int skinId)
@@ -258,10 +257,7 @@ public class WesternTreasureFly : MonoBehaviour
         if (!string.IsNullOrEmpty(skinName))
             skeletonGraphic.Skeleton.SetSkin(skinName);
             skeletonGraphic.Skeleton.SetSlotsToSetupPose();
-            skeletonGraphic.AnimationState.Apply(skeletonGraphic.Skeleton);
-            // CandyJarGraphic.Skeleton.SetSkin(skinName);
-            // CandyJarGraphic.Skeleton.SetSlotsToSetupPose();
-            // CandyJarGraphic.AnimationState.Apply(skeletonGraphic.Skeleton);
+            skeletonGraphic.AnimationState.Apply(skeletonGraphic.Skeleton); 
     }
 
     public void ChangeCandyJarSkin(int skinId)
@@ -294,8 +290,15 @@ public class WesternTreasureFly : MonoBehaviour
     {
         //skeletonGraphic.AnimationState.SetEmptyAnimations(0); 
         skeletonGraphic.AnimationState.SetAnimation(0,animationName,true);
-        JackPotAni.AnimationState.SetAnimation(0, animationName, true);
-        PlayGirlAni(0);
+        if (JackPotAni!=null)
+        {
+            JackPotAni.AnimationState.SetAnimation(0, animationName, true);
+        }
+
+        if (GirlGraphic!=null)
+        {
+            PlayGirlAni(0);
+        }
     }
 
     
