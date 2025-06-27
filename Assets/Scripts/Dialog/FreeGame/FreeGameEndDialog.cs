@@ -237,7 +237,7 @@ public class FreeGameEndDialog : UIDialog
     private void UpdateTextUI(long num)
     {
         this.curCoins = num;
-        FreeGameWinCoins.SetText(string.Format("<sprite=1>{0}",Utils.Utilities.ThousandSeparatorNumber(curCoins)));
+        FreeGameWinCoins.SetText(string.Format("<sprite=0>{0}",Utils.Utilities.ThousandSeparatorNumber(curCoins)));
     }
     
     private void SetCashCoins(int cash)
