@@ -31,8 +31,8 @@ public class LuckyCashDialog : UIDialog
     {
         AudioManager.Instance.AsyncPlayEffectAudio("Bonus_win");
         TMP_Money = Util.FindObject<TextMeshProUGUI>(transform, "Anchor/Animation/TMP_Money");
-        BtnWatch = Util.FindObject<Button>(transform, "Anchor/Animation/Btns/BtnWatch");
-        BtnNotWatch= Util.FindObject<Button>(transform, "Anchor/Animation/Btns/BtnNotWatch");
+        BtnWatch = Util.FindObject<Button>(transform, "Anchor/Animation/BtnWatch");
+        BtnNotWatch= Util.FindObject<Button>(transform, "Anchor/Animation/BtnNoWatch");
         BtnWatch.onClick.AddListener(OnWatchADButtonClick);
         BtnNotWatch.onClick.AddListener(OnButtonCloseClick);
         base.Awake();
