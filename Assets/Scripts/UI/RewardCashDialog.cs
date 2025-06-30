@@ -10,7 +10,7 @@ namespace Classic
     public class RewardCashDialog : UIDialog
     {
         private TextMeshProUGUI TMP_Money;
-        private Button BtnWatch;
+        public Button BtnWatch;
         public Transform cashFlyPosition;
 
         //PopRewardState exit
@@ -23,7 +23,6 @@ namespace Classic
         {
             AudioManager.Instance.AsyncPlayEffectAudio("Bonus_win");
             TMP_Money = Util.FindObject<TextMeshProUGUI>(transform, "Anchor/Animation/TMP_Money");
-            BtnWatch = Util.FindObject<Button>(transform, "Anchor/Animation/Btns/BtnWatch");
             BtnWatch.onClick.AddListener(OnButtonClick);
             base.Awake();
         }
