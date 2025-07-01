@@ -19,7 +19,7 @@ public class WesternTreasureFly : MonoBehaviour
     private WesternTreasureReelManager treeManager;
     public GameObject triggerEffect;
     private Stack<GameObject> m_ImagePool = new Stack<GameObject>();
-    //candyjar的动画
+    //转场动画
     public SkeletonGraphic JackPotAni;
     //girl的动画  0:"hu xi",1:"animation6"
     public SkeletonGraphic GirlGraphic;
@@ -174,10 +174,13 @@ public class WesternTreasureFly : MonoBehaviour
             PlayAnimation(3);
             AudioManager.Instance.AsyncPlayEffectAudio("treelevelup");
             yield return new WaitForSeconds(1f);
-            // JackPotAni.AnimationState.SetAnimation(0, "animation2", false);
-            // AudioManager.Instance.AsyncPlayEffectAudio("JackPotStart");
-            // yield return new WaitForSeconds(5.21f);
-            //SetTriggerEffect(false);
+            JackPotAni.Skeleton.SetToSetupPose();
+            JackPotAni.gameObject.SetActive(true);
+            JackPotAni.AnimationState.SetAnimation(0, "zhuan_chang_1", false);
+            AudioManager.Instance.AsyncPlayEffectAudio("JackPotStart");
+            yield return new WaitForSeconds(4.2f);
+            JackPotAni.gameObject.SetActive(false);
+            // SetTriggerEffect(false);
             treeManager.OpenJackpotGame();
         }
     }
