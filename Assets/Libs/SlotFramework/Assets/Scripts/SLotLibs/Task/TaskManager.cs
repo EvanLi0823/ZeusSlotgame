@@ -113,7 +113,7 @@ namespace Libs
             }
         }
         
-        public BaseTask GetTaskById(int taskId)
+        private BaseTask GetTaskById(int taskId)
         {
             if (!taskDict.ContainsKey(taskId))
             {

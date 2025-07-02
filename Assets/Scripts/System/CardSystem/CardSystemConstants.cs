@@ -36,8 +36,9 @@ namespace CardSystem
         public static string Name = "name";
         public static string UIConfig = "UIConfig";
         
-        public static string GetCardCountMsg = "GetCardCountMsg";
+        public static string GetCardNewTypeCountMsg = "GetCardNewTypeCountMsg";
         public static string RefreshLotteryMsg = "RefreshLotteryMsg";
+        public static string GetCardNewCountMsg = "GetCardNewCountMsg";
 
         public static string PrefabPath = "CardSystem/Prefab";
     }

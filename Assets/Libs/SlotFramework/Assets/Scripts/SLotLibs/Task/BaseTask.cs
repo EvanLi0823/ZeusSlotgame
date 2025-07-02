@@ -44,7 +44,7 @@ namespace Libs
             TaskId = Utilities.GetInt(taskInfoDict, TaskConstants.TaskId_Key, 0);
             TaskType = Utilities.GetInt(taskInfoDict, TaskConstants.Type_Key, 0);
             
-            Description = Utilities.GetString(taskInfoDict, TaskConstants.TaskDes_Key, "");
+            Description = Utilities.GetString(taskInfoDict, TaskConstants.TaskLocalizeDesc_Key, "");
             
             StartTime= Utils.Utilities.GetLong(taskInfoDict, TaskConstants.StartTime_Key, 0);
             EndTime= Utils.Utilities.GetLong(taskInfoDict, TaskConstants.EndTime_Key, 0);
@@ -74,6 +74,7 @@ namespace Libs
                 if (EndTime == -1)
                 {
                     State = (int)TaskState.ONGOING;
+                    return;
                 }
                 long timeMill = TimeUtils.ConvertDateTimeLong(DateTime.Now);
                 if (timeMill>StartTime && timeMill<EndTime)
@@ -130,9 +131,18 @@ namespace Libs
             return (TaskState)State;
         }
 
+        /// <summary>
+        /// 返回多语言文本的key,不直接返回文本内容，方便外部修改
+        /// </summary>
+        /// <returns></returns>
         public virtual string GetDesc()
         {
             return Description;
+        }
+        
+        public virtual string GetProgressDesc()
+        {
+            return $"{HasCollectNum}/{TargetNum}";
         }
 
         public virtual void Clone(BaseTask task)

@@ -20,7 +20,7 @@ namespace Libs
                     task = new SpinAwardCashTask(taskInfoDict, parentTask);
                     break;
                 case TaskConstants.AccumulateCashTask_Key:
-                    task = new AccumulateCashTask(taskInfoDict, parentTask);
+                    task = new AccumulateTotalCashTask(taskInfoDict, parentTask);
                     break;
                 case TaskConstants.CollectSpinCountTask_Key:
                     task = new CollectSpinCountTask(taskInfoDict, parentTask);
@@ -29,7 +29,16 @@ namespace Libs
                     task = new CollectADCountTask(taskInfoDict, parentTask);
                     break;
                 case TaskConstants.CollectCardTask_Key:
-                    task = new CollectCardTask(taskInfoDict, parentTask);
+                    task = new CollectCardTypeCountTask(taskInfoDict, parentTask);
+                    break;
+                case TaskConstants.CollectCashFromZeroTask_Key:
+                    task = new CollectCashFromZeroTask(taskInfoDict, parentTask);
+                    break;
+                case TaskConstants.CollectNewCardCountTask_Key:
+                    task = new CollectNewCardCountTask(taskInfoDict, parentTask);
+                    break;
+                case TaskConstants.CollectNewCardTypeCountTask_Key:
+                    task = new CollectNewCardTypeCountTask(taskInfoDict, parentTask);
                     break;
             }
             return task;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Libs;
 using Spine;
@@ -63,6 +64,11 @@ namespace Activity
             RefreshProgress(activity.GetProgress(),activity.GetProgressText());
             SetInfo();
             ShowTaskIcon();
+            //新的任务显示已经切换完成，通知活动检测任务状态
+            new DelayAction(1f, null, () =>
+            {
+                activity.CheckTaskState();
+            }).Play();
         }
 
         private void ShowTaskIcon()
@@ -85,7 +91,8 @@ namespace Activity
                 }
             }
         }
-        protected override void AddListener()
+
+        private void Start()
         {
             
         }

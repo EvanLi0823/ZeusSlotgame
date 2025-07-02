@@ -7,7 +7,7 @@ namespace Libs
         public const string TargetNum_Key = "targetNum";
         public const string TaskId_Key = "taskId";
         
-        public const string TaskDes_Key = "description";
+        public const string TaskLocalizeDesc_Key = "localizeDesc";
         public const string TaskState_Key = "taskState";
         public const string TaskMark_Key = "mark";
 
@@ -28,5 +28,8 @@ namespace Libs
         public const int WatchADTimeTask_Key = 13;      //观看广告次数
         public const int CollectSpinCountTask_Key = 14; //收集Spin次数
         public const int CollectCardTask_Key = 15;      //收集卡片类型数量
+        public const int CollectCashFromZeroTask_Key = 16; //从0开始收集现金
+        public const int CollectNewCardCountTask_Key = 17; //收集卡片数量的任务，无论类型
+        public const int CollectNewCardTypeCountTask_Key = 18; //从0开始收集卡牌类型数量任务
     }
 }
