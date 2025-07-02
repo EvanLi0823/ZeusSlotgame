@@ -10,10 +10,13 @@ namespace Activity
     public class WithDrawTaskActivity: BaseActivity
     {
         private const string WithDrawTaskProgress = "WithDrawTaskProgress";
-        public CollectCardTask CollectCardTask;
+        public CollectCardTypeCountTask CollectCardTypeCountTask;
         public CollectSpinCountTask CollectSpinCountTask;
         public CollectADCountTask CollectADCountTask;
-        public AccumulateCashTask AccumulateCashTask;
+        public AccumulateTotalCashTask AccumulateTotalCashTask;
+        public CollectNewCardTypeCountTask CollectNewCardTypeCountTask;
+        public CollectCashFromZeroTask CollectCashFromZeroTask;
+
         private List<object> taskData = new List<object>();
         public LocalizedString CollectNumCards;
         public LocalizedString SpinNumTimes;
@@ -70,9 +73,9 @@ namespace Activity
                 Debug.LogError("WithDrawTaskActivity ParseTaskData error, taskId: " + taskId);
                 return;
             }
-            if (Task is CollectCardTask)
+            if (Task is CollectCardTypeCountTask)
             {
-                CollectCardTask = Task as CollectCardTask;
+                CollectCardTypeCountTask = Task as CollectCardTypeCountTask;
             }
             else if (Task is CollectSpinCountTask)
             {
@@ -82,9 +85,16 @@ namespace Activity
             {
                 CollectADCountTask = Task as CollectADCountTask;
             }
-            else if (Task is AccumulateCashTask)
+            else if (Task is AccumulateTotalCashTask)
             {
-                AccumulateCashTask = Task as AccumulateCashTask;
+                AccumulateTotalCashTask = Task as AccumulateTotalCashTask;
+            }
+            else if (Task is CollectNewCardTypeCountTask)
+            {
+                CollectNewCardTypeCountTask = Task as CollectNewCardTypeCountTask;
+            }else if (Task is CollectCashFromZeroTask)
+            {
+                CollectCashFromZeroTask = Task as CollectCashFromZeroTask;
             }
             Messenger.AddListener(Task.UpdateTaskDataMsg, UpdateProgress);
             List<BaseAwardItem> baseAwardItems = GetTaskAward();
@@ -192,21 +202,13 @@ namespace Activity
             string info = string.Empty;
             if (Task!= null)
             {
-                if (Task is CollectCardTask)
+                if (Task.TaskType ==TaskConstants.AccumulateCashTask_Key || Task.TaskType==TaskConstants.CollectCashFromZeroTask_Key)
                 {
-                    info = string.Format("<color=#FFFD3A>{0}</color>",(Task as CollectCardTask).TargetNum);
+                    info = string.Format("<color=#FFFD3A>{0}</color>",OnLineEarningMgr.Instance.GetMoneyStr((int)Task.TargetNum,0,false,true));
                 }
-                else if (Task is CollectSpinCountTask)
+                else
                 {
-                    info = string.Format("<color=#FFFD3A>{0}</color>",(Task as CollectSpinCountTask).TargetNum);
-                }
-                else if (Task is CollectADCountTask)
-                {
-                    info = string.Format("<color=#FFFD3A>{0}</color>",(Task as CollectADCountTask).TargetNum);
-                }
-                else if (Task is AccumulateCashTask)
-                {
-                    info = string.Format("<color=#FFFD3A>{0}</color>",OnLineEarningMgr.Instance.GetMoneyStr((int)(Task as AccumulateCashTask).TargetNum,0,false,true));
+                    info = string.Format("<color=#FFFD3A>{0}</color>",Task.TargetNum);
                 }
             }
             return info;
@@ -217,15 +219,7 @@ namespace Activity
             string info = string.Empty;
             if (Task!= null)
             {
-               info = Task.HasCollectNum + "/" + Task.TargetNum;
-               if (Task is AccumulateCashTask)
-               {
-                   if (AccumulateCashTask!=null)
-                   {
-                       info = string.Format("{0}/{1}",OnLineEarningMgr.Instance.GetMoneyStr((int)AccumulateCashTask.HasCollectNum,0,false,true),
-                           OnLineEarningMgr.Instance.GetMoneyStr((int)AccumulateCashTask.TargetNum,0,false,true));
-                   }
-               }
+                info = Task.GetProgressDesc();
             }
             return info;
         }
@@ -235,7 +229,7 @@ namespace Activity
             int iconId = 0;
             if (Task!= null)
             {
-                if (Task is CollectCardTask)
+                if (Task is CollectCardTypeCountTask|| Task is CollectNewCardTypeCountTask)
                 {
                     iconId = 3;
                 }
@@ -247,7 +241,7 @@ namespace Activity
                 {
                     iconId = 1;
                 }
-                else if (Task is AccumulateCashTask)
+                else if (Task is AccumulateTotalCashTask || Task is CollectCashFromZeroTask)
                 {
                     iconId = 2;
                 }
@@ -299,22 +293,11 @@ namespace Activity
         public string GetTaskInfoDesc()
         {
             string info = "";
-            string key = "";
-            if (Task is CollectCardTask)
+            string key = Task.GetDesc();
+            if (string.IsNullOrEmpty(key))
             {
-                key = "CollectNumCards";
-            }
-            else if (Task is CollectSpinCountTask)
-            {
-                key = "SpinNumTimes";                
-            }
-            else if (Task is CollectADCountTask)
-            {
-                key = "WatchNumVideo";
-            }
-            else if (Task is AccumulateCashTask)
-            {
-                key = "CollectNumCash";
+                Debug.LogError("WithDrawTaskActivity GetTaskInfoDesc error, key is null or empty, taskId: " + Task.TaskId);
+                return info;
             }
             LocalizedString localizedString = new LocalizedString(LocalizationManager.Instance.tableName,key);
             if (localizedString!=null)

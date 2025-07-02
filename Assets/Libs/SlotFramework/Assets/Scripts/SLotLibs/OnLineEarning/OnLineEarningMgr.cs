@@ -224,6 +224,10 @@ public class OnLineEarningMgr
     
     public virtual void IncreaseCash(int newCash)
     {
+        if (newCash>0)
+        {
+            Messenger.Broadcast<int>(OnLineEarningConstants.IncreaseCashMsg, newCash);
+        }
         SetCash(cash + newCash);
     }
     //金钱汇率 以美元为基数转换

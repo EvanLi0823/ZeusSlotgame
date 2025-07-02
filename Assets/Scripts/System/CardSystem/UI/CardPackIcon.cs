@@ -40,14 +40,14 @@ namespace CardSystem
         {
             // 添加监听器的逻辑
             Debug.Log("Adding listeners for Card Lottery Icon");
-            Messenger.AddListener(CardSystemConstants.GetCardCountMsg,UpdateCard);
+            Messenger.AddListener(CardSystemConstants.GetCardNewTypeCountMsg,UpdateCard);
         }
 
         protected override void RemoveListener()
         {
             // 移除监听器的逻辑
             Debug.Log("Removing listeners for Card Lottery Icon");
-            Messenger.RemoveListener(CardSystemConstants.GetCardCountMsg,UpdateCard);
+            Messenger.RemoveListener(CardSystemConstants.GetCardNewTypeCountMsg,UpdateCard);
         }
 
         void UpdateCard()

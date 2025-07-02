@@ -242,7 +242,7 @@ namespace Core
             return PopLevel;
         }
         
-        //检测能否弹出小弹窗
+        //检测能否弹出Luckycash弹窗
         public override bool CheckCanPopReward()
         {
             return CanShowBig();

@@ -440,8 +440,9 @@ namespace CardSystem
             //广播收集到新卡牌
             if (collectnew)
             {
-                Messenger.Broadcast(CardSystemConstants.GetCardCountMsg);
+                Messenger.Broadcast(CardSystemConstants.GetCardNewTypeCountMsg);
             }
+            Messenger.Broadcast(CardSystemConstants.GetCardNewCountMsg);
             PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint, "CardsNum", GetCardsCount());
         }
 

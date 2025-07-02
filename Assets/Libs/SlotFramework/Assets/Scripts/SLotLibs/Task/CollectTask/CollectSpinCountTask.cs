@@ -24,5 +24,10 @@ namespace Libs
             UpdateTaskStatus();
             Messenger.Broadcast(UpdateTaskDataMsg);
         }
+
+        public override string GetDesc()
+        {
+            return "SpinNumTimes";
+        }
     }
 }

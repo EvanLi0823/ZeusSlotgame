@@ -269,7 +269,6 @@ namespace Core
         
         public void ResetSpinTime()
         {
-            Debug.Log("BaseRewardConfig");
             CurSpinTime=0;
         }
         
