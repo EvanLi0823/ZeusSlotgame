@@ -9,10 +9,11 @@ namespace Activity
     public enum ActivityType
     {
         None = -1,
-        SpinWithDraw,
-        CardLottery,
-        CardPack,
-        WithDrawTask,
+        SpinWithDraw=0,
+        CardLottery=1,
+        CardPack=2,
+        WithDrawTask=3,
+        H5RewardActivity=4,
     }
 
     public enum ActivityState

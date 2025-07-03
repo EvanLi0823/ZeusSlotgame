@@ -32,6 +32,7 @@ public class AdditionalPanel : MonoBehaviour
     private long lastTime = 0;
     private bool needShowQiPao = false;
     private Coroutine showQiPaoCor;
+    private bool isClicked = false;
     private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -147,6 +148,11 @@ public class AdditionalPanel : MonoBehaviour
     
     private void OnH5Click(GameObject go)
     {
+        if (isClicked)
+        {
+            return;
+        }
+        isClicked = true;
 #if UNITY_ANDROID
          SkySreenUtils.CurrentOrientation = ScreenOrientation.Portrait;
 #endif
@@ -176,6 +182,11 @@ public class AdditionalPanel : MonoBehaviour
     //从H5页面退出
     private void OnExitH5()
     {
+        if (!isClicked)
+        {
+            return;
+        }
+        isClicked = false;
         //隐藏当前显示的按钮
         h5Buttons[curShowIndex].gameObject.SetActive(false);
         //重置计数

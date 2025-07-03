@@ -59,6 +59,9 @@ namespace Activity
                 case ActivityConstants.WITHDRAWTASK:
                     activity = new WithDrawTaskActivity(data);
                     break;
+                case ActivityConstants.H5RewardActivity:
+                    activity = new H5RewardActivity(data);
+                    break;
             }
 
             return activity;
