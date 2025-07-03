@@ -161,19 +161,8 @@ namespace CardSystem
         private void ShowItem(int i, GameObject go)
         {
             Transform img_cardpack = Util.FindObject<Transform>(go.transform, "img_cardpack");
-            Transform img_star = Util.FindObject<Transform>(go.transform, "img_star");
             GameObject img_card = Util.FindObject<GameObject>(img_cardpack.transform, "" + i);
             img_card.SetActive(true);
-            //一颗星星不显示
-            if (i > 1)
-            {
-                // 更新星星数量
-                for (int j = 1; j <= i; j++)
-                {
-                    GameObject star = Util.FindObject<GameObject>(img_star.transform, "" + j);
-                    star.SetActive(true);
-                }
-            }
         }
 
         private void SetItemAni(GameObject go,string trigger = "idle")
