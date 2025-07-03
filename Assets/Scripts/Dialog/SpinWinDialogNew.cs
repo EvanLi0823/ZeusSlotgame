@@ -253,9 +253,11 @@ public class SpinWinDialogNew : UIDialog
         }
         else
         {
+            //观看激励视频后，累计插屏的计数进度重置
+            OnLineEarningMgr.Instance.ResetADNum();
+            OnLineEarningMgr.Instance.ResetSpinTime();
             ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_SPINWIN);
         }
-        OnLineEarningMgr.Instance.ResetSpinTime();
     }
     void AdIsPlaySuccessful(int type)
     {
