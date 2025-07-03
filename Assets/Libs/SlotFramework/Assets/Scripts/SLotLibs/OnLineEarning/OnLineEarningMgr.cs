@@ -218,6 +218,7 @@ public class OnLineEarningMgr
             throw new System.ArgumentOutOfRangeException("newCash");
         }
         cash = newCash;
+        PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"Cash",cash.ToString());
         SharedPlayerPrefs.SetPlayerPrefsIntValue(CASH,cash); 
     }
    

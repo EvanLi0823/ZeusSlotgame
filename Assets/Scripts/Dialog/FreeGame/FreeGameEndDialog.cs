@@ -96,7 +96,7 @@ public class FreeGameEndDialog : UIDialog
             }
            
         // }
-        
+        SendMsg();
     }
     
    private void OnWatchADButtonClick(GameObject go)
@@ -130,6 +130,7 @@ public class FreeGameEndDialog : UIDialog
             ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_FREESPINEND);
         }
         OnLineEarningMgr.Instance.ResetSpinTime();
+        SendMsg(2);
     }
     void AdIsPlaySuccessful(int type)
     {
@@ -258,6 +259,13 @@ public class FreeGameEndDialog : UIDialog
             Cashtween.Kill(true);
             this.SetCashCoins(totalCash);
         }
+    }
+    private void SendMsg(int multiple = 1)
+    {
+        string msgName = "FreeGame";
+        msgName +=multiple.ToString();
+        //发送消息给平台
+        PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,msgName);
     }
 }
    

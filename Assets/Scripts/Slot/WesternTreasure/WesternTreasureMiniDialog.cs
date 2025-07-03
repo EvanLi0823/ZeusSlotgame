@@ -153,6 +153,7 @@ public class WesternTreasureMiniDialog : UIDialog
             ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_BONUSGAMEWIN);
         }
         OnLineEarningMgr.Instance.ResetSpinTime();
+        SendMsg(2);
     }
 
     private void OnNotWatchADButtonClick()
@@ -192,6 +193,7 @@ public class WesternTreasureMiniDialog : UIDialog
             //不播广告直接加钱
             DoneADCallBack();
         // }
+        SendMsg();
     }
 
     public void Close()
@@ -248,5 +250,12 @@ public class WesternTreasureMiniDialog : UIDialog
             Cashtween.Kill(true);
             this.SetCashCoins(totalCash);
         }
+    }
+    private void SendMsg(int multiple = 1)
+    {
+        string msgName = "JackPot";
+        msgName +=multiple.ToString();
+        //发送消息给平台
+        PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,msgName);
     }
 }

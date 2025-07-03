@@ -65,22 +65,22 @@ namespace Classic
             yield return AddressableManager.Instance.InitializeAsync(progress => {
                 UpdateRealProgress(0.02f + progress * 0.05f);
             });
-            
             // 2. 加载游戏配置 (权重: 0.08)
             yield return LoadConfig();
-            
+            PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"LoadConfig");
             // 3. 预加载核心资源 (权重: 0.45)
             yield return PreloadCoreAssets();
-            
+            PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"PreloadCoreAssets");
             // 4. 预加载机器资源 (权重: 0.20)
             yield return PreloadMachineAssets();
-            
+            PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"PreloadMachineAssets");
             // 5. 预加载机器配置所需资源 (权重: 0.20)
             yield return PreLoadMachineConfig();
-            
+            PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"PreLoadMachineConfig");
             // 6. 加载主场景 (权重: 0.05)
             yield return LoadMainScene();
-            
+            PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"LoadMainSceneEnd");
+
             // 清理资源
             Resources.UnloadUnusedAssets();
             GC.Collect();

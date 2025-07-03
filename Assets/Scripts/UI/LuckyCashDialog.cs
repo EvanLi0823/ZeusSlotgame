@@ -35,6 +35,7 @@ public class LuckyCashDialog : UIDialog
         BtnNotWatch= Util.FindObject<Button>(transform, "Anchor/Animation/BtnNoWatch");
         BtnWatch.onClick.AddListener(OnWatchADButtonClick);
         BtnNotWatch.onClick.AddListener(OnButtonCloseClick);
+        PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"LuckyCash");
         base.Awake();
     }
     void OnEnable()
