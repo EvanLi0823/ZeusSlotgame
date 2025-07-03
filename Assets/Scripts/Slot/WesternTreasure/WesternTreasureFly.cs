@@ -57,36 +57,9 @@ public class WesternTreasureFly : MonoBehaviour
            
             go.gameObject.SetActive(true);
             go.transform.localScale = Vector3.one;
-            Vector3 midPoint = (go.transform.position + DestinationGO.transform.position) / 2f;
+            
             Sequence seq = DOTween.Sequence();
-
-            // 缩放到正常大小
-            seq.Append(go.transform.DOScale(Vector3.one, scaleUpDuration));
-            // 移动到中途点
-            seq.Append(go.transform.DOMove(midPoint, moveDuration));
-            // 缓动暂停
-            seq.AppendInterval(holdDuration);
-            // 移动到目标点
-            seq.Append(go.transform.DOMove(DestinationGO.transform.position,endMoveDuration).SetEase(Ease.InSine));
-            // 缩小到零
-            seq.Append(go.transform.DOScale(Vector3.zero, scaleDownDuration));
-
-            // 每帧持续朝向目标
-            seq.OnStart(() =>
-            {
-                DOTween.To(() => 0, x =>
-                {
-                    // 空操作，仅用来持续调用OnUpdate
-                }, 0, 0).OnUpdate(() =>
-                {
-                    if (DestinationGO.transform.position != null)
-                    {
-                        go.transform.LookAt(DestinationGO.transform.position);
-                    }
-                });
-            });
-
-            seq.OnComplete(() =>
+            seq.Append(go.transform.DOMove(DestinationGO.transform.position, 1.2f).OnComplete(delegate
             {
                 go.SetActive(false);
                 m_ImagePool.Push(go);
@@ -98,28 +71,11 @@ public class WesternTreasureFly : MonoBehaviour
                 {
                     treeManager.spinResult.wildNum += treeManager.spinResult.treeGrow.baseWild;
                 }
-
-
+            
+            
                 ChangeTreeState();
-            });
-            // Sequence sequence = DOTween.Sequence();
-            // sequence.Append(go.transform.DOMove(DestinationGO.transform.position, 1.2f).OnComplete(delegate
-            // {
-            //     go.SetActive(false);
-            //     m_ImagePool.Push(go);
-            //     if (treeManager.isFreespinBonus)
-            //     {
-            //         treeManager.spinResult.wildNum += treeManager.spinResult.treeGrow.freeWild;
-            //     }
-            //     else
-            //     {
-            //         treeManager.spinResult.wildNum += treeManager.spinResult.treeGrow.baseWild;
-            //     }
-            //
-            //
-            //     ChangeTreeState();
-            //  
-            // }));
+             
+            }));
             //sequence.Join(go.transform.DOScale(0.1f, 1.2f));
             seq.SetUpdate(true);
             seq.Play();
@@ -365,11 +321,11 @@ public class WesternTreasureFly : MonoBehaviour
         }
         else if (animationId==2)
         {
-            return "Level Up"; 
+            return "Level up"; 
         }
         else if (animationId==3)
         {
-            return "Tree_4";
+            return "Tree 4";
         }
 
         return null;
