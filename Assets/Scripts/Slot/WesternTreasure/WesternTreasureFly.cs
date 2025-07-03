@@ -247,7 +247,11 @@ public class WesternTreasureFly : MonoBehaviour
 
     private void OnComplete(Spine.TrackEntry entry)
     {
-        
+        if (entry.animation.name != animationName)
+        {
+            //播放完Tree 4动画后，继续播放idle动画
+            skeletonGraphic.AnimationState.SetAnimation(0, animationName, true);
+        }
     }
 
     private void OnGirlPlayComplete(Spine.TrackEntry entry)
