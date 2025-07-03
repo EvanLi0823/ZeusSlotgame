@@ -263,6 +263,7 @@ namespace Core
             }
             else
             {
+                // Debug.Log($"AddSpinTime CurSpinTime:{CurSpinTime}");
                 CurSpinTime++;
             }
         }

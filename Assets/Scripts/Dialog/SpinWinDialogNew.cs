@@ -255,6 +255,7 @@ public class SpinWinDialogNew : UIDialog
         {
             ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_SPINWIN);
         }
+        OnLineEarningMgr.Instance.ResetSpinTime();
     }
     void AdIsPlaySuccessful(int type)
     {
