@@ -19,12 +19,19 @@ public class WesternTreasureFly : MonoBehaviour
     private WesternTreasureReelManager treeManager;
     public GameObject triggerEffect;
     private Stack<GameObject> m_ImagePool = new Stack<GameObject>();
-    //candyjar的动画
+    //转场动画
     public SkeletonGraphic JackPotAni;
     //girl的动画  0:"hu xi",1:"animation6"
     public SkeletonGraphic GirlGraphic;
     //girl的动画  0:"hu xi",1:"animation6"
     public Image slider;
+    
+    // 调整时间为符合总长1.5秒
+    public float moveDuration = 0.4f;          
+    public float holdDuration = 0.2f;          
+    public float endMoveDuration = 0.4f;       
+    public float scaleUpDuration = 0.3f;       
+    public float scaleDownDuration = 0.2f;  
     public void Init(WesternTreasureReelManager _treeManager)
     {
         treeManager = _treeManager;
@@ -50,9 +57,9 @@ public class WesternTreasureFly : MonoBehaviour
            
             go.gameObject.SetActive(true);
             go.transform.localScale = Vector3.one;
-
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(go.transform.DOMove(DestinationGO.transform.position, 1.2f).OnComplete(delegate
+            
+            Sequence seq = DOTween.Sequence();
+            seq.Append(go.transform.DOMove(DestinationGO.transform.position, 1.2f).OnComplete(delegate
             {
                 go.SetActive(false);
                 m_ImagePool.Push(go);
@@ -64,14 +71,14 @@ public class WesternTreasureFly : MonoBehaviour
                 {
                     treeManager.spinResult.wildNum += treeManager.spinResult.treeGrow.baseWild;
                 }
-
-
+            
+            
                 ChangeTreeState();
              
             }));
             //sequence.Join(go.transform.DOScale(0.1f, 1.2f));
-            sequence.SetUpdate(true);
-            sequence.Play();
+            seq.SetUpdate(true);
+            seq.Play();
         }  
     }
 
@@ -161,23 +168,26 @@ public class WesternTreasureFly : MonoBehaviour
         {
             treeManager.spinResult.wildNum = 40000;
             treeManager.spinResult.curTreeLevel = 4;
-            PlayGirlAni(1);
-            yield return new WaitForSeconds(1.0f);
+            // PlayGirlAni(1);
+            // yield return new WaitForSeconds(1.0f);
             PlayAnimation(2);
             // AudioManager.Instance.AsyncPlayEffectAudio("treelevelup");
             yield return new WaitForSeconds(0.6f);
             ChangeSkin(4);
             yield return new WaitForSeconds(1);
-            PlayGirlAni(0);
+            // PlayGirlAni(0);
             //此粒子特效先关闭
             //SetTriggerEffect(true);
             PlayAnimation(3);
             AudioManager.Instance.AsyncPlayEffectAudio("treelevelup");
             yield return new WaitForSeconds(1f);
-            JackPotAni.AnimationState.SetAnimation(0, "animation2", false);
+            JackPotAni.Skeleton.SetToSetupPose();
+            JackPotAni.gameObject.SetActive(true);
+            JackPotAni.AnimationState.SetAnimation(0, "zhuan_chang_1", false);
             AudioManager.Instance.AsyncPlayEffectAudio("JackPotStart");
-            yield return new WaitForSeconds(5.21f);
-            //SetTriggerEffect(false);
+            yield return new WaitForSeconds(4.2f);
+            JackPotAni.gameObject.SetActive(false);
+            // SetTriggerEffect(false);
             treeManager.OpenJackpotGame();
         }
     }
@@ -225,19 +235,23 @@ public class WesternTreasureFly : MonoBehaviour
             }
         }
 
-        if(GirlGraphic != null)
-        {
-            GirlGraphic.startingAnimation = "hu xi";
-            if(GirlGraphic.AnimationState != null)
-            {
-                GirlGraphic.AnimationState.Complete += OnGirlPlayComplete;
-            }
-        }
+        // if(GirlGraphic != null)
+        // {
+        //     GirlGraphic.startingAnimation = "hu xi";
+        //     if(GirlGraphic.AnimationState != null)
+        //     {
+        //         GirlGraphic.AnimationState.Complete += OnGirlPlayComplete;
+        //     }
+        // }
     }
 
     private void OnComplete(Spine.TrackEntry entry)
     {
-        
+        if (entry.animation.name != animationName)
+        {
+            //播放完Tree 4动画后，继续播放idle动画
+            skeletonGraphic.AnimationState.SetAnimation(0, animationName, true);
+        }
     }
 
     private void OnGirlPlayComplete(Spine.TrackEntry entry)
@@ -249,7 +263,6 @@ public class WesternTreasureFly : MonoBehaviour
         string aniName = GetAnimationName(animationId);
         if (!string.IsNullOrEmpty(aniName))
             skeletonGraphic.AnimationState.SetAnimation(0, aniName, false);
-            // CandyJarGraphic.AnimationState.SetAnimation(0, aniName, false);
     }
 
     public void ChangeSkin(int skinId)
@@ -258,10 +271,7 @@ public class WesternTreasureFly : MonoBehaviour
         if (!string.IsNullOrEmpty(skinName))
             skeletonGraphic.Skeleton.SetSkin(skinName);
             skeletonGraphic.Skeleton.SetSlotsToSetupPose();
-            skeletonGraphic.AnimationState.Apply(skeletonGraphic.Skeleton);
-            // CandyJarGraphic.Skeleton.SetSkin(skinName);
-            // CandyJarGraphic.Skeleton.SetSlotsToSetupPose();
-            // CandyJarGraphic.AnimationState.Apply(skeletonGraphic.Skeleton);
+            skeletonGraphic.AnimationState.Apply(skeletonGraphic.Skeleton); 
     }
 
     public void ChangeCandyJarSkin(int skinId)
@@ -294,8 +304,15 @@ public class WesternTreasureFly : MonoBehaviour
     {
         //skeletonGraphic.AnimationState.SetEmptyAnimations(0); 
         skeletonGraphic.AnimationState.SetAnimation(0,animationName,true);
-        JackPotAni.AnimationState.SetAnimation(0, animationName, true);
-        PlayGirlAni(0);
+        if (JackPotAni!=null)
+        {
+            JackPotAni.AnimationState.SetAnimation(0, animationName, true);
+        }
+
+        if (GirlGraphic!=null)
+        {
+            PlayGirlAni(0);
+        }
     }
 
     
@@ -308,11 +325,11 @@ public class WesternTreasureFly : MonoBehaviour
         }
         else if (animationId==2)
         {
-            return "Level Up"; 
+            return "Level up"; 
         }
         else if (animationId==3)
         {
-            return "Tree_4";
+            return "Tree 4";
         }
 
         return null;
