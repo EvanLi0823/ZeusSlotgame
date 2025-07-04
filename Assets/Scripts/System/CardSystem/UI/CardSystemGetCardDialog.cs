@@ -56,9 +56,9 @@ namespace CardSystem
                         star.SetActive(true);
                     }
                 // }
-                GameObject img_card = Util.FindObject<GameObject>(item.transform, "img_bg/" + level);
-                img_card.SetActive(true);
-                
+                GameObject img_cardbg = Util.FindObject<GameObject>(item.transform, "img_bg/" + level);
+                img_cardbg.SetActive(true);
+               
                 int cardCount = CardSystemManager.Instance.GetCardCount(CardId);
                 if (cardCount > 1)
                 {
@@ -68,6 +68,8 @@ namespace CardSystem
                     text_count.text = cardCount.ToString();
                 }
                 //加载卡牌图标
+                Transform img_card = Util.FindObject<Transform>(item.transform, "img_card");
+                img_card.gameObject.SetActive(false);
                 LoadCardItem();
                 CardSystemManager.Instance.CollectCard(CardId);
             }
@@ -86,6 +88,8 @@ namespace CardSystem
                 {
                     Image img_card = Util.FindObject<Image>(item.transform, "img_card");
                     img_card.sprite = asset;
+                    img_card.SetNativeSize();
+                    img_card.gameObject.SetActive(true);
                 }
                 else
                 {
@@ -108,6 +112,12 @@ namespace CardSystem
                 // Handle collect button click
                 this.Close();
             }
+        }
+
+        protected override void BtnCloseClick(GameObject closeBtnObject)
+        {
+            base.BtnCloseClick(closeBtnObject);
+            Messenger.Broadcast(CardSystemConstants.RefreshLotteryMsg);
         }
 
         public override void Close()
