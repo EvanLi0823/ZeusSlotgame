@@ -125,6 +125,7 @@ public class FreeGameStartDialog : UIDialog
         {
             ADManager.Instance.PlayInterstitialAd(ADEntrances.Interstitial_Entrance_CLOSEFREESPINSTART);
         }
+        OnLineEarningMgr.Instance.ResetSpinTime();
     }
     protected bool adRewarded = false;
     //广告播放成功，关闭弹板进入下一个操作

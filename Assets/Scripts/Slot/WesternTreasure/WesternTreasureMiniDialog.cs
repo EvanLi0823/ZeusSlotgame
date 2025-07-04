@@ -152,6 +152,7 @@ public class WesternTreasureMiniDialog : UIDialog
         {
             ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_BONUSGAMEWIN);
         }
+        OnLineEarningMgr.Instance.ResetSpinTime();
     }
 
     private void OnNotWatchADButtonClick()

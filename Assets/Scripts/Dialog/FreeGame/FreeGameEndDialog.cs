@@ -129,6 +129,7 @@ public class FreeGameEndDialog : UIDialog
         {
             ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_FREESPINEND);
         }
+        OnLineEarningMgr.Instance.ResetSpinTime();
     }
     void AdIsPlaySuccessful(int type)
     {
