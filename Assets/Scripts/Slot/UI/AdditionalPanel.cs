@@ -62,8 +62,10 @@ public class AdditionalPanel : MonoBehaviour
         h5Buttons[curShowIndex].gameObject.SetActive(show);
         if (show)
         {
-            Debug.Log("AdditionalPanel ShowQiPao");
             NeedShowQiPao();
+        }else
+        {
+            DestroyShowQiPao();
         }
     }
 
