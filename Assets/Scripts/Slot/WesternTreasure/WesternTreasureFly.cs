@@ -181,8 +181,8 @@ public class WesternTreasureFly : MonoBehaviour
             PlayAnimation(3);
             AudioManager.Instance.AsyncPlayEffectAudio("treelevelup");
             yield return new WaitForSeconds(1f);
-            JackPotAni.Skeleton.SetToSetupPose();
             JackPotAni.gameObject.SetActive(true);
+            JackPotAni.Skeleton.SetToSetupPose();
             JackPotAni.AnimationState.SetAnimation(0, "zhuan_chang_1", false);
             AudioManager.Instance.AsyncPlayEffectAudio("JackPotStart");
             yield return new WaitForSeconds(4.2f);
