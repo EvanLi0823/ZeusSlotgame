@@ -11,8 +11,8 @@ namespace Activity
     public class H5RewardActivityIcon:BaseIcon
     {
         private SkeletonGraphic skeletonGraphic;
-        private SkeletonGraphic qipao;
-        private Transform saqian;
+        // private SkeletonGraphic qipao;
+        // private Transform saqian;
         private Button clickButton;
         //当前展示的H5按钮序号
         private int curShowIndex = 0;
@@ -24,8 +24,8 @@ namespace Activity
         private void Awake()
         {
             skeletonGraphic = Utils.Utilities.RealFindObj<SkeletonGraphic>(transform, "spinAni");
-            qipao = Utils.Utilities.RealFindObj<SkeletonGraphic>(transform, "qipao");
-            saqian = Utils.Utilities.RealFindObj<Transform>(transform, "saqian");
+            // qipao = Utils.Utilities.RealFindObj<SkeletonGraphic>(transform, "qipao");
+            // saqian = Utils.Utilities.RealFindObj<Transform>(transform, "saqian");
             clickButton = GetComponent<Button>();
             if (clickButton!=null)
             {
@@ -57,14 +57,14 @@ namespace Activity
             {
                 ChangeSkinByIndex(curShowIndex);
                 skeletonGraphic.gameObject.SetActive(true);
-                saqian.gameObject.SetActive(true);
-                NeedShowQiPao();
+                // saqian.gameObject.SetActive(true);
+                // NeedShowQiPao();
             }
             else
             {
                 skeletonGraphic.gameObject.SetActive(false);
-                saqian.gameObject.SetActive(false);
-                DestroyShowQiPao();
+                // saqian.gameObject.SetActive(false);
+                // DestroyShowQiPao();
             }
         }
         
@@ -83,28 +83,23 @@ namespace Activity
         {
             // 根据索引返回对应的皮肤名称
             // 这里需要根据实际情况实现
-            return $"ZS_{index+1}";
+            return (index+1).ToString();
         }
         
-        private void NeedShowQiPao()
-        {
-            // needShowQiPao = true;
-            // DestroyShowQiPao();
-            qipao.Skeleton.SetSlotsToSetupPose();
-            qipao.Initialize(true);
-            qipao.AnimationState.SetAnimation(0,"animation",true);
-            qipao.gameObject.SetActive(true);
-        }
-
-        private void DestroyShowQiPao()
-        {
-            // if (showQiPaoCor!=null)
-            // {
-            //     StopCoroutine(showQiPaoCor);
-            //     showQiPaoCor = null;
-            // }
-            qipao.gameObject.SetActive(false);
-        }
+        // private void NeedShowQiPao()
+        // {
+        //     // needShowQiPao = true;
+        //     // DestroyShowQiPao();
+        //     qipao.Skeleton.SetSlotsToSetupPose();
+        //     qipao.Initialize(true);
+        //     qipao.AnimationState.SetAnimation(0,"animation",true);
+        //     qipao.gameObject.SetActive(true);
+        // }
+        //
+        // private void DestroyShowQiPao()
+        // {
+        //     qipao.gameObject.SetActive(false);
+        // }
         
         private Coroutine timeCor = null;
         private long lastTime = 0;
@@ -121,10 +116,10 @@ namespace Activity
             lastTime = 0;
             //序号自增，展示下一个
             curShowIndex = (curShowIndex==totalCount - 1) ? 0 : curShowIndex + 1;
-            //销毁气泡展示协程
-            needShowQiPao = false;
+            // //销毁气泡展示协程
+            // needShowQiPao = false;
             UpdateIcon(false);
-            DestroyShowQiPao();
+            // DestroyShowQiPao();
             if (timeCor!=null)
             {
                 StopCoroutine(timeCor);
