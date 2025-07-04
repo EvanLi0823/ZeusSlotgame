@@ -322,6 +322,7 @@ namespace CardSystem
         
         void OnDoSpin()
         {
+            
             spinState = SpinState.Spinning;
             cardIndex = weightCondition.GetResultByWeight();
             int level = CardSystemManager.Instance.GetCardLevel(cardIndex);
@@ -333,7 +334,7 @@ namespace CardSystem
                 Debug.LogError("无效的目标位置: " + targetPosition);
                 return;
             }
-            
+            PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint, "CardLottery");
             spinCoroutine = StartCoroutine(SpinToPosition(targetPosition));
         }
         

@@ -258,6 +258,7 @@ public class SpinWinDialogNew : UIDialog
             OnLineEarningMgr.Instance.ResetSpinTime();
             ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_SPINWIN);
         }
+        SendMsg(spinWinType,2);
     }
     void AdIsPlaySuccessful(int type)
     {
@@ -365,6 +366,7 @@ public class SpinWinDialogNew : UIDialog
             //不播广告直接加钱
             DoneADCallBack();
         }
+        SendMsg(spinWinType);
     }
 
     public void OnCollectBtnClick(GameObject go)
