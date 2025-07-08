@@ -3,6 +3,7 @@ using Spine;
 using Spine.Unity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 using Utils;
 namespace Activity
@@ -68,7 +69,10 @@ namespace Activity
             }
             else
             {
-                Messenger.Broadcast(GameDialogManager.OpenTipsDialogMsg, "6666");
+                LocalizedString localizedString = new LocalizedString(LocalizationManager.Instance.tableName,"SpinCountReaches");
+                localizedString.Arguments = new object[] { activity.Task.TargetNum - activity.Task.HasCollectNum };
+                var info = localizedString.GetLocalizedString();
+                Messenger.Broadcast(GameDialogManager.OpenTipsDialogMsg, info);
             }
         }
         
