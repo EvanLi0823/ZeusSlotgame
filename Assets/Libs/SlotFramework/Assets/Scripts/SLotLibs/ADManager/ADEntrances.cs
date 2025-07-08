@@ -5,6 +5,7 @@ public class ADEntrances
     public const string REWARD_VIDEO_ENTRANCE_MORECASH= "MoreCash";
     public const string REWARD_VIDEO_ENTRANCE_SPINWIN = "SpinWin";
     public const string REWARD_VIDEO_ENTRANCE_CARDLOTTERY = "CardLottery";
+    public const string REWARD_VIDEO_CONTINUE_SPIN = "ContinueSpin";
 
     public const string REWARD_VIDEO_ENTRANCE_FREESPINSTART = "FreeSpinStart";
     public const string REWARD_VIDEO_ENTRANCE_FREESPINEND= "FreeSpinEnd";
