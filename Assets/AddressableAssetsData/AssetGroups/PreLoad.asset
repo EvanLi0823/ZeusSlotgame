@@ -81,11 +81,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
-  - m_GUID: 512a49d95c0c4332bdd98131869c23c9
-    m_Address: Sprite Assets
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:
