@@ -47,7 +47,7 @@ public class WesternTreasureMiniDialog : UIDialog
         totalCoins = Utils.Utilities.CastValueLong(coins);
         //根据 jackpot类型获取奖励值
         totalCash = OnLineEarningMgr.Instance.GetJackpotGameWinReward(jackpotType);
-        BonusGameWinCash.gameObject.SetActive(totalCash>0);
+        // BonusGameWinCash.gameObject.SetActive(totalCash>0);
         // if (totalCash>0)
         // {
         //     BonusGameWinCash.SetText(OnLineEarningMgr.Instance.GetMoneyStr(totalCash));
@@ -59,12 +59,16 @@ public class WesternTreasureMiniDialog : UIDialog
             AudioEntity.Instance.StopRollingUpEffect();
             tween = null;
         }).SetUpdate(true);
-        //金币滚动
-        Cashtween = Utils.Utilities.AnimationTo(curCash, totalCash, 2f, SetCashCoins, null, () =>
+        if (!PlatformManager.Instance.IsWhiteBao())
         {
-            SetCashCoins(totalCash);
-            Cashtween = null;
-        });
+            //金币滚动
+            Cashtween = Utils.Utilities.AnimationTo(curCash, totalCash, 2f, SetCashCoins, null, () =>
+            {
+                SetCashCoins(totalCash);
+                Cashtween = null;
+            });
+        }
+        BonusGameWinCash.gameObject.SetActive(!PlatformManager.Instance.IsWhiteBao() && totalCash > 0);
     }
     
     private void SetCashCoins(int cash)
@@ -105,16 +109,26 @@ public class WesternTreasureMiniDialog : UIDialog
     private void DoneADCallBack()
     {
         bool needFly = true;
-        //加钱动画
-        FlyCash(needFly);
+        if (!PlatformManager.Instance.IsWhiteBao())
+        {
+            //加钱动画
+            FlyCash(needFly);
+        }
+        
         //加金币动画
         FlyCoins(false);
         Messenger.Broadcast(SlotControllerConstants.AUTO_SPIN_RESUME);
         Libs.AudioEntity.Instance.StopAllEffect();
-        Libs.AudioEntity.Instance.PlayCoinCollectionEffect();
+        if (!PlatformManager.Instance.IsWhiteBao())
+        {
+            Libs.AudioEntity.Instance.PlayCoinCollectionEffect();
+        }
         new DelayAction( .8f, null, () =>
         {
-            Messenger.Broadcast(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL);
+            if (!PlatformManager.Instance.IsWhiteBao())
+            {
+                Messenger.Broadcast(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL);
+            }
             this.Close();
         }).Play();
     }

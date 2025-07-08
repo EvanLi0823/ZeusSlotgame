@@ -50,8 +50,11 @@ public class WithDrawPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        Messenger.AddListener(global::SpinButtonStyle.ENABLESPIN, OnSpinEnd);
-        Messenger.AddListener(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL, OnShowTip);
+        if (!PlatformManager.Instance.IsWhiteBao())
+        {
+            Messenger.AddListener(global::SpinButtonStyle.ENABLESPIN, OnSpinEnd);
+            Messenger.AddListener(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL, OnShowTip);
+        }
     }
 
     private void OnDisable()

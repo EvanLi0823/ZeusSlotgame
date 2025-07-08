@@ -159,17 +159,27 @@ public class FreeGameEndDialog : UIDialog
     private void DoneADCallBack()
     {
         bool needFly = true;
-        FlyCash(needFly);
+        if (!PlatformManager.Instance.IsWhiteBao())
+        {
+            FlyCash(needFly);
+        }
+       
         FlyCoins(false);
         Messenger.Broadcast(SlotControllerConstants.AUTO_SPIN_RESUME);
         // AudioEntity.Instance.StopFreeGameEndDialogMusic();
         // AudioEntity.Instance.PlayFeatureBtnEffect();
         Libs.AudioEntity.Instance.StopAllEffect();
-        Libs.AudioEntity.Instance.PlayCoinCollectionEffect();
+        if (!PlatformManager.Instance.IsWhiteBao())
+        {
+            Libs.AudioEntity.Instance.PlayCoinCollectionEffect();
+        }
         new DelayAction( .8f, null, () =>
         {
             this.Close();
-            Messenger.Broadcast(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL);
+            if (!PlatformManager.Instance.IsWhiteBao())
+            {
+                Messenger.Broadcast(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL);
+            }
         }).Play();
     }
     private void FlyCash(bool showAni = true)
@@ -207,32 +217,31 @@ public class FreeGameEndDialog : UIDialog
         totalCash = cash;
         if(FreeGameCount != null) 
             FreeGameCount.SetText(count.ToString());
-        if (FreeGameWinCash != null)
+        if (FreeGameWinCash!=null)
         {
-            FreeGameWinCash.gameObject.SetActive(totalCash>0);
-            // if (totalCash>0)
-            // {
-            //     this.FreeGameWinCash.SetText(OnLineEarningMgr.Instance.GetMoneyStr(totalCash));
-            // }
+            FreeGameWinCash.gameObject.SetActive(!PlatformManager.Instance.IsWhiteBao() && totalCash > 0);
         }
-        
         AudioEntity.Instance.PlayRollUpEffect();
         tween = Utils.Utilities.AnimationTo (this.curCoins, coins, 2f, UpdateTextUI, null,()=>
         {
             AudioEntity.Instance.StopRollingUpEffect();
             tween = null;
 		}).SetUpdate(true);
-        //金币滚动
-        Cashtween = Utils.Utilities.AnimationTo(curCash, totalCash, 2f, SetCashCoins, null, () =>
+        if (!PlatformManager.Instance.IsWhiteBao())
         {
-            SetCashCoins(totalCash);
-            Cashtween = null;
-        });
+            //金币滚动
+            Cashtween = Utils.Utilities.AnimationTo(curCash, totalCash, 2f, SetCashCoins, null, () =>
+            {
+                SetCashCoins(totalCash);
+                Cashtween = null;
+            });
+        }
     }
     
     public void Close()
     {
         base.Close();
+        Libs.AudioEntity.Instance.StopCoinCollectionEffect();
         tween?.Kill();
     }
     

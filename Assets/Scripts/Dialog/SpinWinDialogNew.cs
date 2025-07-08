@@ -76,7 +76,7 @@ public class SpinWinDialogNew : UIDialog
         spinWinType = type;
         //设置文本
         totalCoins = coins;
-        totalCash = OnLineEarningMgr.Instance.GetSpinWinReward((int)spinWinType);
+        
         // SetCashCoins(totalCash);
         // UpdateTextUI(totalCoins);
         //设置图片
@@ -98,15 +98,20 @@ public class SpinWinDialogNew : UIDialog
                 tween = null;
             });
         }).Play();
-        //金币滚动
-        new DelayAction(0.4f, null,() =>
+        if (!PlatformManager.Instance.IsWhiteBao())
         {
-            Cashtween = Utils.Utilities.AnimationTo(curCash, totalCash, time, SetCashCoins, null, () =>
+            totalCash = OnLineEarningMgr.Instance.GetSpinWinReward((int)spinWinType);
+            //金币滚动
+            new DelayAction(0.4f, null,() =>
             {
-                SetCashCoins(totalCash);
-                Cashtween = null;
-            });
-        }).Play();
+                Cashtween = Utils.Utilities.AnimationTo(curCash, totalCash, time, SetCashCoins, null, () =>
+                {
+                    SetCashCoins(totalCash);
+                    Cashtween = null;
+                });
+            }).Play();
+        }
+        cashText.gameObject.SetActive(!PlatformManager.Instance.IsWhiteBao());
         int popCount = OnLineEarningMgr.Instance.AddPopSpinWinCount();
         isFirstTime = popCount==1;
         isSecondTime = popCount==2;
@@ -287,14 +292,23 @@ public class SpinWinDialogNew : UIDialog
     private void DoneADCallBack()
     {
         bool needFly = true;
-        FlyCash(needFly);
+        if (!PlatformManager.Instance.IsWhiteBao())
+        {
+            FlyCash(needFly);
+        }
         FlyCoins(false);
         Messenger.Broadcast(SlotControllerConstants.AUTO_SPIN_RESUME);
-        Libs.AudioEntity.Instance.PlayCoinCollectionEffect();
+        if (!PlatformManager.Instance.IsWhiteBao())
+        {
+            Libs.AudioEntity.Instance.PlayCoinCollectionEffect();
+        }
         new DelayAction( .8f, null, () =>
         {
             this.Close();
-            Messenger.Broadcast(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL);
+            if (!PlatformManager.Instance.IsWhiteBao())
+            {
+                Messenger.Broadcast(GameConstants.SHOW_WITH_DRAW_TIPS_PANEL);
+            }
         }).Play();
     }
     private void FlyCash(bool showAni = true)
@@ -431,6 +445,7 @@ public class SpinWinDialogNew : UIDialog
     public void Close()
     {
         base.Close();
+        AudioEntity.Instance.StopRollingUpEffect();
         tween?.Kill();
         Cashtween?.Kill();
     }

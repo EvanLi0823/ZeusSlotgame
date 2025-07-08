@@ -3000,19 +3000,22 @@ namespace Classic
                 }
             }
 
-            //计算现金奖励
-            if (isFreespinBonus)
+            if (!PlatformManager.Instance.IsWhiteBao())
             {
-                data.CashValue = OnLineEarningMgr.Instance.GetFreeSpinReward(FreespinGame.NeedShowCash);
-            }
-            else
-            {
-                if (data.AccountValue > GetCurrentBet() && data.AccountValue< gameConfigs.BigWinTag * GetCurrentBet())
+                //计算现金奖励
+                if (isFreespinBonus)
                 {
-                    data.CashValue = OnLineEarningMgr.Instance.GetNormalSpinReward();
+                    data.CashValue = OnLineEarningMgr.Instance.GetFreeSpinReward(FreespinGame.NeedShowCash);
                 }
+                else
+                {
+                    if (data.AccountValue > GetCurrentBet() && data.AccountValue< gameConfigs.BigWinTag * GetCurrentBet())
+                    {
+                        data.CashValue = OnLineEarningMgr.Instance.GetNormalSpinReward();
+                    }
+                }
+                Debug.Log($"[ReelManager] [SetSpinEndProcessData] data.CashValue:{data.CashValue}");
             }
-            Debug.Log($"[ReelManager] [SetSpinEndProcessData] data.CashValue:{data.CashValue}");
             
             return data;
         }

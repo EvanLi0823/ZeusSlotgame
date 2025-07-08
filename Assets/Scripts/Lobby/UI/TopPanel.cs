@@ -82,6 +82,7 @@ namespace Classic
             menuPanel.ResetMenuButton();
             lastBalance = -1;
             levelPanel.SetLevel(OnLineEarningMgr.Instance.GetLevel());
+            withDrawPanel.gameObject.SetActive(!PlatformManager.Instance.IsWhiteBao());
             withDrawPanel.InitMoney(OnLineEarningMgr.Instance.Cash());
             this.BalanceChange();
             FlyCoinsPanel.Instance.InitNum(lastBalance);
