@@ -209,7 +209,9 @@ public class APKBuildConfigCreator : EditorWindow
             existingConfig.keyaliasName = keyaliasName;
             existingConfig.keyaliasPassword = keyaliasPass;
             existingConfig.outputPath = outputPath;
-            
+            existingConfig.bundleVersion = bundleVersion;
+            existingConfig.productName = productName;
+
             EditorUtility.SetDirty(existingConfig);
             AssetDatabase.SaveAssets();
             

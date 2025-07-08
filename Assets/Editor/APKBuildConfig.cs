@@ -5,10 +5,10 @@ public class APKBuildConfig : ScriptableObject
 {
     [Header("应用信息")]
     [Tooltip("示例: 1.0.0")]
-    public string bundleVersion = "1.0.0";
+    public string bundleVersion;
     
     [Tooltip("产品显示名称")] 
-    public string productName = "Zeus";
+    public string productName;
     
     [Tooltip("Keystore文件绝对路径")]
     public string keystorePath;
