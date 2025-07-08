@@ -37,6 +37,7 @@ public class OnLineEarningMgr
     private const string Spin_KEY = "spin";
     private const string RewardMin_KEY = "rewardmin";
     private const string RewardMax_KEY = "rewardmax";
+    private const string IsWhitePackage_KEY = "IsWhitePackage";
 
     private const string THREE_HUNDRED_CONFIG_KEY = "ThreeHundredConfig";
     private const string ON_LINE_EARNING_MODEL_KEY = "OnLineEarningModel"; //网赚模式 0--》无限模式  1--》300模式
@@ -73,6 +74,7 @@ public class OnLineEarningMgr
     private int newUserCashMin = 0; //新用户首次弹板奖励金钱
     private int newUserCashMax = 0; //新用户首次弹板奖励金钱
 
+    private bool isWhitePackage = false; //白包用户
     public void ParseConfig(Dictionary<string,object> config)
     {
         isOpen = Utils.Utilities.GetBool(config,OPEN_KEY,true);
@@ -80,6 +82,7 @@ public class OnLineEarningMgr
         {
             return;
         }
+        isWhitePackage = Utils.Utilities.GetBool(config,IsWhitePackage_KEY,false);
         OnLineEarningModel = Utils.Utilities.GetInt(config,ON_LINE_EARNING_MODEL_KEY,0);
         if (OnLineEarningModel == 0)
         {
@@ -135,7 +138,7 @@ public class OnLineEarningMgr
     void OnSpinEnd()
     {
         //奖励弹板只弹出一次
-        if (UserManager.GetInstance().UserProfile().GetTotalSpinCounter()>=newUserSpinCount)
+        if (UserManager.GetInstance().UserProfile().GetTotalSpinCounter()>=newUserSpinCount && !PlatformManager.Instance.IsWhiteBao())
         {
             new DelayAction(1.3f,null, () =>
             {
@@ -629,6 +632,11 @@ public class OnLineEarningMgr
     public int GetNormalSpinReward()
     {
         return GetRewardsByName(OnLineEarningConstants.REWARD_SPIN);
+    }
+
+    public bool IsWhiteBao()
+    {
+        return isWhitePackage;
     }
 }
 

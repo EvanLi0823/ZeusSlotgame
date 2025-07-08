@@ -567,6 +567,10 @@ namespace Libs
 
             return languageCode;
         }
+         public bool IsWhiteBao()
+         {
+             return OnLineEarningMgr.Instance.IsWhiteBao();
+         }
     }
 }
 

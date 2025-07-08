@@ -26,6 +26,8 @@ namespace Classic
             // //满足弹出大弹窗条件时，弹出大弹窗，不弹小弹窗
             // if (canShowBig)
             // {
+            if (!PlatformManager.Instance.IsWhiteBao())
+            {
                 //获取大弹窗的奖励金钱
                 rewardCash = OnLineEarningMgr.Instance.GetLuckyCashReward();
                 if (rewardCash<=0)
@@ -34,6 +36,8 @@ namespace Classic
                     return;
                 }
                 Messenger.Broadcast<int,Action>(SlotGameDialogManager.OpenPopRewardBigDialog,rewardCash,PopBigRewardQuit);
+            }
+               
             // }
         }
 
