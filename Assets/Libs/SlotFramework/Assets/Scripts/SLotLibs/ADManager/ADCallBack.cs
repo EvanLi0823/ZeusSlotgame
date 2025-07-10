@@ -118,6 +118,10 @@ public class ADCallBack:IAcbAdsCallbackHandler
                 //点击 luckyCash按钮给出的金钱奖励翻倍
                 Messenger.Broadcast<int>(ADConstants.PlayCardLotteryAD,0);
                 break;
+            case ADEntrances.REWARD_VIDEO_CONTINUE_SPIN:
+                //点击 小屋按钮给钱
+                Messenger.Broadcast<int>(ADConstants.PlayContinueSpinAD,0);
+                break;
             default:
                 break;
         }

@@ -79,6 +79,7 @@ public class GameDialogManager : MonoBehaviour
 	public const string OpenSpinWithDrawStartDialogMsg = "OpenSpinWithDrawStartDialog";
 	public const string OpenSpinWithDrawEndDialogMsg = "OpenSpinWithDrawEndDialog";
 	public const string OpenRewardCashDialogMsg = "OpenRewardCashDialogMsg";
+	public const string OpenContinueSpinDialogMsg = "OpenContinueSpinDialogMsg";
 
 	public const string OpenNewUserGuidDialogMsg = "OpenNewUserGuidDialog";
 	public const string OpenAccountDialogMsg = "OpenAccountDialog";
@@ -87,6 +88,9 @@ public class GameDialogManager : MonoBehaviour
 	public const string OpenCardSystemCollectionDialogMsg = "OpenCardSystemCollectionDialog";
 	public const string OpenCardSystemGetCardDialogMsg = "OpenCardSystemGetCardDialogMsg";
 	public const string OpenCardSystemLuckyDrawDialogMsg = "OpenCardSystemLuckyDrawDialogMsg";
+	
+	//Tips
+	public const string OpenTipsDialogMsg = "OpenTipsDialogMsg";
 
 	public static bool QuestDialogShowed { get; set; }
 
@@ -183,12 +187,17 @@ public class GameDialogManager : MonoBehaviour
 
             Messenger.AddListener<int,int>(OpenAccountDialogMsg, OpenAccountDialog);
             Messenger.AddListener<int,string,int>(OpenAccountEnsureMsg, OpenAccountEnsureDialog);
+            Messenger.AddListener<int,Action>(OpenContinueSpinDialogMsg, OpenContinueSpinDialog);
             #endregion
 
             #region cardSystem
             Messenger.AddListener(OpenCardSystemCollectionDialogMsg, OpenCardSystemCollectionDialog);
             Messenger.AddListener<int>(OpenCardSystemGetCardDialogMsg, OpenCardSystemGetCardDialog);
             Messenger.AddListener(OpenCardSystemLuckyDrawDialogMsg, OpenCardSystemLuckyDrawDialog);
+            #endregion
+			
+			#region tips
+			Messenger.AddListener<string>(OpenTipsDialogMsg, OpenTipsDialog);
             #endregion
             
         }
@@ -269,11 +278,16 @@ public class GameDialogManager : MonoBehaviour
 			Messenger.AddListener<int,System.Action>(OpenSpinWithDrawEndDialogMsg, OpenSpinWithDrawEndDialog);
 			Messenger.RemoveListener<int,int>(OpenAccountDialogMsg, OpenAccountDialog);
 			Messenger.RemoveListener<int,string,int>(OpenAccountEnsureMsg, OpenAccountEnsureDialog);
+			Messenger.RemoveListener<int,Action>(OpenContinueSpinDialogMsg, OpenContinueSpinDialog);
 			
 			#region cardSystem
 			Messenger.RemoveListener(OpenCardSystemCollectionDialogMsg, OpenCardSystemCollectionDialog);
 			Messenger.RemoveListener<int>(OpenCardSystemGetCardDialogMsg, OpenCardSystemGetCardDialog);
 			Messenger.RemoveListener(OpenCardSystemLuckyDrawDialogMsg, OpenCardSystemLuckyDrawDialog);
+			#endregion
+			
+			#region tips
+			Messenger.RemoveListener<string>(OpenTipsDialogMsg, OpenTipsDialog);
 			#endregion
 		}
 	}
@@ -605,6 +619,16 @@ public class GameDialogManager : MonoBehaviour
 	}
 	
 	protected virtual void OpenRewardCashDialog(int cash)
+	{
+		
+	}
+	
+	protected virtual void OpenContinueSpinDialog(int cash,Action callback)
+	{
+		
+	}
+	
+	protected virtual void OpenTipsDialog(string text)
 	{
 		
 	}

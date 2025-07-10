@@ -62,6 +62,10 @@ namespace Activity
                 case ActivityConstants.H5RewardActivity:
                     activity = new H5RewardActivity(data);
                     break;
+                case ActivityConstants.CONTINUESPINTASK:
+                    activity = new ContinueSpinActivity(data);
+                    break;
+                
             }
 
             return activity;
