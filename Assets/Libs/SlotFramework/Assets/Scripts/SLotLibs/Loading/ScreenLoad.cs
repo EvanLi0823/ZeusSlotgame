@@ -15,7 +15,7 @@ namespace Classic
     {
         [Header("UI References")] 
         [SerializeField] private Slider progressBar;
-        [SerializeField] private Text progressText;
+        [SerializeField] private UIText progressText;
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Image staticImage;
         
@@ -325,7 +325,7 @@ namespace Classic
             
             // 更新UI
             progressBar.value = currentProgress;
-            progressText.text = $"{Mathf.RoundToInt(currentProgress * 100)}%";
+            progressText.SetText($"{Mathf.RoundToInt(currentProgress * 100)}%");
         }
         
         #endregion
