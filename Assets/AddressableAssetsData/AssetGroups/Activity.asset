@@ -36,6 +36,10 @@ MonoBehaviour:
     m_Address: H5Reward
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 894a4d2c4c8a42c42bb683e15269f075
+    m_Address: ContinueSpin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:
