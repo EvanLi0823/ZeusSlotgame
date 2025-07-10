@@ -464,5 +464,27 @@ namespace Classic
                     dialog.SetUIData(cash);
                 }));
         }
+        
+        protected override void OpenContinueSpinDialog(int cash,Action callback)
+        {
+            bool isPortrait = BaseGameConsole.ActiveGameConsole().IsInSlotMachine() &&
+                SkySreenUtils.CurrentOrientation == ScreenOrientation.Portrait;
+            UIManager.Instance.OpenSystemDialog(
+                new OpenConfigParam<ContinueSpinDialog>(isPortrait,uiPopupStrategy: new SystemUIPopupStrategy(),dialogInitCallBack: (dialog) =>
+                {
+                    dialog.SetUIData(cash,callback);
+                }));
+        }
+        
+        protected override void OpenTipsDialog(string text)
+        {
+            bool isPortrait = BaseGameConsole.ActiveGameConsole().IsInSlotMachine() &&
+                SkySreenUtils.CurrentOrientation == ScreenOrientation.Portrait;
+            UIManager.Instance.OpenSystemDialog(
+                new OpenConfigParam<TipsDialog>(isPortrait,uiPopupStrategy: new SystemUIPopupStrategy(),dialogInitCallBack: (dialog) =>
+                {
+                    dialog.SetUIData(text);
+                }));
+        }
     }
 }
