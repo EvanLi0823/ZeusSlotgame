@@ -599,6 +599,10 @@ namespace CardSystem
         
         public List<BaseCard> GetCardsInfo()
         {
+            for (int i = 0; i < cardsInfo.Count; i++)
+            {
+                cardsInfo[i].SetCount(GetCardCount(cardsInfo[i].Index));
+            }
             return cardsInfo;
         }
         
@@ -719,10 +723,10 @@ namespace CardSystem
             Messenger.Broadcast(GameDialogManager.OpenCardSystemLuckyDrawDialogMsg);
         }
         
-        public void ShowGetRewardDialog(int cardId)
+        public void ShowGetRewardDialog(int cardId,GameObject parent)
         {
             // 这里可以添加特定于CardLotteryActivity的开始对话框逻辑
-            Messenger.Broadcast<int>(GameDialogManager.OpenCardSystemGetCardDialogMsg,cardId);
+            Messenger.Broadcast<int,GameObject>(GameDialogManager.OpenCardSystemGetCardDialogMsg,cardId,parent);
         }
         #endregion
        
