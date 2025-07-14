@@ -65,21 +65,22 @@ namespace Activity
 
             if (activity.Task.IsTaskConditionOK)
             {
+                StopEffect(hand);
                 ActivityManager.Instance.OnClickIcon(activityId);
             }
             else
             {
-                LocalizedString localizedString = new LocalizedString(LocalizationManager.Instance.tableName,"SpinCountReaches");
+                /*LocalizedString localizedString = new LocalizedString(LocalizationManager.Instance.tableName,"SpinCountReaches");
                 localizedString.Arguments = new object[] { activity.Task.TargetNum - activity.Task.HasCollectNum };
                 var info = localizedString.GetLocalizedString();
-                Messenger.Broadcast(GameDialogManager.OpenTipsDialogMsg, info);
+                Messenger.Broadcast(GameDialogManager.OpenTipsDialogMsg, info);*/
             }
         }
         
         public override void RefreshProgress(float progress,string info=null)
         {
             RefreshIcon();
-            progressTxt.text = ((int)(progress * 100)).ToString();
+            progressTxt.text = $"{(int)(progress * 100)}%";
             progressBar.fillAmount = progress;
             if (Mathf.Approximately(progressBar.fillAmount, 1))
             {
