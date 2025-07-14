@@ -22,7 +22,7 @@ namespace Activity
         private Action _callback;
 
        
-
+        private const string CONTINUE_SPIN_COUNT = "CONTINUE_SPIN_COUNT"; //开启次数
         
         
         public void SetUIData(int rewardNum,Action callback)
@@ -92,7 +92,10 @@ namespace Activity
 
         private void ShowVideoCallBack(int res)
         {
-            Debug.Log("ShowVideoCallBack");
+            int count = SharedPlayerPrefs.GetPlayerPrefsIntValue(CONTINUE_SPIN_COUNT);
+            count++;
+            SharedPlayerPrefs.SetPlayerPrefsIntValue(CONTINUE_SPIN_COUNT,count);
+            PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"continue_spin_count",count);
             PlayAnim();
             //SetCoins();
             _adButton.gameObject.SetActive(false);
