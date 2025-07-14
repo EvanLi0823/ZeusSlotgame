@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Activity;
 using Classic;
 using DG.Tweening;
 using Libs;
@@ -80,7 +81,13 @@ public class WithDrawPanel : MonoBehaviour
         }
         if (tipText!=null)
         {
-            tipText.text = GetTipTextInfo();
+            string info = GetTipTextInfo();
+            if (string.IsNullOrEmpty(info) || info == string.Empty)
+            {
+                tip.SetActive(false);
+                return;
+            }
+            tipText.text = info;
         }
         tip.SetActive(true);
         tip.transform.localScale = Vector3.zero;
@@ -107,36 +114,40 @@ public class WithDrawPanel : MonoBehaviour
 
     string GetTipTextInfo()
     {
-        int nowCash = OnLineEarningMgr.Instance.Cash();
-        int leftCash = 0;
-        int targetCash = 0;
-        if (nowCash< 500*OnLineEarningMgr.Instance.GetCashMultiple())
+        // int nowCash = OnLineEarningMgr.Instance.Cash();
+        // int leftCash = 0;
+        // int targetCash = 0;
+        // if (nowCash< 500*OnLineEarningMgr.Instance.GetCashMultiple())
+        // {
+        //     targetCash = 500*OnLineEarningMgr.Instance.GetCashMultiple();
+        // }else if (nowCash< 800*OnLineEarningMgr.Instance.GetCashMultiple())
+        // {
+        //     targetCash = 800*OnLineEarningMgr.Instance.GetCashMultiple();
+        // }else if (nowCash< 1300*OnLineEarningMgr.Instance.GetCashMultiple())
+        // {
+        //     targetCash = 1300*OnLineEarningMgr.Instance.GetCashMultiple();
+        // }else if (nowCash< 2000*OnLineEarningMgr.Instance.GetCashMultiple())
+        // {
+        //     targetCash = 2000*OnLineEarningMgr.Instance.GetCashMultiple();
+        // }else if (nowCash< 3000*OnLineEarningMgr.Instance.GetCashMultiple())
+        // {
+        //     targetCash = 3000*OnLineEarningMgr.Instance.GetCashMultiple();
+        // }else if (nowCash< 8000*OnLineEarningMgr.Instance.GetCashMultiple())
+        // {
+        //     targetCash = 8000*OnLineEarningMgr.Instance.GetCashMultiple();
+        // }
+        // leftCash = targetCash - nowCash;
+        // if (_localizedString != null && !string.IsNullOrEmpty(_localizedString.GetLocalizedString()))
+        // {
+        //     string arg1 = string.Format("<color=#D800D9>{0}</color>",OnLineEarningMgr.Instance.GetMoneyStr(leftCash, 2, false, true));
+        //     string arg2 = string.Format("<color=#D800D9>{0}</color>",OnLineEarningMgr.Instance.GetMoneyStr(targetCash, 2, false, true));
+        //     _localizedString.Arguments = new object[] {arg1,arg2};
+        //     return _localizedString.GetLocalizedString();
+        // }
+        WithDrawTaskActivity withDrawTaskActivity = ActivityManager.Instance.GetActivityByType(ActivityType.WithDrawTask) as WithDrawTaskActivity;
+        if (withDrawTaskActivity != null)
         {
-            targetCash = 500*OnLineEarningMgr.Instance.GetCashMultiple();
-            
-        }else if (nowCash< 800*OnLineEarningMgr.Instance.GetCashMultiple())
-        {
-            targetCash = 800*OnLineEarningMgr.Instance.GetCashMultiple();
-        }else if (nowCash< 1300*OnLineEarningMgr.Instance.GetCashMultiple())
-        {
-            targetCash = 1300*OnLineEarningMgr.Instance.GetCashMultiple();
-        }else if (nowCash< 2000*OnLineEarningMgr.Instance.GetCashMultiple())
-        {
-            targetCash = 2000*OnLineEarningMgr.Instance.GetCashMultiple();
-        }else if (nowCash< 3000*OnLineEarningMgr.Instance.GetCashMultiple())
-        {
-            targetCash = 3000*OnLineEarningMgr.Instance.GetCashMultiple();
-        }else if (nowCash< 8000*OnLineEarningMgr.Instance.GetCashMultiple())
-        {
-            targetCash = 8000*OnLineEarningMgr.Instance.GetCashMultiple();
-        }
-        leftCash = targetCash - nowCash;
-        if (_localizedString != null && !string.IsNullOrEmpty(_localizedString.GetLocalizedString()))
-        {
-            string arg1 = string.Format("<color=#D800D9>{0}</color>",OnLineEarningMgr.Instance.GetMoneyStr(leftCash, 2, false, true));
-            string arg2 = string.Format("<color=#D800D9>{0}</color>",OnLineEarningMgr.Instance.GetMoneyStr(targetCash, 2, false, true));
-            _localizedString.Arguments = new object[] {arg1,arg2};
-            return _localizedString.GetLocalizedString();
+            return withDrawTaskActivity.GetTaskInfoDescForTip();
         }
         return String.Empty;
     }
