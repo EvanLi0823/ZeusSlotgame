@@ -336,6 +336,7 @@ namespace CardSystem
         void UpdateSpinCount()
         {
             spinCount++;
+            Debug.Log("CardSystemManager UpdateSpinCount spinCount: " + spinCount);
             if (spinCount >= spinLimit)
             {
                 // 达到转动次数限制，重置转动次数
@@ -701,6 +702,8 @@ namespace CardSystem
         {
             CurrentSpinIndex++;
             CurrentSpinIndex = CurrentSpinIndex >= baseWeightLists.Count ? 0 : CurrentSpinIndex;
+            //广播切换了权重条件
+            Messenger.Broadcast(CardSystemConstants.LotteryChangeWeightConditionMsg);
         }
 
         #region ui
