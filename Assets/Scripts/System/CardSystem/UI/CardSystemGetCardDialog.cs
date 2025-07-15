@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using DG.Tweening;
 using Libs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 
 namespace CardSystem
 {
@@ -11,7 +14,7 @@ namespace CardSystem
         private Button btn_cardPack;
         private Button btn_collect;
         private Transform item;
-        
+        private GameObject parentPrefab;
         protected override void Awake()
         {
             base.Awake();
@@ -28,9 +31,10 @@ namespace CardSystem
             }
         }
 
-        public void SetCardId(int cardId)
+        public void SetCardData(int cardId,GameObject parent)
         {
             CardId = cardId;
+            parentPrefab = parent;
             ShowCardItem();
         }
 
@@ -59,14 +63,14 @@ namespace CardSystem
                 GameObject img_cardbg = Util.FindObject<GameObject>(item.transform, "img_bg/" + level);
                 img_cardbg.SetActive(true);
                
-                int cardCount = CardSystemManager.Instance.GetCardCount(CardId);
-                if (cardCount > 1)
-                {
-                    Transform img_redPoint = Util.FindObject<Transform>(item.transform, "img_redPoint");
-                    TextMeshProUGUI text_count = Util.FindObject<TextMeshProUGUI>(item.transform, "img_redPoint/tmp_count");
-                    img_redPoint.gameObject.SetActive(true);
-                    text_count.text = cardCount.ToString();
-                }
+                // int cardCount = CardSystemManager.Instance.GetCardCount(CardId);
+                // if (cardCount > 1)
+                // {
+                //     Transform img_redPoint = Util.FindObject<Transform>(item.transform, "img_redPoint");
+                //     TextMeshProUGUI text_count = Util.FindObject<TextMeshProUGUI>(item.transform, "img_redPoint/tmp_count");
+                //     img_redPoint.gameObject.SetActive(true);
+                //     text_count.text = cardCount.ToString();
+                // }
                 //加载卡牌图标
                 Transform img_card = Util.FindObject<Transform>(item.transform, "img_card");
                 img_card.gameObject.SetActive(false);
@@ -122,8 +126,32 @@ namespace CardSystem
 
         public override void Close()
         {
+            this.gameObject.SetActive(false);
             base.Close();
-            Messenger.Broadcast(CardSystemConstants.RefreshLotteryMsg);
+            //卡牌飞至卡包按钮的位置
+            if (parentPrefab != null)
+            {
+                item.SetParent(parentPrefab.transform, true);
+                item.gameObject.SetActive(true);
+                item.transform.DOLocalMove(Vector3.zero,0.5f).SetEase(Ease.Linear);
+                item.transform.DOScale(Vector3.zero,0.5f).SetEase(Ease.InQuart).OnComplete(() =>
+                {
+                    item.gameObject.SetActive(false);
+                    Messenger.Broadcast(CardSystemConstants.RefreshLotteryMsg);
+                });
+            }
         }
+        
+        // Vector2数组转Vector3数组（Z轴固定为0）
+        private Vector3[] ConvertToVector3Array(Vector2[] path2D)
+        {
+            Vector3[] path3D = new Vector3[path2D.Length];
+            for (int i = 0; i < path2D.Length; i++)
+            {
+                path3D[i] = new Vector3(path2D[i].x, path2D[i].y, 0);
+            }
+            return path3D;
+        }
+        
     }
 }

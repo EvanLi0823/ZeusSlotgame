@@ -105,6 +105,7 @@ public class SpinButtonStyle : MonoBehaviour
     private void Start()
     {
         InitNumOfMenuBtn();
+        RefreshNewUserGuide(UserManager.GetInstance().UserProfile().IsFirstGameSession);
     }
 
     /// <summary>

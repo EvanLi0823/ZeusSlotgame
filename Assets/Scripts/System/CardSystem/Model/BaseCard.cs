@@ -16,5 +16,10 @@ namespace CardSystem
             Level = Utils.Utilities.GetInt(data, CardSystemConstants.level, 1);
             Count = CardSystemManager.Instance.GetCardCount(Index);
         }
+        
+        public void SetCount(int count)
+        {
+            Count = count;
+        }
     }
 }

@@ -336,6 +336,7 @@ namespace CardSystem
         void UpdateSpinCount()
         {
             spinCount++;
+            Debug.Log("CardSystemManager UpdateSpinCount spinCount: " + spinCount);
             if (spinCount >= spinLimit)
             {
                 // 达到转动次数限制，重置转动次数
@@ -598,6 +599,10 @@ namespace CardSystem
         
         public List<BaseCard> GetCardsInfo()
         {
+            for (int i = 0; i < cardsInfo.Count; i++)
+            {
+                cardsInfo[i].SetCount(GetCardCount(cardsInfo[i].Index));
+            }
             return cardsInfo;
         }
         
@@ -701,6 +706,8 @@ namespace CardSystem
         {
             CurrentSpinIndex++;
             CurrentSpinIndex = CurrentSpinIndex >= baseWeightLists.Count ? 0 : CurrentSpinIndex;
+            //广播切换了权重条件
+            Messenger.Broadcast(CardSystemConstants.LotteryChangeWeightConditionMsg);
         }
 
         #region ui
@@ -716,10 +723,10 @@ namespace CardSystem
             Messenger.Broadcast(GameDialogManager.OpenCardSystemLuckyDrawDialogMsg);
         }
         
-        public void ShowGetRewardDialog(int cardId)
+        public void ShowGetRewardDialog(int cardId,GameObject parent)
         {
             // 这里可以添加特定于CardLotteryActivity的开始对话框逻辑
-            Messenger.Broadcast<int>(GameDialogManager.OpenCardSystemGetCardDialogMsg,cardId);
+            Messenger.Broadcast<int,GameObject>(GameDialogManager.OpenCardSystemGetCardDialogMsg,cardId,parent);
         }
         #endregion
        

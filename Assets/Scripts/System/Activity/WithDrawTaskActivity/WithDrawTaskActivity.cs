@@ -286,7 +286,16 @@ namespace Activity
         {
             string info = GetTaskInfoDesc();
             info = info.Replace("FFFD3A", "FFFF00");
-            string progressInfo = string.Format("<color=#FFFF00>({0}/{1})</color>",Task.HasCollectNum,Task.TargetNum);
+            string progressInfo = "";
+            if (Task is CollectCashFromZeroTask)
+            {
+                progressInfo = string.Format("<color=#FFFF00>({0}/{1})</color>",OnLineEarningMgr.Instance.GetMoneyStr((int)Task.HasCollectNum,0,false,true),
+                    OnLineEarningMgr.Instance.GetMoneyStr((int)Task.TargetNum,0,false,true));
+            }
+            else
+            {
+                progressInfo = string.Format("<color=#FFFF00>({0}/{1})</color>",Task.HasCollectNum,Task.TargetNum);
+            }
             return info+". "+progressInfo;
         }
 
@@ -308,6 +317,42 @@ namespace Activity
 
             return info;
         }
+
+        public string GetTaskInfoDescForTip()
+        {
+            string info = "";
+            string key = "";
+            string arg1 = "";
+            if (Task is CollectSpinCountTask)
+            {
+                key = "MoreSpinTimes";
+                arg1 = string.Format("<color=#D800D9>{0}</color>",Task.TargetNum - Task.HasCollectNum);
+            }else if (Task is CollectADCountTask)
+            {
+                key = "MoreVideoAds";
+                arg1 = string.Format("<color=#D800D9>{0}</color>",Task.TargetNum - Task.HasCollectNum);
+            }
+            else if (Task is CollectCashFromZeroTask)
+            {
+                key = "MoreWinCash";
+                int leftCash = (int)(Task.TargetNum - Task.HasCollectNum);
+                arg1 = string.Format("<color=#D800D9>{0}</color>",OnLineEarningMgr.Instance.GetMoneyStr(leftCash, 2, false, true));
+            }else if (Task is CollectCardTypeCountTask)
+            {
+                key = "MoreCollectCards";
+                arg1 = string.Format("<color=#D800D9>{0}</color>",Task.TargetNum - Task.HasCollectNum);
+            }
+            LocalizedString localizedString = new LocalizedString(LocalizationManager.Instance.tableName,key);
+            if (localizedString!=null)
+            {
+                
+                localizedString.Arguments = new object[] { arg1};
+                info = localizedString.GetLocalizedString();
+            }
+            return info;
+        }
+        
+        
         
         public override void OnClickIcon()
         {
