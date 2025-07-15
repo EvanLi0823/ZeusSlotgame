@@ -133,8 +133,8 @@ namespace CardSystem
             {
                 item.SetParent(parentPrefab.transform, true);
                 item.gameObject.SetActive(true);
-                item.transform.DOLocalMove(Vector3.zero,1f).SetEase(Ease.InQuart);
-                item.transform.DOScale(Vector3.zero,1f).SetEase(Ease.InQuart).OnComplete(() =>
+                item.transform.DOLocalMove(Vector3.zero,0.5f).SetEase(Ease.Linear);
+                item.transform.DOScale(Vector3.zero,0.5f).SetEase(Ease.InQuart).OnComplete(() =>
                 {
                     item.gameObject.SetActive(false);
                     Messenger.Broadcast(CardSystemConstants.RefreshLotteryMsg);

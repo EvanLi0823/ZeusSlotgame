@@ -62,10 +62,11 @@ namespace CardSystem
             tmp_cardInfo.text = $"{CardSystemManager.Instance.GetHaveCardTypeCount()}/{CardSystemManager.Instance.GetTotalCardTypeCount()}";
         }
 
-        public override void Close()
+        protected override void BtnCloseClick(GameObject closeBtnObject)
         {
-            base.Close();
+            base.BtnCloseClick(closeBtnObject);
             CardSystemManager.Instance.ClearNewCardIndex();
+
         }
 
         #region LoopScrollRect必需实现
