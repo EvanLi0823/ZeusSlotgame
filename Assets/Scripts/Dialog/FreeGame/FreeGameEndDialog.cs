@@ -52,6 +52,30 @@ public class FreeGameEndDialog : UIDialog
         Messenger.RemoveListener<int>(ADConstants.PlayFreeSpinEndAD,AdIsPlaySuccessful);
     }
     
+    protected override void Start()
+    {
+        base.Start();
+        DelayShowClaimBtn();
+    }
+
+    void DelayShowClaimBtn()
+    {
+        if (EndBtn!=null)
+        {
+            EndBtn.enabled = false;
+            EndBtn.gameObject.SetActive(false);
+            EndBtn.transform.localScale = Vector3.zero;
+            new DelayAction(1f, null, () =>
+            {
+                EndBtn.gameObject.SetActive(true);
+                EndBtn.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
+                {
+                    EndBtn.enabled = true;
+                });
+            }).Play();
+        }
+    }
+    
     public override void OnButtonClickHandler(GameObject go)
     {
         if(!EndBtn.interactable) return;

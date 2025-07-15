@@ -139,12 +139,28 @@ public class SpinWinDialogNew : UIDialog
             Debug.Log("SpinWinDialogNew OnStart isThirdTime");
             //第三次之后有广告和插屏
             WatchAdBtn.gameObject.SetActive(true);
-            CloseBtnOnAd.gameObject.SetActive(true);
             //显示免费的收集按钮
             CollectBtn.gameObject.SetActive(false);
+            DelayShowCloseOnAdBtn();
         }
     }
-
+    void DelayShowCloseOnAdBtn()
+    {
+        if (CloseBtnOnAd!=null)
+        {
+            CloseBtnOnAd.enabled = false;
+            CloseBtnOnAd.gameObject.SetActive(false);
+            CloseBtnOnAd.transform.localScale = Vector3.zero;
+            new DelayAction(1f, null, () =>
+            {
+                CloseBtnOnAd.gameObject.SetActive(true);
+                CloseBtnOnAd.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
+                {
+                    CloseBtnOnAd.enabled = true;
+                });
+            }).Play();
+        }
+    }
     void PlaySpineShowAni(int id)
     {
         if (skeleton!=null)
