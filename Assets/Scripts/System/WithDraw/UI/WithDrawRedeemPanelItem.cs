@@ -51,6 +51,7 @@ public class WithDrawRedeemPanelItem:MonoBehaviour,LoopScrollPrefabSource, LoopS
                     }
                 }
             }
+            platToggle1.isOn = true;
         });
 
         //toggle显隐
@@ -106,10 +107,10 @@ public class WithDrawRedeemPanelItem:MonoBehaviour,LoopScrollPrefabSource, LoopS
     
     #endregion
     
-    private void Start()
-    {
-        platToggle1.isOn = true;
-    }
+    // private void Start()
+    // {
+    //     platToggle1.isOn = true;
+    // }
 
     void OnValueChanged(bool value)
     {
@@ -117,7 +118,6 @@ public class WithDrawRedeemPanelItem:MonoBehaviour,LoopScrollPrefabSource, LoopS
         {
             return;
         }
-        Debug.Log($"触发事件 - 当前状态: {value}, 调用堆栈: {Environment.StackTrace}");
         Toggle selected = titleToggleGroup.ActiveToggles().FirstOrDefault();
         if (selected != null)
         {
