@@ -51,6 +51,7 @@ public class WithDrawRedeemPanelItem:MonoBehaviour,LoopScrollPrefabSource, LoopS
                     }
                 }
             }
+            platToggle1.isOn = true;
         });
 
         //toggle显隐
@@ -106,10 +107,10 @@ public class WithDrawRedeemPanelItem:MonoBehaviour,LoopScrollPrefabSource, LoopS
     
     #endregion
     
-    private void Start()
-    {
-        platToggle1.isOn = true;
-    }
+    // private void Start()
+    // {
+    //     platToggle1.isOn = true;
+    // }
 
     void OnValueChanged(bool value)
     {
