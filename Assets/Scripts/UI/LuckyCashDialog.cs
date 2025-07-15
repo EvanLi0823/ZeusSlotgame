@@ -52,14 +52,15 @@ public class LuckyCashDialog : UIDialog
         {
             BtnNotWatch.enabled = false;
             BtnNotWatch.gameObject.SetActive(false);
-            BtnNotWatch.transform.localScale = Vector3.zero;
+            // BtnNotWatch.transform.localScale = Vector3.zero;
             new DelayAction(1f, null, () =>
             {
                 BtnNotWatch.gameObject.SetActive(true);
-                BtnNotWatch.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
-                {
-                    BtnNotWatch.enabled = true;
-                });
+                BtnNotWatch.enabled = true;
+                // BtnNotWatch.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
+                // {
+                //     BtnNotWatch.enabled = true;
+                // });
             }).Play();
         }
     }

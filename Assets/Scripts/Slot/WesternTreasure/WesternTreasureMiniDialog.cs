@@ -83,14 +83,15 @@ public class WesternTreasureMiniDialog : UIDialog
         {
             EndBtn.enabled = false;
             EndBtn.gameObject.SetActive(false);
-            EndBtn.transform.localScale = Vector3.zero;
+            // EndBtn.transform.localScale = Vector3.zero;
             new DelayAction(1f, null, () =>
             {
                 EndBtn.gameObject.SetActive(true);
-                EndBtn.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
-                {
-                    EndBtn.enabled = true;
-                });
+                EndBtn.enabled = true;
+                // EndBtn.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
+                // {
+                //     EndBtn.enabled = true;
+                // });
             }).Play();
         }
     }
