@@ -37,7 +37,33 @@ public class LuckyCashDialog : UIDialog
         BtnNotWatch.onClick.AddListener(OnButtonCloseClick);
         PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"LuckyCash");
         base.Awake();
+        
     }
+
+    protected override void Start()
+    {
+        base.Start();
+        DelayShowClaimBtn();
+    }
+
+    void DelayShowClaimBtn()
+    {
+        if (BtnNotWatch!=null)
+        {
+            BtnNotWatch.enabled = false;
+            BtnNotWatch.gameObject.SetActive(false);
+            BtnNotWatch.transform.localScale = Vector3.zero;
+            new DelayAction(1f, null, () =>
+            {
+                BtnNotWatch.gameObject.SetActive(true);
+                BtnNotWatch.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
+                {
+                    BtnNotWatch.enabled = true;
+                });
+            }).Play();
+        }
+    }
+    
     void OnEnable()
     {
         Messenger.AddListener<int>(ADConstants.PlayLuckyCashAD,AdIsPlaySuccessful);
