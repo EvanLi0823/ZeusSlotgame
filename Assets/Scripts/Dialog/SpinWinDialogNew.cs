@@ -148,16 +148,22 @@ public class SpinWinDialogNew : UIDialog
     {
         if (CloseBtnOnAd!=null)
         {
+            Debug.Log("Scale animation complete111");
             CloseBtnOnAd.enabled = false;
             CloseBtnOnAd.gameObject.SetActive(false);
-            CloseBtnOnAd.transform.localScale = Vector3.zero;
+            // CloseBtnOnAd.transform.localScale = Vector3.zero;
             new DelayAction(1f, null, () =>
             {
-                CloseBtnOnAd.gameObject.SetActive(true);
-                CloseBtnOnAd.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
-                {
-                    CloseBtnOnAd.enabled = true;
-                });
+                CloseBtnOnAd.gameObject.SetActive(true); 
+                CloseBtnOnAd.enabled = true;
+                //此段代码出现 bug,点击按钮后会缩回去
+                // Tween tween = CloseBtnOnAd.transform.DOScale(Vector3.one, 0.3f).OnComplete(() =>
+                // {
+                //     CloseBtnOnAd.enabled = true;
+                //     CloseBtnOnAd.transform.localScale = Vector3.one;
+                //     Debug.Log("Scale animation complete");
+                //     tween = null;
+                // });
             }).Play();
         }
     }
