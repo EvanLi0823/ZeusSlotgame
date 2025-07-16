@@ -143,7 +143,16 @@ public class FreeGameStartDialog : UIDialog
             return;
         }
         hasClicked = true;
-        ShowAD();
+        OnLineEarningMgr.Instance.FreeSpinCount++;
+        if (OnLineEarningMgr.Instance.CheckCanShowFreeStartAD())
+        {
+            Debug.Log("FreeGameStartDialog OnStartButtonClick ShowAD");
+            ShowAD();
+        }
+        else
+        {
+            ADDoneCallBack();
+        }
         //ADDoneCallBack();
     }
 
