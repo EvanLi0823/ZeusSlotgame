@@ -332,7 +332,7 @@ namespace Activity
                 key = "MoreVideoAds";
                 arg1 = string.Format("<color=#D800D9>{0}</color>",Task.TargetNum - Task.HasCollectNum);
             }
-            else if (Task is CollectCashFromZeroTask)
+            else if (Task is CollectCashFromZeroTask||Task is  AccumulateTotalCashTask)
             {
                 key = "MoreWinCash";
                 int leftCash = (int)(Task.TargetNum - Task.HasCollectNum);
