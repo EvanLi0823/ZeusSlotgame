@@ -21,6 +21,67 @@ MonoBehaviour:
     m_Address: Assets/Localizaiton/StringTable/CandyFantasyString Shared Data
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: d932ec0d684d8492691fdb69618c6059
+    m_Address: Assets/AssetResources/Localizaiton/AssetTable/FontAssetTable Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 1317265bd367bf24c8c9252ba14c8797
+    m_Address: Assets/Samples/Localization/1.3.2/Smart Strings - Persistent Variables/String
+      Table/Gender Sample Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 27153e20147c06c4c8d1304d28104a87
+    m_Address: Assets/Samples/Localization/1.3.2/Smart Strings - Persistent Variables/String
+      Table/Global Variables Sample Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: d09918b801c124cbe8c83d54929957dc
+    m_Address: Roboto-Bold SDF
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-cs
+    - Locale-nl
+    - Locale-en
+    - Locale-fil
+    - Locale-fr
+    - Locale-de
+    - Locale-id
+    - Locale-it
+    - Locale-ms
+    - Locale-pl
+    - Locale-pt
+    - Locale-ro
+    - Locale-ru
+    - Locale-es
+    - Locale-tr
+    - Locale-vi
+  - m_GUID: 6eb9918bb82834d6482b7df1b1face20
+    m_Address: Roboto-Bold Atlas Material 093E00
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-id
+    - Locale-cs
+    - Locale-nl
+    - Locale-fr
+    - Locale-fil
+    - Locale-de
+    - Locale-it
+    - Locale-ms
+    - Locale-pl
+    - Locale-pt
+    - Locale-ro
+    - Locale-ru
+    - Locale-es
+    - Locale-tr
+    - Locale-vi
+    - Locale-en
+  - m_GUID: 356a7c9529d6648b08530c7d0389eaf8
+    m_Address: NotoSans-Bold SDF
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-hi
+    - Locale-en
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Japanese (ja)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Japanese (ja)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 62c57cb438d754229985185c886babab
+  m_SerializeEntries:
+  - m_GUID: c6986c2342f5b430cb85ddc1a98756ac
+    m_Address: NotoSansJP-Bold SDF
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+  - m_GUID: f7f2798d1c19a4b53b182b4b4f57d5d2
+    m_Address: NotoSansJP-Bold Atlas Material 093E00
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 19c0be067dc5442c4a521d21a9286d37, type: 2}
+    - {fileID: 11400000, guid: 02bd69940bd694fbba18df2ceeab6f61, type: 2}

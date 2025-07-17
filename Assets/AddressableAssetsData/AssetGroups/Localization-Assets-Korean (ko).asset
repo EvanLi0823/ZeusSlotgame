@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Korean (ko)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Korean (ko)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d323818b6bef541a5ac6e8089a293949
+  m_SerializeEntries:
+  - m_GUID: c068e78dffa2e4616a55dc135f7dc31a
+    m_Address: NotoSansKR-Bold SDF
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+  - m_GUID: 54134334c8712486cbf30ac5c25c6bb3
+    m_Address: NotoSansKR-Bold Atlas Material 093E00
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5e4e3baabbb774014a0c512802e5e24e, type: 2}
+    - {fileID: 11400000, guid: b3b2279eb65054a8186f1c2399a72379, type: 2}
