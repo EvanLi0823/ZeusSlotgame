@@ -78,6 +78,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ja
     - Locale-en
+  - m_GUID: 35cdf49581391431e9e4328d8795acc4
+    m_Address: Roboto-Bold Atlas Material 550285
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-cs
+    - Locale-nl
+    - Locale-en
+    - Locale-fil
+    - Locale-fr
+    - Locale-de
+    - Locale-id
+    - Locale-it
+    - Locale-ms
+    - Locale-pl
+    - Locale-pt
+    - Locale-ro
+    - Locale-ru
+    - Locale-es
+    - Locale-tr
+    - Locale-vi
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:

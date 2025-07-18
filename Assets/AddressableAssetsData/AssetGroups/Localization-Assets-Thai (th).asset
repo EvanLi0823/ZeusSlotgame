@@ -22,6 +22,16 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-th
+  - m_GUID: a7c750b4a3a7f4612b4f1bcf277eaf36
+    m_Address: NotoSansThai-Bold Atlas Material 550285
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th
+  - m_GUID: ae95f8101ef7e4d96938fe9e105e4f7d
+    m_Address: NotoSansThai-Bold Atlas Material 093E00
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:
