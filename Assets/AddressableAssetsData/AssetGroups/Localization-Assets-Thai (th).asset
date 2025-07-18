@@ -17,13 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 83f9de0df5fdd4ff08380283a566fd35
   m_SerializeEntries:
-  - m_GUID: 66322fab75e824686a19741165b95db5
-    m_Address: Kanit-Bold SDF
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-th
-  - m_GUID: 095e33f05c5a34008b5f4a2dcd023088
-    m_Address: Kanit-Bold Atlas Material 093E00
+  - m_GUID: abfcd4ffe3b3047cc81ca0443508213f
+    m_Address: NotoSansThai-Bold SDF
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-th

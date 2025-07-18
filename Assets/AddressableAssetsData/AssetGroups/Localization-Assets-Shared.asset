@@ -72,6 +72,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-hi
     - Locale-en
+  - m_GUID: c6986c2342f5b430cb85ddc1a98756ac
+    m_Address: NotoSansJP-Bold SDF
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    - Locale-en
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:
