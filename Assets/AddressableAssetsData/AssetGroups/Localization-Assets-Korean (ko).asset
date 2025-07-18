@@ -37,6 +37,16 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko
+  - m_GUID: 082252e5d0d45433f94d94c8452643d7
+    m_Address: NotoSansKR-Bold Atlas Material 840500
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+  - m_GUID: dd4bb2e35e90c46a589fc28e65778e6c
+    m_Address: NotoSansKR-Bold Atlas Material 600650
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:

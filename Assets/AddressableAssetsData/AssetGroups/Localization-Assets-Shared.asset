@@ -118,6 +118,46 @@ MonoBehaviour:
     - Locale-es
     - Locale-tr
     - Locale-vi
+  - m_GUID: 257c83f313fb0428fabe870571519b69
+    m_Address: Roboto-Bold Atlas Material 840500
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Locale-cs
+    - Locale-nl
+    - Locale-fil
+    - Locale-fr
+    - Locale-de
+    - Locale-id
+    - Locale-it
+    - Locale-ms
+    - Locale-pl
+    - Locale-pt
+    - Locale-ro
+    - Locale-ru
+    - Locale-es
+    - Locale-tr
+    - Locale-vi
+  - m_GUID: 2748966fbd6524db3a84ea8b706c6890
+    m_Address: Roboto-Bold Atlas Material 600650
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Locale-cs
+    - Locale-nl
+    - Locale-fil
+    - Locale-fr
+    - Locale-de
+    - Locale-id
+    - Locale-it
+    - Locale-ms
+    - Locale-pl
+    - Locale-pt
+    - Locale-ro
+    - Locale-ru
+    - Locale-es
+    - Locale-vi
+    - Locale-tr
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:
