@@ -1,6 +1,7 @@
 <linker>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="Activity.ActivityPanel" preserve="all" />
+    <type fullname="Activity.ContinueSpinDialog" preserve="all" />
     <type fullname="Activity.SpinWithDrawEndDialog" preserve="all" />
     <type fullname="Activity.SpinWithDrawStartDialog" preserve="all" />
     <type fullname="Activity.WithDrawTaskIcon" preserve="all" />
@@ -39,6 +40,7 @@
     <type fullname="Classic.SettingDialog" preserve="all" />
     <type fullname="Classic.SlotGameDialogManager" preserve="all" />
     <type fullname="Classic.SlotMiddlePanel" preserve="all" />
+    <type fullname="Classic.TipsDialog" preserve="all" />
     <type fullname="Classic.TopPanel" preserve="all" />
     <type fullname="Classic.WesternTreasureTest" preserve="all" />
     <type fullname="CollectElementPanel" preserve="all" />
