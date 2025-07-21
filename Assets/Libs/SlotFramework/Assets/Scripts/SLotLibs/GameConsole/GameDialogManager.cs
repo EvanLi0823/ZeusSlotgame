@@ -187,7 +187,7 @@ public class GameDialogManager : MonoBehaviour
 
             #region cardSystem
             Messenger.AddListener(OpenCardSystemCollectionDialogMsg, OpenCardSystemCollectionDialog);
-            Messenger.AddListener<int>(OpenCardSystemGetCardDialogMsg, OpenCardSystemGetCardDialog);
+            Messenger.AddListener<int,GameObject>(OpenCardSystemGetCardDialogMsg, OpenCardSystemGetCardDialog);
             Messenger.AddListener(OpenCardSystemLuckyDrawDialogMsg, OpenCardSystemLuckyDrawDialog);
             #endregion
             
@@ -272,7 +272,7 @@ public class GameDialogManager : MonoBehaviour
 			
 			#region cardSystem
 			Messenger.RemoveListener(OpenCardSystemCollectionDialogMsg, OpenCardSystemCollectionDialog);
-			Messenger.RemoveListener<int>(OpenCardSystemGetCardDialogMsg, OpenCardSystemGetCardDialog);
+			Messenger.RemoveListener<int,GameObject>(OpenCardSystemGetCardDialogMsg, OpenCardSystemGetCardDialog);
 			Messenger.RemoveListener(OpenCardSystemLuckyDrawDialogMsg, OpenCardSystemLuckyDrawDialog);
 			#endregion
 		}
@@ -595,7 +595,7 @@ public class GameDialogManager : MonoBehaviour
 	{
 		
 	}
-	protected virtual void OpenCardSystemGetCardDialog(int cardId)
+	protected virtual void OpenCardSystemGetCardDialog(int cardId,GameObject cardBtn)
 	{
 		
 	}

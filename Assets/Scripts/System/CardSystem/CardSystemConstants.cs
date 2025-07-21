@@ -41,5 +41,6 @@ namespace CardSystem
         public static string GetCardNewCountMsg = "GetCardNewCountMsg";
 
         public static string PrefabPath = "CardSystem/Prefab";
+        public static string LotteryChangeWeightConditionMsg = "LotteryChangeWeightConditionMsg";
     }
 }
