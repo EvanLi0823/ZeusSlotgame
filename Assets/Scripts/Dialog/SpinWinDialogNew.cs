@@ -133,6 +133,8 @@ public class SpinWinDialogNew : UIDialog
             CollectBtn.gameObject.SetActive(true);
             Transform x2Image = Utilities.RealFindObj<Transform>(CollectBtn.transform, "x2");
             x2Image.gameObject.SetActive(true);
+            Transform numImage = Utilities.RealFindObj<Transform>(CollectBtn.transform, "number");
+            numImage.gameObject.SetActive(true);
         }
         else
         {
