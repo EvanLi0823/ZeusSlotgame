@@ -183,9 +183,9 @@ public class WesternTreasureFly : MonoBehaviour
             yield return new WaitForSeconds(1f);
             JackPotAni.gameObject.SetActive(true);
             JackPotAni.Skeleton.SetToSetupPose();
-            JackPotAni.AnimationState.SetAnimation(0, "zhuan_chang_1", false);
+            JackPotAni.AnimationState.SetAnimation(0, "animation", false);
             AudioManager.Instance.AsyncPlayEffectAudio("JackPotStart");
-            yield return new WaitForSeconds(4.2f);
+            yield return new WaitForSeconds(3.5f);
             JackPotAni.gameObject.SetActive(false);
             // SetTriggerEffect(false);
             treeManager.OpenJackpotGame();

@@ -57,11 +57,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Machines
-  - m_GUID: cb27ad541ce824efb9b24821b4fc1015
-    m_Address: Spine
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Machines
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 854a929d254d6403b801fd5c05cfb890, type: 2}
   m_SchemaSet:
