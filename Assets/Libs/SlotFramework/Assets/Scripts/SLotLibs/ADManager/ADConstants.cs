@@ -9,6 +9,7 @@ public class ADConstants
     public const string PlayFreeSpinADDefeated = "PlayFreeSpinADDefeated";
     public const string PlayJackPotGameAD = "PlayJackPotGameAD";
     public const string PlayCardLotteryAD = "PlayCardLotteryAD";
+    public const string PlayContinueSpinAD = "PlayContinueSpinAD";
     public const string Time = "time";
     
     public const string OnPlayVedioEnd = "OnPlayVedioEnd";

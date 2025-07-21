@@ -310,6 +310,7 @@ public class CustomXcodeProcessBase  {
 	//less use ,substitution of ya configuration
 	protected virtual void ModifyYamlFile()
 	{
+#if UNITY_IOS
         string projPath = UnityEditor.iOS.Xcode.PBXProject.GetPBXProjectPath(pathToBuiltXcodeProject);
 		UnityEditor.iOS.Xcode.PBXProject proj = new UnityEditor.iOS.Xcode.PBXProject();
 		
@@ -326,5 +327,6 @@ public class CustomXcodeProcessBase  {
 		proj.AddFileToBuild(target, proj.AddFile(fileName, fileName,UnityEditor.iOS.Xcode.PBXSourceTree.Source));
 		
 		File.WriteAllText(projPath, proj.WriteToString());
+#endif
     }
 }
