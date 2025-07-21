@@ -473,7 +473,7 @@ namespace Classic
                 new OpenConfigParam<ContinueSpinDialog>(isPortrait,uiPopupStrategy: new SystemUIPopupStrategy(),dialogInitCallBack: (dialog) =>
                 {
                     dialog.SetUIData(cash,callback);
-                },defaultResourcePath:"ContinueSpin/Prefab/ContinueSpinDialog_p"));
+                },defaultResourcePath:"ContinueSpin/Prefab/ContinueSpinDialog"));
         }
         
         protected override void OpenTipsDialog(string text)
