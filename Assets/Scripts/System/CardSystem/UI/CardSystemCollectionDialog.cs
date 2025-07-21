@@ -27,6 +27,10 @@ namespace CardSystem
         protected override void Awake()
         {
             base.Awake();
+            if (btn_collect!=null)
+            {
+                UGUIEventListener.Get(btn_collect.gameObject).onClick = BtnCollectClick;
+            }
             Cards = CardSystemManager.Instance.GetCardsInfo();
             string info = OnLineEarningMgr.Instance.GetMoneyStr(CardSystemManager.Instance.GetCurCollectionCoins());
             tmp_coin.text = info;
@@ -52,7 +56,11 @@ namespace CardSystem
             base.Close();
             CardSystemManager.Instance.ClearNewCardIndex();
         }
-
+        private void BtnCollectClick(GameObject closeBtnObject)
+        {
+            this.Close();
+            CardSystemManager.Instance.ShowLotteryDialog();
+        }
         #region LoopScrollRect必需实现
         public void ProvideData(Transform transform, int idx)
         {

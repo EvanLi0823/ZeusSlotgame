@@ -224,7 +224,6 @@ public class OnLineEarningMgr
         PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"Cash",cash.ToString());
         SharedPlayerPrefs.SetPlayerPrefsIntValue(CASH,cash); 
     }
-   
     
     public virtual void IncreaseCash(int newCash)
     {
@@ -637,6 +636,49 @@ public class OnLineEarningMgr
     public bool IsWhiteBao()
     {
         return isWhitePackage;
+    }
+    
+    /// <summary>
+    /// 作用于触发 freespin和 jackpot的次数统计
+    /// 第一次触发 freespin和 jackpot时，不播放广告
+    /// </summary>
+    public const string FreeSpinCountKey = "OnLineFreeSpinCountKey";
+    public const string JackpotCountKey = "OnLineJackpotCountKey";
+    //触发 freespin的次数
+    public int FreeSpinCount
+    {
+        set
+        {      
+            SharedPlayerPrefs.SetPlayerPrefsIntValue(FreeSpinCountKey, value);
+        }
+        get
+        {
+            int value = SharedPlayerPrefs.GetPlayerPrefsIntValue(FreeSpinCountKey, 0);
+            return value;
+        }
+    }
+    //触发 jackpot的次数
+    public int JackpotCount {
+        set
+        {      
+            SharedPlayerPrefs.SetPlayerPrefsIntValue(JackpotCountKey, value);
+        }
+        get
+        {
+            int value = SharedPlayerPrefs.GetPlayerPrefsIntValue(JackpotCountKey, 0);
+            return value;
+        }
+    }
+
+    public int FreeSpinCountLimit = 1;
+    public int JackpotCountLimit = 1;
+    public bool CheckCanShowFreeStartAD()
+    {
+       return FreeSpinCount>FreeSpinCountLimit;
+    }
+    public bool CheckCanShowJackpotStartAD()
+    {
+        return JackpotCount>JackpotCountLimit;
     }
 }
 

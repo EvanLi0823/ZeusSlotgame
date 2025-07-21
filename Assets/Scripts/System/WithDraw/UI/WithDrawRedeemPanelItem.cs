@@ -38,6 +38,12 @@ public class WithDrawRedeemPanelItem:MonoBehaviour,LoopScrollPrefabSource, LoopS
         loopVerticalScrollRect.dataSource = this;
         List<string> spritePath = LocalizationManager.Instance.GetPlatFormSpriteResourcePath();
         int num = spritePath.Count;
+        //toggle显隐
+        for (int i = 0; i < Toggles.Count; i++)
+        {
+            Toggles[i].name = i + "";
+            Toggles[i].gameObject.SetActive(i<num);
+        }
         AddressableManager.Instance.LoadAsset<SpriteAtlas>("Platform.spriteatlas", (result) =>
         {
             if (result != null)
@@ -52,12 +58,6 @@ public class WithDrawRedeemPanelItem:MonoBehaviour,LoopScrollPrefabSource, LoopS
                 }
             }
         });
-
-        //toggle显隐
-        for (int i = 0; i < Toggles.Count; i++)
-        {
-            Toggles[i].gameObject.SetActive(i<num);
-        }
     }
 
     private void OnEnable()
@@ -75,7 +75,6 @@ public class WithDrawRedeemPanelItem:MonoBehaviour,LoopScrollPrefabSource, LoopS
         Toggle toggle = Toggles[index];
         Image platform1 = Util.FindObject<Image>(toggle.transform, "Background/platform");
         platform1.sprite = sp;
-        toggle.name = index+"";
     }
     
     

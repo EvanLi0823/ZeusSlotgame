@@ -14,6 +14,7 @@ namespace Activity
         CardPack=2,
         WithDrawTask=3,
         H5RewardActivity=4,
+        ContinueSpin=5
     }
 
     public enum ActivityState

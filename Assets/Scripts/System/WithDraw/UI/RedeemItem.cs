@@ -16,6 +16,8 @@ public class RedeemItem : MonoBehaviour
     private TextMeshProUGUI cashTMP;
     private Image paltformImg;
     private Button redeemBtn;
+    private Button withdrawBtn;
+
     private RectTransform checking;
     private RectTransform inProgress;
     private RectTransform withDraw;
@@ -26,6 +28,7 @@ public class RedeemItem : MonoBehaviour
     private TextMeshProUGUI countDownTMP;
     private Coroutine timeCor;
     private TextMeshProUGUI FaildText;
+    private TextMeshProUGUI withdrawProgressTmp;
     private void Awake()
     {
         cashTMP = Utils.Utilities.RealFindObj<TextMeshProUGUI>(transform, "cashTMP");
@@ -39,10 +42,17 @@ public class RedeemItem : MonoBehaviour
         condition = Utils.Utilities.RealFindObj<RectTransform>(transform, "Condition");
         progressBar = Utils.Utilities.RealFindObj<Image>(transform, "inProgress/bottom/checking/progressBar");
         countDownTMP = Utils.Utilities.RealFindObj<TextMeshProUGUI>(transform, "checking/CountDown");
+        withdrawProgressTmp = Utils.Utilities.RealFindObj<TextMeshProUGUI>(transform, "withDraw/withdrawProgressTMP");
+        withdrawBtn = Utils.Utilities.RealFindObj<Button>(transform, "withDraw/withdrawBtn");
+
         FaildText= Utils.Utilities.RealFindObj<TextMeshProUGUI>(transform, "FaildTMP");
         if (redeemBtn != null)
         {
             UGUIEventListener.Get(redeemBtn.gameObject).onClick = OnButtonClickHandler;
+        }
+        if (withdrawBtn != null)
+        {
+            UGUIEventListener.Get(withdrawBtn.gameObject).onClick = OnButtonClickHandler;
         }
     }
 
@@ -144,22 +154,14 @@ public class RedeemItem : MonoBehaviour
     {
         redeemBtn.gameObject.SetActive(false);
         checking.gameObject.SetActive(false);
-        inProgress.gameObject.SetActive(true);
-        withDraw.gameObject.SetActive(false);
+        inProgress.gameObject.SetActive(false);
+        withDraw.gameObject.SetActive(true);
         condition.gameObject.SetActive(false);
         FaildText.gameObject.SetActive(false);
-        Transform cardIcon = Utils.Utilities.RealFindObj<Transform>(transform, "inProgress/bottom/cardIMG");
-        Transform cashIcon = Utils.Utilities.RealFindObj<Transform>(transform, "inProgress/bottom/moneyIMG");
-        if (cardIcon!=null)
-        {
-            cardIcon.gameObject.SetActive(true);
-            cashIcon.gameObject.SetActive(false);
-        }
         //钱的图标换成了卡牌图标
         int HasCollectNum = CardSystemManager.Instance.GetHaveCardTypeCount();
         int TargetNum = CardSystemManager.Instance.GetTotalCardTypeCount();
-        progressTMP.text = string.Format("{0}/{1}", HasCollectNum, TargetNum);
-        progressBar.fillAmount = HasCollectNum >= TargetNum ? 1.0f : HasCollectNum / (TargetNum * 1.0f);
+        withdrawProgressTmp.text = string.Format("{0}/{1}", HasCollectNum, TargetNum);
     }
 
     private void ShowWithDrawUI()
@@ -209,7 +211,16 @@ public class RedeemItem : MonoBehaviour
     {
         // WithDrawManager.Instance.CurSelectTaskId = itemData.task.TaskId;
         // WithDrawManager.Instance.ReduceCash((int)itemData.task.TargetNum);
-        WithDrawManager.Instance.ShowAccountDialog(itemData.task.TaskId,(int)itemData.task.TargetNum);
+        if (go == redeemBtn.gameObject)
+        {
+            //点击了领取按钮
+            WithDrawManager.Instance.ShowAccountDialog(itemData.task.TaskId,(int)itemData.task.TargetNum);
+        }
+        else if (go == withdrawBtn.gameObject)
+        {
+            //点击了提现按钮,给出提示消息
+            Messenger.Broadcast(WithDrawConstants.ShowTipMsg);
+        }
     }
 
     private WaitForSecondsRealtime waitOneSceond = new WaitForSecondsRealtime(1);

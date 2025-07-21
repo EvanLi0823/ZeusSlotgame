@@ -71,6 +71,31 @@ public class WesternTreasureMiniDialog : UIDialog
         BonusGameWinCash.gameObject.SetActive(!PlatformManager.Instance.IsWhiteBao() && totalCash > 0);
     }
     
+    protected override void Start()
+    {
+        base.Start();
+        DelayShowClaimBtn();
+    }
+    
+    void DelayShowClaimBtn()
+    {
+        if (EndBtn!=null)
+        {
+            EndBtn.enabled = false;
+            EndBtn.gameObject.SetActive(false);
+            // EndBtn.transform.localScale = Vector3.zero;
+            new DelayAction(1f, null, () =>
+            {
+                EndBtn.gameObject.SetActive(true);
+                EndBtn.enabled = true;
+                // EndBtn.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
+                // {
+                //     EndBtn.enabled = true;
+                // });
+            }).Play();
+        }
+    }
+    
     private void SetCashCoins(int cash)
     {
         this.curCash = cash;
