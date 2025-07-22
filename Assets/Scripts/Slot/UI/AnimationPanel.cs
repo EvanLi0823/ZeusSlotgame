@@ -52,7 +52,7 @@ public class AnimationPanel : MonoBehaviour
          return;
       }
       curAnimationName = name;
-      skeletonGraphic = animationItem.SkeletonPrefab.GetComponent<SkeletonGraphic>();
+      skeletonGraphic = Instantiate(animationItem.SkeletonPrefab).GetComponent<SkeletonGraphic>();
       skeletonGraphic.gameObject.transform.SetParent(transform, false);
       skeletonGraphic.gameObject.SetActive(true);
       skeletonGraphic.Skeleton.SetToSetupPose();
@@ -65,6 +65,7 @@ public class AnimationPanel : MonoBehaviour
       if (entry.animation.name != curAnimationName)
       {
          skeletonGraphic.gameObject.SetActive(false);
+         Destroy(skeletonGraphic.gameObject);
          skeletonGraphic = null;
          curAnimationName = string.Empty;
       }

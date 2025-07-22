@@ -13,7 +13,7 @@ namespace Activity
     {
         public Transform cashFlyPosition;
         private SkeletonGraphic _skeletonGraphic;
-        private TextMeshProUGUI _cashCount;
+        private Text _cashCount;
         private Button _adButton;
         private Button _closeButton;
         private Button _getButton;
@@ -56,7 +56,7 @@ namespace Activity
             
             _skeletonGraphic = Utilities.RealFindObj<SkeletonGraphic>(transform,"Anchor/Animation/House");
             
-            _cashCount = Utilities.RealFindObj<TextMeshProUGUI>(transform,"Anchor/Animation/TMP_Money");
+            _cashCount = Utilities.RealFindObj<Text>(transform,"Anchor/Animation/TMP_Money");
             
             _adButton = Utilities.RealFindObj<Button>(transform,"Anchor/Animation/AdBtn");
             
