@@ -83,7 +83,7 @@ public class SpinWinDialogNew : UIDialog
         // winImage[0].sprite = winType[(int)type];
         // foreach (var item in winImage) item.SetNativeSize();
         //播放spine动画
-        PlaySpineShowAni(1);
+        PlaySpineShowAni();
         this.PlayWinTypeEffect();
         AudioEntity.Instance.PlayRollUpEffect(0.7f);
         time *= ((int)spinWinType+1);
@@ -169,12 +169,26 @@ public class SpinWinDialogNew : UIDialog
             }).Play();
         }
     }
-    void PlaySpineShowAni(int id)
+    void PlaySpineShowAni()
     {
         if (skeleton!=null)
         {
+            int id = 1;
             skeleton.Skeleton.SetToSetupPose();
             skeleton.AnimationState.ClearTracks();
+            switch (spinWinType)
+            {
+                case SpinWinType.EPIC:
+                    id = 5;
+                    break;
+                case SpinWinType.MEGA:
+                    id = 3;
+                    break;
+                case SpinWinType.BIG:
+                    id = 1;
+                    break;
+            }
+
             skeleton.AnimationState.Complete += OnComplete;
             skeleton.AnimationState.SetAnimation(0, GetAniName(id), false);
         }
@@ -190,36 +204,11 @@ public class SpinWinDialogNew : UIDialog
             }
             else if ((int)spinWinType == 1)
             {
-                //开始切换至mega
-                if (entry.animation.name == GetAniName(1))
-                {
-                    AudioEntity.Instance.PlayEffect("mega_win");
-                    skeleton.AnimationState.ClearTracks();
-                    skeleton.AnimationState.SetAnimation(0, GetAniName(3), false);
-                }else if (entry.animation.name == GetAniName(3))
-                {
-                    skeleton.AnimationState.SetAnimation(0, GetAniName(4), true);
-                }
+                skeleton.AnimationState.SetAnimation(0, GetAniName(4), true);
             }
             else if ((int)spinWinType == 2)
             {
-                //开始切换至mega
-                if (entry.animation.name == GetAniName(1))
-                {
-                    AudioEntity.Instance.PlayEffect("mega_win");
-                    skeleton.AnimationState.ClearTracks();
-                    skeleton.AnimationState.SetAnimation(0, GetAniName(3), false);
-                }
-                else if (entry.animation.name == GetAniName(3))
-                {
-                    AudioEntity.Instance.PlayEffect("epic_win");
-                    skeleton.AnimationState.ClearTracks();
-                    skeleton.AnimationState.SetAnimation(0, GetAniName(5), false);
-                }
-                else if (entry.animation.name == GetAniName(5))
-                {
-                    skeleton.AnimationState.SetAnimation(0, GetAniName(6), true);
-                }
+                skeleton.AnimationState.SetAnimation(0, GetAniName(6), true);
             }
         }
     }
@@ -450,21 +439,23 @@ public class SpinWinDialogNew : UIDialog
         this.curCash = cash;
         this.cashText.SetText(OnLineEarningMgr.Instance.GetMoneyStr(cash));
     }
+    
+    
     private void PlayWinTypeEffect()
     {
-        AudioEntity.Instance.PlayEffect("big_win");
-        // switch (spinWinType)
-        // {
-        //     case SpinWinType.EPIC:
-        //         AudioEntity.Instance.PlayEffect("epic_win");
-        //         break;
-        //     case SpinWinType.MEGA:
-        //         AudioEntity.Instance.PlayEffect("mega_win");
-        //         break;
-        //     case SpinWinType.BIG:
-        //         AudioEntity.Instance.PlayEffect("big_win");
-        //         break;
-        // }
+        // AudioEntity.Instance.PlayEffect("big_win");
+        switch (spinWinType)
+        {
+            case SpinWinType.EPIC:
+                AudioEntity.Instance.PlayEffect("epic_win");
+                break;
+            case SpinWinType.MEGA:
+                AudioEntity.Instance.PlayEffect("mega_win");
+                break;
+            case SpinWinType.BIG:
+                AudioEntity.Instance.PlayEffect("big_win");
+                break;
+        }
     }
     public void Close()
     {
