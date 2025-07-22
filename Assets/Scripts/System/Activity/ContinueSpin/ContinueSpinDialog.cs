@@ -129,9 +129,21 @@ namespace Activity
         }
         private void OnClickCloseBtn()
         {
-            _cashCount.gameObject.SetActive(false);
-            _cashCount.text = "0";
-            Close();
+            bool rewardADIsReady = ADManager.Instance.RewardAdIsOk(ADEntrances.REWARD_VIDEO_CONTINUE_SPIN);
+              
+            if (rewardADIsReady)
+            {
+                ContinueSpinActivity.IsCloseReward = true;
+                ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_CONTINUE_SPIN);
+            }
+            else
+            {
+                //广告未加载好
+                //展示未加载好广告的提示,直接给看广告成功的奖励
+                _cashCount.gameObject.SetActive(false);
+                _cashCount.text = "0";
+                Close();
+            }
         }
         private TrackEntry _trackEntry = null;
 
@@ -143,6 +155,7 @@ namespace Activity
               
             if (rewardADIsReady)
             {
+                ContinueSpinActivity.IsCloseReward = false;
                 ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_CONTINUE_SPIN);
             }
             else
