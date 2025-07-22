@@ -359,7 +359,7 @@ public class SpinWinDialogNew : UIDialog
         if (showAni)
         {
             Messenger.Broadcast<Transform, Libs.CoinsBezier.BezierType, System.Action>(
-                GameConstants.CollectBonusWithType, coinFlyPosition.transform, Libs.CoinsBezier.BezierType.DailyBonus, null);
+                GameConstants.CollectBonusWithType, coinFlyPosition.transform, Libs.CoinsBezier.BezierType.Purchase, null);
         }
         Messenger.Broadcast(SlotControllerConstants.OnBlanceChangeForDisPlay);
     }

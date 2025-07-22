@@ -232,9 +232,6 @@ internal static class Messenger
 		OnListenerAdding (eventType, handler);
 		eventTable [eventType] = (UnityAction<T, U, V,W>)eventTable [eventType] + handler;
 	}
-	
-
-	
 	#endregion
 
 	#region RemoveListener

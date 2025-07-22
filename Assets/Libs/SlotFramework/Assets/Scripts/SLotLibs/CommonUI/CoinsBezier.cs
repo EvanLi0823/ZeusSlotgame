@@ -13,34 +13,34 @@ namespace Libs
 	public class CoinsBezier : MonoBehaviour
 	{
 		public GameObject BezierObject;
-		public GameObject BezierCashObject;
+		// public GameObject BezierCashObject;
 		public GameObject CoinEffect;
 		private GameObject _coinEffect;
-		private  string BezierObjectPath = "Prefab/Shared/CoinsImage";
-		private  string BezierObjectCashPath = "Prefab/Shared/CashImage";
+		private string PoolKey = "BezierCoins";
+		private string BezierObjectPath = "Prefab/Shared/CoinsImage";
 
-		private  string BezierPanelPath = "Prefab/Shared/CoinsBezierPanel";
+		private static string BezierPanelPath = "Prefab/Shared/CoinsBezierPanel";
 		public Transform targatTansform;
 		public Transform startTransform;
 		private static CoinsBezier _instance;
 
-		private DelayAction stopCoinShakeDelay = null;
-		private Animator coinShakeAnimator;
+		public DelayAction stopCoinShakeDelay = null;
+		public Animator coinShakeAnimator;
 		public float coinShakeTime;
 
 		// 用来描述曲线与运动过程中变化的相关参数
 		// 曲线的中间点的相对坐标
-		private static List<List<Vector3>> bezierMiddlePoints;
+		public static List<List<Vector3>> bezierMiddlePoints;
 		// 曲线中间点的相对随机偏移量范围
-		private static List<float> bezierMiddlePointsOffset;
+		public static List<float> bezierMiddlePointsOffset;
 		// 描述硬币随运动的大小变化
-		private static List<List<Vector2>> sizeScaleChangePolylines;
+		public static List<List<Vector2>> sizeScaleChangePolylines;
 		// 描述硬币在何时运动到曲线的何处
-		private static List<List<Vector2>> timeScaleChangePolylines;
+		public static List<List<Vector2>> timeScaleChangePolylines;
 		// 硬币从起点运动到终点的时间范围
-		private static List<Vector2> timeDuration;
+		public static List<Vector2> timeDuration;
 		// 硬币出现的持续时间
-		private static List<float> popDuration;
+		public static List<float> popDuration;
 
 		// 用来在unity中实时调试曲线的参数，调完之后记得写到代码里。仅支持对一段曲线的调试
 		[Header("是否启用调试")]
@@ -97,7 +97,7 @@ namespace Libs
 					_instance = GameObject.FindObjectOfType<CoinsBezier> ();
 					if (_instance == null) {
 						// 初始化
-						_instance = Instantiate(Libs.ResourceLoadManager.Instance.LoadResource<GameObject> ("Prefab/Shared/CoinsBezierPanel")).GetComponent<CoinsBezier> ();
+						_instance = Instantiate(Libs.ResourceLoadManager.Instance.LoadResource<GameObject> (BezierPanelPath)).GetComponent<CoinsBezier> ();
 						// 向场景中导入指定prefab，并从中获取对象
 						// 设置transform并移动至最上层
 						_instance.transform.SetParent (Libs.UIManager.Instance.Root.transform.parent);
@@ -108,7 +108,7 @@ namespace Libs
 					}
 					// 导入指定的运动物体
 					_instance.BezierObject = Libs.ResourceLoadManager.Instance.LoadResource<GameObject> (_instance.BezierObjectPath);
-					_instance.BezierCashObject = ResourceLoadManager.Instance.LoadResource<GameObject> (_instance.BezierObjectCashPath);
+					// _instance.BezierCashObject = ResourceLoadManager.Instance.LoadResource<GameObject> (_instance.BezierObjectCashPath);
 					Canvas canvas = _instance.GetComponent<Canvas> ();
 					if (canvas != null) {
 						canvas.overrideSorting = true;
@@ -160,7 +160,7 @@ namespace Libs
 			return endPos;
 		}
 
-		private void PlayCoinEffect(Vector3 fromPosition)
+		public void PlayCoinEffect(Vector3 fromPosition)
 		{
 			if(CoinEffect==null)return;
 			if (_coinEffect!=null)
@@ -178,7 +178,7 @@ namespace Libs
 			}
 		}
 
-		private void StopCoinEffect()
+		public void StopCoinEffect()
 		{
 			if(CoinEffect==null)return;
 			_coinEffect = this.transform.Find("CoinEffect").gameObject;
@@ -193,15 +193,7 @@ namespace Libs
 			GetAnimator ();
 			for (int i=0; i<count; i++) {
 				// 从池中取物体，节省性能
-				CoinBezierObject element = null;
-				if (objectType == BezierObjectType.Coin)
-				{
-					element = (PoolMgr.DefaultPools.GetOrCreatePool("BezierCoins").CreateObject( BezierObject) as GameObject).GetComponent<CoinBezierObject>();
-				}
-				else if(objectType == BezierObjectType.Cash)
-				{
-					element = (PoolMgr.DefaultPools.GetOrCreatePool("BezierCash").CreateObject(BezierCashObject) as GameObject).GetComponent<CoinBezierObject>();
-				}
+				CoinBezierObject element = CreateBezierObject();
 				// 相关设置（位置、路径）
 				element.gameObject.SetActive (true);
 				element.skyBezierCurve = new SkyBezierCurve ();
@@ -254,7 +246,7 @@ namespace Libs
 			}).Play();
 		}
 
-		private void PlayCoinFly(Vector3 fromPosition, Vector3 toPosition, BezierType bezierType, System.Action lastCoinCallback = null, int count = 10,BezierObjectType objectType =BezierObjectType.Coin)
+		public void PlayCoinFly(Vector3 fromPosition, Vector3 toPosition, BezierType bezierType, System.Action lastCoinCallback = null, int count = 10,BezierObjectType objectType =BezierObjectType.Coin)
 		{
 			System.Action callback = ()=>
 			{
@@ -278,15 +270,7 @@ namespace Libs
 			
 			for (int i = 0; i < count; i++) {
 				// 从池中取物体，节省性能
-				CoinBezierObject element = null;
-				if (objectType == BezierObjectType.Coin)
-				{
-					element = (PoolMgr.DefaultPools.GetOrCreatePool("BezierCoins").CreateObject( BezierObject) as GameObject).GetComponent<CoinBezierObject>();
-				}
-				else if(objectType == BezierObjectType.Cash)
-				{
-					element = (PoolMgr.DefaultPools.GetOrCreatePool("BezierCash").CreateObject(BezierCashObject) as GameObject).GetComponent<CoinBezierObject>();
-				}
+				CoinBezierObject element = CreateBezierObject();
 				// 相关设置（位置、路径）
 				element.gameObject.SetActive (true);
 //				element.gameObject.GetComponent<Animator>().enabled = false;
@@ -356,10 +340,13 @@ namespace Libs
 				float offset = Random.Range(-1f, 1f);
 //				offset = -1f + 2f * i / (count - 1);
 				// 从池中取物体，节省性能
-				CoinBezierObject element = (PoolMgr.DefaultPools.GetOrCreatePool("BezierCoins").CreateObject( BezierObject) as GameObject).GetComponent<CoinBezierObject>();
+				CoinBezierObject element = CreateBezierObject();
 				// 起始位置、起始大小设置
 				element.gameObject.SetActive (true);
-				element.gameObject.GetComponent<Animator>().enabled = false;
+				if (element.gameObject.GetComponent<Animator>()!=null)
+				{
+					element.gameObject.GetComponent<Animator>().enabled = false;
+				}
 
 				element.transform.SetParent (this.transform, false);
 				element.transform.localPosition = fromPosition;
@@ -440,6 +427,12 @@ namespace Libs
 			Messenger.Broadcast(GameConstants.SET_COINSPANEL_TWEENER_PARAM, minEndTime - sigma, maxEndTime - minEndTime);
 		}
 
+        public CoinBezierObject CreateBezierObject()
+        {
+	        CoinBezierObject element = (PoolMgr.DefaultPools.GetOrCreatePool(PoolKey).CreateObject(BezierObject) as GameObject).GetComponent<CoinBezierObject>();
+	        return element;
+        }
+        
         // 停止所有的金币，令其隐藏
         public void KillAllCoins() {
             foreach (CoinBezierObject element in bezierObjects) {
@@ -451,11 +444,11 @@ namespace Libs
         private void KillCoin(CoinBezierObject element) {
 //            element.gameObject.SetActive(false);
 //            StartCoroutine(UI.Utils.UIUtil.DelayAction(2f, delegate () {
-                PoolMgr.DefaultPools.GetOrCreatePool("BezierCoins").DestoryObject(element.gameObject);
+                PoolMgr.DefaultPools.GetOrCreatePool(PoolKey).DestoryObject(element.gameObject);
 //            }));
         }
 
-		private void GetAnimator()
+        public void GetAnimator()
 		{
 			// if (coinShakeAnimator == null) {
 			// 	if (BaseGameConsole.singletonInstance.IsInLobby ()) {
@@ -469,7 +462,7 @@ namespace Libs
 
 		// 播放终点的金币动画，在金币到达终点时调用
 		// 一定时间后停止动画，若在此之前又有新的金币到达（函数被调用）则重置计时器
-		private void PlayCoinAnimation() {
+		public void PlayCoinAnimation() {
 			if (stopCoinShakeDelay == null) {
 				stopCoinShakeDelay = new DelayAction(coinShakeTime, null, StopCoinAnimation);
 			}
@@ -485,18 +478,18 @@ namespace Libs
 		}
 
 		// 停止终点的金币动画
-		private void StopCoinAnimation() {
+		public void StopCoinAnimation() {
 			if (coinShakeAnimator != null) {
 				coinShakeAnimator.SetTrigger("Stop");
 			}
 		}
 	
-		private float genOffset ()
+		public float genOffset ()
 		{
 			return UnityEngine.Random.Range (-100, 100);
 		}
 
-		private List<Object> bezierObjects = new List<Object>();
+		public List<Object> bezierObjects = new List<Object>();
 
 		// 曲线的种类
 		public enum BezierType {
@@ -516,7 +509,7 @@ namespace Libs
 		}
 
 		// 这两个方法会返回应该使用的参数的编号
-		private int GetBezierSettingIndex(BezierType bezierType) {
+		public int GetBezierSettingIndex(BezierType bezierType) {
 			switch (bezierType) {
 			case BezierType.ByPosition:
 				return -1;
@@ -545,7 +538,7 @@ namespace Libs
 			return 0;
 		}
 
-		private int GetBezierSettingIndex(Vector3 worldPos) {
+		public int GetBezierSettingIndex(Vector3 worldPos) {
 			if (worldPos.y > 1) {
 				if (worldPos.x < -4.8) {
 					return 4;
@@ -571,7 +564,7 @@ namespace Libs
 		}
 
 		// 在这里设定曲线中间点的相对坐标
-		private static void BezierMiddlePointSettings() {
+		public static void BezierMiddlePointSettings() {
 			if (bezierMiddlePoints == null) {
 				bezierMiddlePoints = new List<List<Vector3>>();
 			}
@@ -605,7 +598,7 @@ namespace Libs
 		}
 
 		// 在这里设定曲线中间点的随机相对偏移量最大值
-		private static void BezierMiddlePointOffsetSettings() {
+		public static void BezierMiddlePointOffsetSettings() {
 			if (bezierMiddlePointsOffset == null) {
 				bezierMiddlePointsOffset = new List<float>();
 			}
@@ -620,7 +613,7 @@ namespace Libs
 		}
 
 		// 在这里设定物体在何时运动到曲线的何处
-		private static void TimeScaleChangeSettings() {
+		public static void TimeScaleChangeSettings() {
 			if (timeScaleChangePolylines == null) {
 				timeScaleChangePolylines = new List<List<Vector2>>();
 			}
@@ -665,7 +658,7 @@ namespace Libs
 		}
 
 		// 在这里设定物体在运动时的大小变化
-		private static void SizeScaleChangeSettings() {
+		public static void SizeScaleChangeSettings() {
 			if (sizeScaleChangePolylines == null) {
 				sizeScaleChangePolylines = new List<List<Vector2>>();
 			}
@@ -714,7 +707,7 @@ namespace Libs
 		}
 
 		// 在这里设定物体做曲线运动的时间范围
-		private static void TimeDurationSettings() {
+		public static void TimeDurationSettings() {
 			if (timeDuration == null) {
 				timeDuration = new List<Vector2>();
 			}
@@ -729,7 +722,7 @@ namespace Libs
 		}
 
 		// 在这里设定物体出现的出现时间
-		private static void PopDurationSettings() {
+		public static void PopDurationSettings() {
 			if (popDuration == null) {
 				popDuration = new List<float>();
 			}

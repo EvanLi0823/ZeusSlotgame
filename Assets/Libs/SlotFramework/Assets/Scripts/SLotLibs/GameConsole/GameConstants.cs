@@ -45,8 +45,8 @@ public static class GameConstants
 	public const string CollectBonusWithType = "CollectBonusWithType";
 	public const string CollectBonusWithTypeAndTarget = "CollectBonusWithTypeAndTarget";
 	public const string CollectBonusFromInputMouse = "CollectBonusFromInputMouse";
-	
-	
+	public const string CollectCashWithTypeAndTarget = "CollectCashWithTypeAndTarget";
+
 	public const string OnApplicationResume ="OnApplicationResume";
 	public const string OnSceneInit = "OnSceneInit";
 	public const string OnH5InitSuccess = "OnH5InitSuccess";
