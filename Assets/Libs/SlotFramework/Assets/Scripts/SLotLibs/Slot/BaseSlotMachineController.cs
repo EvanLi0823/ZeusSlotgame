@@ -328,10 +328,13 @@ public class BaseSlotMachineController : MonoBehaviour
         ResultStateManager.InitInstane (this);
 
         Messenger.AddListener<Transform, Libs.CoinsBezier.BezierType, System.Action,CoinsBezier.BezierObjectType>(GameConstants.CollectBonusWithType, CreateCoinBezierFrom);
-        Messenger.AddListener<Transform, Transform, Libs.CoinsBezier.BezierType, System.Action> (GameConstants.CollectBonusWithTypeAndTarget, CreateCoinBezierFromTo);
-		Messenger.AddListener(GameConstants.CollectBonusFromInputMouse, CreateCoinBezierFromInputMouse);
+		//飞金币
+        Messenger.AddListener<Transform,Transform,Libs.CoinsBezier.BezierType,System.Action>(GameConstants.CollectBonusWithTypeAndTarget, CreateCoinBezierFromTo);
+		Messenger.AddListener<CoinsBezier.BezierObjectType>(GameConstants.CollectBonusFromInputMouse, CreateCoinBezierFromInputMouse);
+		//飞钱
+		Messenger.AddListener<Transform,Transform,Libs.CoinsBezier.BezierType,System.Action>(GameConstants.CollectCashWithTypeAndTarget, CreateCashBezierFromTo);
 
-        InitAnimationActions ();
+		InitAnimationActions ();
 		BeginStay ();
 		InitDebugBoardPanel();
 		RegisterMB();
@@ -567,8 +570,9 @@ public class BaseSlotMachineController : MonoBehaviour
 		Messenger.RemoveListener (SlotControllerConstants.AUTO_SPIN_RESUME, AutoSpinResumeHandle);
 		Messenger.RemoveListener(SlotControllerConstants.HIGH_ROLLER_CHECK_KEY,CheckPopupHighRollerDialog);
         Messenger.RemoveListener<Transform, Libs.CoinsBezier.BezierType, System.Action,Libs.CoinsBezier.BezierObjectType>(GameConstants.CollectBonusWithType, CreateCoinBezierFrom);
-		Messenger.RemoveListener(GameConstants.CollectBonusFromInputMouse, CreateCoinBezierFromInputMouse);
-		Messenger.RemoveListener<Transform, Transform, Libs.CoinsBezier.BezierType, System.Action> (GameConstants.CollectBonusWithTypeAndTarget, CreateCoinBezierFromTo);
+		Messenger.RemoveListener<CoinsBezier.BezierObjectType>(GameConstants.CollectBonusFromInputMouse, CreateCoinBezierFromInputMouse);
+		Messenger.RemoveListener<Transform, Transform, Libs.CoinsBezier.BezierType,System.Action> (GameConstants.CollectBonusWithTypeAndTarget, CreateCoinBezierFromTo);
+		Messenger.RemoveListener<Transform, Transform, Libs.CoinsBezier.BezierType,System.Action> (GameConstants.CollectCashWithTypeAndTarget, CreateCashBezierFromTo);
 
         //UnregisterPaymentListeners ();
         Libs.AudioEntity.Instance.StopAllAudio();//LQ 清空所有的Audioclip
@@ -2086,10 +2090,17 @@ public class BaseSlotMachineController : MonoBehaviour
 
 		Vector3 from = Libs.CoinsBezier.Instance.LocalPositionFromTransForm (Libs.UIManager.Instance.UICamera, dialogTransformVector);
 		Vector2 to = Libs.CoinsBezier.Instance.LocalPositionFromTransForm (ToCamera, targetTransformVector);
-        Libs.CoinsBezier.Instance.Create (from, to, bezierType, callback,objectType:objectType);
+		if (objectType == CoinsBezier.BezierObjectType.Cash)
+		{
+			Libs.CashBezier.Instance.Create (from, to, bezierType, callback,objectType:objectType);
+		}
+		else
+		{
+			CoinsBezier.Instance.Create (from, to, bezierType, callback,objectType:objectType);
+		}
 	}
     
-    public void CreateCoinBezierFromTo (Transform dialogTransformVector, Transform target, Libs.CoinsBezier.BezierType bezierType, System.Action callback = null)
+    public void CreateCoinBezierFromTo(Transform dialogTransformVector, Transform target, Libs.CoinsBezier.BezierType bezierType, System.Action callback = null)
     {
 	    Transform targetTransformVector = target;
 
@@ -2100,22 +2111,52 @@ public class BaseSlotMachineController : MonoBehaviour
 
 	    Vector3 from = Libs.CoinsBezier.Instance.LocalPositionFromTransForm (Libs.UIManager.Instance.UICamera, dialogTransformVector);
 	    Vector2 to = Libs.CoinsBezier.Instance.LocalPositionFromTransForm (Libs.UIManager.Instance.UICamera, targetTransformVector);
+	    
 	    Libs.CoinsBezier.Instance.Create (from, to, bezierType, callback);
     }
 
-	public void CreateCoinBezierFromInputMouse ( )
+	public void CreateCoinBezierFromInputMouse(CoinsBezier.BezierObjectType bezierObjectType= CoinsBezier.BezierObjectType.Coin)
     {
-        Transform targetTransformVector = this.CoinsTransform;
+	    Transform targetTransformVector;
+	    if (bezierObjectType == CoinsBezier.BezierObjectType.Cash)
+	    {
+		    targetTransformVector = CashTransform;
+	    }
+	    else  
+	    {
+		    targetTransformVector = this.CoinsTransform;
+	    }
+	    if (ToCamera == null || targetTransformVector == null) {
+		    return;
+	    }
 
-        if (ToCamera == null || targetTransformVector == null) {
-            return;
-        }
-
-        Vector3 from = Libs.CoinsBezier.Instance.LocalPositionFromInputMouse ();
-        Vector2 to = Libs.CoinsBezier.Instance.LocalPositionFromTransForm (ToCamera, targetTransformVector);
-		Libs.CoinsBezier.Instance.Create (from, to, Libs.CoinsBezier.BezierType.DailyBonus);
+	    Vector3 from = Libs.CoinsBezier.Instance.LocalPositionFromInputMouse ();
+	    Vector2 to = Libs.CoinsBezier.Instance.LocalPositionFromTransForm (ToCamera, targetTransformVector);
+	    if (bezierObjectType == CoinsBezier.BezierObjectType.Cash)
+	    {
+		    Libs.CashBezier.Instance.Create (from, to, CoinsBezier.BezierType.DailyBonus);
+	    }
+	    else
+	    {
+		    Libs.CoinsBezier.Instance.Create (from, to, Libs.CoinsBezier.BezierType.DailyBonus);
+	    }
     }
 
+	public void CreateCashBezierFromTo(Transform dialogTransformVector, Transform target, Libs.CoinsBezier.BezierType bezierType, System.Action callback = null)
+	{
+		Transform targetTransformVector = target;
+
+		if (targetTransformVector == null) {
+			return;
+		}
+		Messenger.Broadcast(GameConstants.SET_BALANCE_TARGET_POSITION,targetTransformVector);
+
+		Vector3 from = Libs.CoinsBezier.Instance.LocalPositionFromTransForm (Libs.UIManager.Instance.UICamera, dialogTransformVector);
+		Vector2 to = Libs.CoinsBezier.Instance.LocalPositionFromTransForm (Libs.UIManager.Instance.UICamera, targetTransformVector);
+	    
+		CashBezier.Instance.Create (from, to, bezierType, callback);
+	}
+	
 	#region rateMachine
 	private long StayStartTime = 0;
 
