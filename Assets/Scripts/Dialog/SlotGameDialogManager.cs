@@ -465,14 +465,14 @@ namespace Classic
                 }));
         }
         
-        protected override void OpenContinueSpinDialog(int cash,Action callback)
+        protected override void OpenContinueSpinDialog(int activityId)
         {
             bool isPortrait = BaseGameConsole.ActiveGameConsole().IsInSlotMachine() &&
                 SkySreenUtils.CurrentOrientation == ScreenOrientation.Portrait;
             UIManager.Instance.OpenSystemDialog(
                 new OpenConfigParam<ContinueSpinDialog>(isPortrait,uiPopupStrategy: new SystemUIPopupStrategy(),dialogInitCallBack: (dialog) =>
                 {
-                    dialog.SetUIData(cash,callback);
+                    dialog.SetUIData(activityId);
                 }));
         }
         
