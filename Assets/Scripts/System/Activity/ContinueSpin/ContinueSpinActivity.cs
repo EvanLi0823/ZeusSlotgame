@@ -115,7 +115,7 @@ namespace Activity
             ShowContinueSpinDialog();
         }
 
-        private void ResetTask()
+        public void ResetTask()
         {
             Task.HasCollectNum = 0;
             Task.IsTaskConditionOK = false;
@@ -162,7 +162,12 @@ namespace Activity
         private void ShowContinueSpinDialog()
         {
             _canOpenSpinCount = 0;
-            var randomReward = 0;
+            Messenger.Broadcast<int>(GameDialogManager.OpenContinueSpinDialogMsg,id);
+        }
+
+        public int GetReward()
+        {
+            int randomReward;
             if (IsCloseReward)
             {
                 randomReward = Random.Range(_closeMinReward,_closeMaxReward + 1);
@@ -171,7 +176,7 @@ namespace Activity
             {
                 randomReward = Random.Range(_minReward,_maxReward + 1);
             }
-            Messenger.Broadcast<int,Action>(GameDialogManager.OpenContinueSpinDialogMsg,randomReward,ResetTask);
+            return randomReward;
         }
         
 

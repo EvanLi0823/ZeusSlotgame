@@ -18,17 +18,13 @@ namespace Activity
         private Button _closeButton;
         private Button _getButton;
 
-        private int _randomReward;
-        private Action _callback;
-
        
         private const string CONTINUE_SPIN_COUNT = "CONTINUE_SPIN_COUNT"; //开启次数
         
-        
-        public void SetUIData(int rewardNum,Action callback)
+        ContinueSpinActivity _activity;
+        public void SetUIData(int activityId)
         {
-            _randomReward = rewardNum;
-            _callback = callback;
+            _activity = ActivityManager.Instance.GetActivityByID(activityId) as ContinueSpinActivity;
             OpenUI();
         }
 
@@ -100,13 +96,13 @@ namespace Activity
             //SetCoins();
             _adButton.gameObject.SetActive(false);
             _closeButton.gameObject.SetActive(false);
-            _callback?.Invoke();
+            _activity.ResetTask();
         }
 
         private void SetCoins()
         {
-            //加钱动画播放完毕
-            OnLineEarningMgr.Instance.IncreaseCash(_randomReward);
+            var randomReward = _activity.GetReward();
+            OnLineEarningMgr.Instance.IncreaseCash(randomReward);
             PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.UpdateLevel,OnLineEarningMgr.Instance.GetCashTime());
             Messenger.Broadcast<Transform, Libs.CoinsBezier.BezierType, System.Action, CoinsBezier.BezierObjectType>(
                 GameConstants.CollectBonusWithType, cashFlyPosition, Libs.CoinsBezier.BezierType.DailyBonus, null,
@@ -193,7 +189,9 @@ namespace Activity
             _cashCount.transform.localScale = Vector3.zero;
             _cashCount.transform.DOScale(1, AnimTime).OnComplete(
                 ()=>_getButton.gameObject.SetActive(true));
-            SetCoinsNum(_randomReward);
+
+            var randomReward = _activity.GetReward();
+            SetCoinsNum(randomReward);
            
         }
        
