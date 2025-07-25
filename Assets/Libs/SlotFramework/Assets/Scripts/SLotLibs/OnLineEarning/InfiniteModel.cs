@@ -108,7 +108,7 @@ namespace Core
         }
     }
     
-    public class PopPlanConfig : BaseRewardConfig
+    public class InfiniteModel : BaseOnlineEarningModel
     {
         static readonly string PopPlan_Key = "PopPlan";
         static readonly string PopReward_Key = "Rewards";
@@ -174,7 +174,7 @@ namespace Core
             CurLevelSmallLimit = GetSmallIntervalByLevel(PopLevel);
             CurLevelBigLimit = GetBigLimitByLevel(PopLevel);
             CurSpinLimit = GetSpinLimitByLevel(PopLevel);
-            Debug.Log("PopPlanConfig CurLevel ="+PopLevel+"   SmallDialogPopNum="+SmallDialogPopNum+"    BigDialogPopNum = "+BigDialogPopNum);
+            Debug.Log("InfiniteModel CurLevel ="+PopLevel+"   SmallDialogPopNum="+SmallDialogPopNum+"    BigDialogPopNum = "+BigDialogPopNum);
             Dictionary<string,object> popRewards = Utils.Utilities.GetValue<Dictionary<string,object>>(config, PopReward_Key, null);
             if (popRewards == null)
             {
@@ -277,7 +277,7 @@ namespace Core
         {
             PopLevel += 1;
             Reset();
-            Debug.Log("PopPlanConfig AddLevel CurLevel ="+PopLevel);
+            Debug.Log("InfiniteModel AddLevel CurLevel ="+PopLevel);
             Messenger.Broadcast(SlotControllerConstants.OnPopLevelChange);
         }
 
@@ -286,7 +286,7 @@ namespace Core
             CurLevelSmallLimit = GetSmallIntervalByLevel(PopLevel);
             CurLevelBigLimit = GetBigLimitByLevel(PopLevel);
             CurSpinLimit = GetSpinLimitByLevel(PopLevel);
-            Debug.Log("PopPlanConfig Reset CurSpinLimit ="+CurSpinLimit+"\nCurLevelSmallLimit="+CurLevelSmallLimit+"\nCurLevelBigLimit = "+CurLevelSmallLimit);
+            Debug.Log("InfiniteModel Reset CurSpinLimit ="+CurSpinLimit+"\nCurLevelSmallLimit="+CurLevelSmallLimit+"\nCurLevelBigLimit = "+CurLevelSmallLimit);
         }
         
         //弹出大弹窗

@@ -7,7 +7,7 @@ using Utils;
 
 namespace Core
 {
-    public class ThreeHundredConfig : BaseRewardConfig
+    public class ThreeHundredModel : BaseOnlineEarningModel
     {
         static readonly string SmallInterval_KEY = "Small";
         static readonly string SpinInterval_Key = "Spin";

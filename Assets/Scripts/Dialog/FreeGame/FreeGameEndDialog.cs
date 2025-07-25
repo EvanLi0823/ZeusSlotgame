@@ -6,7 +6,7 @@ using Classic;
 using Libs;
 using TMPro;
 using DG.Tweening;
-
+using Ads;
 public class FreeGameEndDialog : UIDialog 
 {
     [Header("FreeGame结束按钮")]
@@ -46,10 +46,12 @@ public class FreeGameEndDialog : UIDialog
     void OnEnable()
     {
         Messenger.AddListener<int>(ADConstants.PlayFreeSpinEndAD,AdIsPlaySuccessful);
+        Messenger.AddListener<int>(ADConstants.PlayFreeSpinEndADFailed,AdIsPlayFailed);
     }
     void OnDisable()
     {
         Messenger.RemoveListener<int>(ADConstants.PlayFreeSpinEndAD,AdIsPlaySuccessful);
+        Messenger.RemoveListener<int>(ADConstants.PlayFreeSpinEndADFailed,AdIsPlayFailed);
     }
     
     protected override void Start()
@@ -155,6 +157,7 @@ public class FreeGameEndDialog : UIDialog
         {
             ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_ENTRANCE_FREESPINEND);
         }
+        Messenger.Broadcast<string>(ADConstants.PlayAdByEntrance, ADEntrances.REWARD_VIDEO_ENTRANCE_FREESPINEND);
         OnLineEarningMgr.Instance.ResetSpinTime();
         SendMsg(2);
     }
@@ -170,6 +173,11 @@ public class FreeGameEndDialog : UIDialog
         // {
         //     DoneADCallBack();
         // }
+    }
+    
+    void AdIsPlayFailed(int type)
+    {
+        AdIsPlaySuccessful(type);
     }
 
     void RewardADIsPlaySuccess()

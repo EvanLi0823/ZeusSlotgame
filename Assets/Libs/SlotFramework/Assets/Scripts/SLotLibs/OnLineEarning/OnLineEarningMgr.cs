@@ -32,14 +32,14 @@ public enum CountryType
 public class OnLineEarningMgr
 {
     private const string OPEN_KEY = "OPEN";
-    private const string POP_PLAN_CONFIG_KEY = "PopPlanConfig";
+    private const string POP_PLAN_CONFIG_KEY = "InfiniteModelConfig";
     private const string NEW_USER_KEY = "NewUser";
     private const string Spin_KEY = "spin";
     private const string RewardMin_KEY = "rewardmin";
     private const string RewardMax_KEY = "rewardmax";
     private const string IsWhitePackage_KEY = "IsWhitePackage";
 
-    private const string THREE_HUNDRED_CONFIG_KEY = "ThreeHundredConfig";
+    private const string THREE_HUNDRED_CONFIG_KEY = "300ModelConfig";
     private const string ON_LINE_EARNING_MODEL_KEY = "OnLineEarningModel"; //网赚模式 0--》无限模式  1--》300模式
     #region 单例
     protected static OnLineEarningMgr _Instance;
@@ -59,10 +59,10 @@ public class OnLineEarningMgr
     #endregion
    
     private int OnLineEarningModel = 0;
-    private PopPlanConfig popPlanConfig;
-    private ThreeHundredConfig threeHundredConfig;
+    private InfiniteModel _infiniteModel;
+    private ThreeHundredModel _threeHundredModel;
 
-    private BaseRewardConfig baseRewardConfig;
+    private BaseOnlineEarningModel _baseOnlineEarningModel;
     //系统开启按钮
     private bool isOpen = true;
 
@@ -90,24 +90,24 @@ public class OnLineEarningMgr
             if(PopPlanConfigDict == null) 
                 throw new ArgumentNullException ("PopPlan dict not in big plist");
             //开启无限模式，解析无限模式配置
-            if (popPlanConfig == null)
+            if (_infiniteModel == null)
             {
-                popPlanConfig = new PopPlanConfig();
+                _infiniteModel = new InfiniteModel();
             }
-            popPlanConfig.ParseConfig(PopPlanConfigDict);
-            baseRewardConfig = popPlanConfig;
+            _infiniteModel.ParseConfig(PopPlanConfigDict);
+            _baseOnlineEarningModel = _infiniteModel;
         }else if (OnLineEarningModel == 1)
         {
             Dictionary<string,object> ThreeHundredConfigDict = Utils.Utilities.GetValue<Dictionary<string,object>>(config,THREE_HUNDRED_CONFIG_KEY,null);
             if(ThreeHundredConfigDict == null) 
                 throw new ArgumentNullException ("PopPlan dict not in big plist");
             //开启300模式，解析300模式配置
-            if (threeHundredConfig == null)
+            if (_threeHundredModel == null)
             {
-                threeHundredConfig = new ThreeHundredConfig();
+                _threeHundredModel = new ThreeHundredModel();
             }
-            threeHundredConfig.ParseConfig(ThreeHundredConfigDict);
-            baseRewardConfig = threeHundredConfig;
+            _threeHundredModel.ParseConfig(ThreeHundredConfigDict);
+            _baseOnlineEarningModel = _threeHundredModel;
         }
         
         //加载本地化数据
@@ -128,11 +128,13 @@ public class OnLineEarningMgr
 
     OnLineEarningMgr()
     {
-        Messenger.AddListener<bool>(GameConstants.RefreshCashInFree,RefreshCashInFree);
+        Messenger.AddListener<bool>(GameConstants.RefreshCashInFree, RefreshCashInFree);
+        Messenger.AddListener(OnLineEarningConstants.ResetLuckyCashMsg,ResetSpinTime);
     }
     ~OnLineEarningMgr()
     {
         Messenger.RemoveListener<bool>(GameConstants.RefreshCashInFree,RefreshCashInFree);
+        Messenger.RemoveListener(OnLineEarningConstants.ResetLuckyCashMsg,ResetSpinTime);
     }
 
     void OnSpinEnd()
@@ -152,7 +154,6 @@ public class OnLineEarningMgr
     }
     public void SaveToPlayerPrefs()
     {
-        
         PlayerPrefs.SetInt(CASH, cash);
     }
     
@@ -172,21 +173,21 @@ public class OnLineEarningMgr
     }
     public bool isInfiniteOpen()
     {
-        return isOpen && popPlanConfig != null;
+        return isOpen && _infiniteModel != null;
     }
     
     public bool isThreeHundredOpen()
     {
-        return isOpen && threeHundredConfig != null;
+        return isOpen && _threeHundredModel != null;
     }
     
-    public PopPlanConfig GetPopPlanConfig()
+    public InfiniteModel GetPopPlanConfig()
     {
-        return popPlanConfig;
+        return _infiniteModel;
     }
-    public ThreeHundredConfig GetThreeHundredConfig()
+    public ThreeHundredModel GetThreeHundredConfig()
     {
-        return threeHundredConfig;
+        return _threeHundredModel;
     }
     private string language = "";
     private string country = "";
@@ -211,7 +212,7 @@ public class OnLineEarningMgr
     }
     public int GetCashTime()
     {
-        return baseRewardConfig.GetRewardCount;
+        return _baseOnlineEarningModel.GetRewardCount;
     }
     
     public void SetCash(int newCash)
@@ -342,59 +343,61 @@ public class OnLineEarningMgr
     {
         if (isThreeHundredOpen() )
         {
-            return PlatformManager.Instance.CheckCanShowH5() && threeHundredConfig.CanShowH5();
+            return PlatformManager.Instance.CheckCanShowH5() && _threeHundredModel.CanShowH5();
         }
 
         return PlatformManager.Instance.CheckCanShowH5();
     }
+    
+    
     public void AddSpinTime()
     {
-        if (baseRewardConfig!=null)
+        if (_baseOnlineEarningModel!=null)
         {
-            baseRewardConfig.AddSpinTime();
+            _baseOnlineEarningModel.AddSpinTime();
         }
     }
     
     public void ResetSpinTime()
     {
-        if (baseRewardConfig!=null)
+        if (_baseOnlineEarningModel!=null)
         {
-            baseRewardConfig.ResetSpinTime();
+            _baseOnlineEarningModel.ResetSpinTime();
         }
     }
     public bool CheckCanShowBig()
     {
-        if (baseRewardConfig==null)
+        if (_baseOnlineEarningModel==null)
         {
             return false;
         }
-        return baseRewardConfig.CanShowBig();
+        return _baseOnlineEarningModel.CanShowBig();
     }
     
     public bool CheckCanPopReward()
     {
-        if (baseRewardConfig==null)
+        if (_baseOnlineEarningModel==null)
         {
             return false;
         }
-        return baseRewardConfig.CheckCanPopReward();
+        return _baseOnlineEarningModel.CheckCanPopReward();
     }
  
     public void AddGetRewardCount()
     {
-        baseRewardConfig?.AddGetRewardCount();
+        _baseOnlineEarningModel?.AddGetRewardCount();
     } 
     public void AddGetH5RewardCount()
     {
-        baseRewardConfig?.AddGetRewardCount();
+        _baseOnlineEarningModel?.AddGetRewardCount();
     } 
     public void PopSmallDialogEnd()
     {
-        baseRewardConfig?.PopSmallDialogEnd();
+        _baseOnlineEarningModel?.PopSmallDialogEnd();
     }
     public void PopBigDialogEnd()
     {
-        baseRewardConfig?.PopBigDialogEnd();
+        _baseOnlineEarningModel?.PopBigDialogEnd();
     }
     
     
@@ -407,13 +410,13 @@ public class OnLineEarningMgr
         switch (type)
         {
             case 0:
-                baseRewardConfig?.AddADNum();
+                _baseOnlineEarningModel?.AddADNum();
                 break;
             case 1:
-                baseRewardConfig?.AddFreeInterstitialADNum();
+                _baseOnlineEarningModel?.AddFreeInterstitialADNum();
                 break;
             case 2:
-                baseRewardConfig?.AddBonusInterstitialADNum();
+                _baseOnlineEarningModel?.AddBonusInterstitialADNum();
                 break;
         }
     }
@@ -423,13 +426,13 @@ public class OnLineEarningMgr
         switch (type)
         {
             case 0:
-                num = baseRewardConfig.GetADNum();
+                num = _baseOnlineEarningModel.GetADNum();
                 break;
             case 1:
-                num = baseRewardConfig.GetFreeInterstitialADNum();
+                num = _baseOnlineEarningModel.GetFreeInterstitialADNum();
                 break;
             case 2:
-                num = baseRewardConfig.GetBonusInterstitialADNum();
+                num = _baseOnlineEarningModel.GetBonusInterstitialADNum();
                 break;
         }
         return num;
@@ -437,11 +440,11 @@ public class OnLineEarningMgr
   
     public int AddPopSpinWinCount()
     {
-        if (baseRewardConfig==null)
+        if (_baseOnlineEarningModel==null)
         {
             return 0;
         }
-        return baseRewardConfig.AddPopSpinWinCount();
+        return _baseOnlineEarningModel.AddPopSpinWinCount();
     }
     
     public void ResetADNum(int type = 0)
@@ -449,13 +452,13 @@ public class OnLineEarningMgr
         switch (type)
         {
             case 0:
-                baseRewardConfig?.ResetADNum();
+                _baseOnlineEarningModel?.ResetADNum();
                 break;
             case 1:
-                baseRewardConfig?.ResetFreeInterstitialADNum();
+                _baseOnlineEarningModel?.ResetFreeInterstitialADNum();
                 break;
             case 2:
-                baseRewardConfig?.ResetBonusInterstitialADNum();
+                _baseOnlineEarningModel?.ResetBonusInterstitialADNum();
                 break;
         }
        
@@ -467,13 +470,13 @@ public class OnLineEarningMgr
         switch (type)
         {
             case 0:
-                canshow = baseRewardConfig.CheckCanPopAD();
+                canshow = _baseOnlineEarningModel.CheckCanPopAD();
                 break;
             case 1:
-                canshow = baseRewardConfig.CheckCanPopFreeInterstitialAD();
+                canshow = _baseOnlineEarningModel.CheckCanPopFreeInterstitialAD();
                 break;
             case 2:
-                canshow = baseRewardConfig.CheckCanPopBonusInterstitialAD();
+                canshow = _baseOnlineEarningModel.CheckCanPopBonusInterstitialAD();
                 break;
         }
 
@@ -481,41 +484,41 @@ public class OnLineEarningMgr
     }
     public int GetBigRewardMultiple()
     {
-        if (baseRewardConfig==null)
+        if (_baseOnlineEarningModel==null)
         {
             return 0;
         }
-        return baseRewardConfig.GetBigRewardMultiple();
+        return _baseOnlineEarningModel.GetBigRewardMultiple();
     }
 
     public int GetH5Reward()
     {
-        if (baseRewardConfig==null)
+        if (_baseOnlineEarningModel==null)
         {
             return 0;
         }
-        return baseRewardConfig.GetH5Reward();
+        return _baseOnlineEarningModel.GetH5Reward();
     }
 
     public void HandleH5Event(float addCash)
     {
         //广播H5加钱
         int amount = Utilities.CastValueInt(addCash * GetCashMultiple());
-        baseRewardConfig.HandleH5Event(amount);
+        _baseOnlineEarningModel.HandleH5Event(amount);
     }
     
     public int GetCashMultiple()
     {
-        return baseRewardConfig.CashMultiple();
+        return _baseOnlineEarningModel.CashMultiple();
     }
     public int GetLevel()
     {
-        return baseRewardConfig.Level();
+        return _baseOnlineEarningModel.Level();
     }
     //由于cash根据不同的模式扩大的倍数不同，需要金钱文案显示时，通过此方法转换
     public double ConvertMoneyToDouble(int amount,int decimalPlaces=2,bool needExchange = true)
     {
-        int multiple = baseRewardConfig.CashMultiple();
+        int multiple = _baseOnlineEarningModel.CashMultiple();
         double number = 0;
         if (needExchange)
         {
@@ -588,21 +591,21 @@ public class OnLineEarningMgr
     
     public List<PopPlanDiscountItem> GetDiscountItem()
     {
-        return baseRewardConfig.GetDiscountItem();
+        return _baseOnlineEarningModel.GetDiscountItem();
     }
 
     public int GetCurLevelDiscount()
     {
-        return baseRewardConfig.GetCurLevelDiscount();
+        return _baseOnlineEarningModel.GetCurLevelDiscount();
     }
     public double GetWithDrawMoney()
     {
-        return ConvertMoneyToDouble(baseRewardConfig.withDrawMoney);
+        return ConvertMoneyToDouble(_baseOnlineEarningModel.withDrawMoney);
     }
 
     private int GetRewardsByName(string key,int level = 0)
     {
-        return baseRewardConfig.GetRewardsByName(key,level);
+        return _baseOnlineEarningModel.GetRewardsByName(key,level);
     }
 
     public int GetLuckyCashReward()
@@ -680,6 +683,13 @@ public class OnLineEarningMgr
     {
         return JackpotCount>JackpotCountLimit;
     }
+
+
+    #region 外部调用接口
+
+    
+
+    #endregion
 }
 
 

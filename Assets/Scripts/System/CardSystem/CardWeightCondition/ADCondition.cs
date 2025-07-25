@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using Ads;
 namespace CardSystem
 {
     public class ADCondition:BaseWeightCondition

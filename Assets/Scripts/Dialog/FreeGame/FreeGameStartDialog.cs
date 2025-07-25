@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Libs;
-
+using Ads;
 public class FreeGameStartDialog : UIDialog
 {
     [Header("FreeGame开始按钮")]

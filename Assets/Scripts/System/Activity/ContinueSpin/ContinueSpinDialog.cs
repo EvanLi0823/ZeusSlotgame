@@ -7,6 +7,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using Ads;
+
 namespace Activity
 {
     public class ContinueSpinDialog:UIDialog

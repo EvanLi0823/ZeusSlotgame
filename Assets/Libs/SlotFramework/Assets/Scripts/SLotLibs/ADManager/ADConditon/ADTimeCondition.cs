@@ -1,17 +1,13 @@
 
 using System.Collections.Generic;
 
-public class ADTimeCondition:ADCondition
+namespace Ads
 {
-    private int TargetTime;
-    private int HasCollectTime;
-    public ADTimeCondition(Dictionary<string, object> data) : base(data)
+    public class ADTimeCondition:ADCondition
     {
-        TargetTime = Utils.Utilities.GetInt(data, "Time", 0);
-    }
-
-    public override void ResetCondition()
-    {
-        HasCollectTime = 0;
+        public ADTimeCondition(Dictionary<string, object> data) : base(data)
+        {
+        
+        }
     }
 }

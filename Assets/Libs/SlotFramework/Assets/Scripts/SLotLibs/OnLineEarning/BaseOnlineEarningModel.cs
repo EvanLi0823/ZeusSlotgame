@@ -21,7 +21,7 @@ namespace Core
             Index = index;
         }
     }
-    public class BaseRewardConfig
+    public class BaseOnlineEarningModel
     {
         public const string CurADNumberKey = "CurADNumberKey";
         public const string CurLuckyADNumberKey = "CurLuckyADNumberKey";
@@ -47,6 +47,7 @@ namespace Core
         public int ADLimit = 3;
         public int FreeGameADLimit = 3;
         public int BonusGameADLimit = 3;
+        //LuckyCash广告弹出次数限制,前15次spin不弹出luckycash弹窗,之后开始计数，按照当前 level spinlimit弹出
         public int LuckyADLimit = 15;
         
         public int PopSpinWinCount

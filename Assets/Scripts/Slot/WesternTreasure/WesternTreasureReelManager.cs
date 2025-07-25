@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
+using Ads;
 using System;
 using UnityEngine.Serialization;
 //using NUnit.Framework;
