@@ -34,6 +34,8 @@ namespace CardSystem
     {
         public Text txtPercent;
         public Button btn_spin;
+        public Button btn_cardPack;
+        public TextMeshProUGUI cardPackCountText;
         private SpinState spinState = SpinState.Normal;
         private List<GameObject> wheelItems = new List<GameObject>();
         private List<int> config = new List<int>();
@@ -65,6 +67,10 @@ namespace CardSystem
             if (btn_spin != null)
             {
                 UGUIEventListener.Get(btn_spin.gameObject).onClick += OnClickSpinButton;
+            }
+            if (btn_cardPack != null)
+            {
+                UGUIEventListener.Get(btn_cardPack.gameObject).onClick += OnClickCardPackButton;
             }
             spinCurve = new AnimationCurve(
                 new Keyframe(0, 0, 0, 2),          // 开始快速
@@ -109,6 +115,7 @@ namespace CardSystem
             base.Refresh();
             try
             {
+                UpdateCardPackCount();
                 //动画状态重置
                 for (int i = 0; i < wheelItems.Count; i++)
                 {
@@ -150,6 +157,16 @@ namespace CardSystem
                 this.Close();
                 throw;
             }
+        }
+
+        private void UpdateCardPackCount()
+        {
+            int HasCollectNum = CardSystemManager.Instance.GetHaveCardTypeCount();
+            int TargetNum = CardSystemManager.Instance.GetTotalCardTypeCount();
+            if (cardPackCountText != null)
+            {
+                cardPackCountText.text = $"{HasCollectNum}/{TargetNum}";
+            }        
         }
 
         private void PlayCardLotteryAD(int type)
@@ -254,6 +271,13 @@ namespace CardSystem
             }
         }
 
+        private void OnClickCardPackButton(GameObject go)
+        {
+            this.Close();
+            // 打开卡包界面
+            CardSystemManager.Instance.ShowCollectionDialog();
+        }
+        
         void OnFreeSpin()
         {
             // 处理免费转动的逻辑
@@ -482,7 +506,7 @@ namespace CardSystem
             // 更新状态为Finished,权重组自增
             CardSystemManager.Instance.AddWeightIndex();
             //展示获奖界面
-            CardSystemManager.Instance.ShowGetRewardDialog(cardIndex);
+            CardSystemManager.Instance.ShowGetRewardDialog(cardIndex,btn_cardPack.gameObject);
             spinState = SpinState.Finished;
             //打开获奖按钮
             btn_spin.interactable = true; // 重新启用按钮

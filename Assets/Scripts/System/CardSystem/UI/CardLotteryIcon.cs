@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Activity;
 using CardSystem.Activity;
+using Classic;
 using TMPro;
 using UnityEngine.UI;
 
@@ -15,6 +16,8 @@ namespace CardSystem
         private TextMeshProUGUI tmpProgress;
 
         private Image progressBar;
+
+        private Image redPointImg;
 
         private CardLotteryActivity activity;
         // private GameObject handIcon;
@@ -43,9 +46,19 @@ namespace CardSystem
             // {
             //     handIcon = transform.Find("spine_hand")?.gameObject;
             // }
+            redPointImg = Utils.Utilities.RealFindObj<Image>(transform, "img_redPoint");
             tmpProgress = Utils.Utilities.RealFindObj<TextMeshProUGUI>(transform, "img_progressbg/tmp_progress");
             progressBar = Utils.Utilities.RealFindObj<Image>(transform, "img_progressbg/img_progressbar");
         }
+        
+        private void OnEnable()
+        {
+            // 当图标启用时，添加监听器
+            AddListener();
+            ShowRedPoint();
+            // ShowHand();
+        }
+        
         public void ShowHand()
         {
             // 显示小手的逻辑
@@ -55,6 +68,18 @@ namespace CardSystem
             //     return;
             // }
             // handIcon.SetActive(true);
+        }
+        public void ShowRedPoint()
+        {
+            BaseWeightCondition weightCondition = CardSystemManager.Instance.GetCurrentWeightCondition();
+            if (weightCondition is CostCoinsCondition costCoinsCondition)
+            {
+                redPointImg.gameObject.SetActive(UserManager.GetInstance().UserProfile().Balance() > costCoinsCondition.Limit);
+            }
+            else
+            {
+                redPointImg.gameObject.SetActive(true);
+            }
         }
 
         public override void RefreshProgress(float progress,string info=null)
@@ -69,12 +94,14 @@ namespace CardSystem
         {
             // 添加监听器的逻辑
             Debug.Log("Adding listeners for Card Lottery Icon");
+            Messenger.AddListener(CardSystemConstants.LotteryChangeWeightConditionMsg, ShowRedPoint);
         }
 
         protected override void RemoveListener()
         {
             // 移除监听器的逻辑
             Debug.Log("Removing listeners for Card Lottery Icon");
+            Messenger.RemoveListener(CardSystemConstants.LotteryChangeWeightConditionMsg, ShowRedPoint);
         }
         
         void OnButtonClick()

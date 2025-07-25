@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Classic;
 using Libs;
 using MarchingBytes;
@@ -28,7 +29,21 @@ namespace CardSystem
         {
             base.Awake();
             Cards = CardSystemManager.Instance.GetCardsInfo();
-            string info = OnLineEarningMgr.Instance.GetMoneyStr(CardSystemManager.Instance.GetCurCollectionCoins());
+            Cards.Sort((a, b) =>
+            {
+                // 先判断 Count 是否等于0
+                bool aIsZero = a.Count == 0;
+                bool bIsZero = b.Count == 0;
+
+                // 先将 Count==0 的放前面
+                if (aIsZero != bIsZero)
+                    return aIsZero ? -1 : 1;
+
+                // Count都不为0或都为0时，按 Level 排序
+                return b.Level.CompareTo(a.Level);
+            });
+
+            string info = OnLineEarningMgr.Instance.GetMoneyStr(CardSystemManager.Instance.GetCurCollectionCoins(),0);
             tmp_coin.text = info;
             PoolResourceManager.Instance.InitPool(poolName,itemPrefab,14);
             loopScrollRect.prefabSource = this;
@@ -59,7 +74,7 @@ namespace CardSystem
             CardUI cardUI = transform.GetComponent<CardUI>();
             BaseCard itemData = Cards[idx];
             //释放之前绑定的数据对象
-            cardUI.UpdateData(idx,itemData);
+            cardUI.UpdateData(itemData.Index,itemData);
         }
 
         public GameObject GetObject(int index)

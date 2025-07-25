@@ -41,6 +41,7 @@ namespace CardSystem
             // 添加监听器的逻辑
             Debug.Log("Adding listeners for Card Lottery Icon");
             Messenger.AddListener(CardSystemConstants.GetCardNewTypeCountMsg,UpdateCard);
+
         }
 
         protected override void RemoveListener()

@@ -434,7 +434,7 @@ namespace Classic
             UIManager.Instance.OpenSystemDialog(
                 new OpenConfigParam<CardSystemCollectionDialog>(isPortrait,uiPopupStrategy: new SystemUIPopupStrategy(),defaultResourcePath:"CardSystem/Prefab/CardSystemCollectionDialog"));
         }
-        protected override void OpenCardSystemGetCardDialog(int cardId)
+        protected override void OpenCardSystemGetCardDialog(int cardId,GameObject parent)
         {
             UIDialog dialog = UIManager.Instance.GetActiveDialog();
             OpenType type = dialog == null ? OpenType.Normal : OpenType.FrontOfHead;
@@ -444,7 +444,7 @@ namespace Classic
             UIManager.Instance.OpenSystemDialog(
                 new OpenConfigParam<CardSystemGetCardDialog>(isPortrait,eid,openType:type,uiPopupStrategy: new SystemUIPopupStrategy(),dialogInitCallBack: (dialog) =>
                 {
-                    dialog.SetCardId(cardId);
+                    dialog.SetCardData(cardId,parent);
                 },defaultResourcePath:"CardSystem/Prefab/CardSystemGetCardDialog"));
         }
         protected override void OpenCardSystemLuckyDrawDialog()
