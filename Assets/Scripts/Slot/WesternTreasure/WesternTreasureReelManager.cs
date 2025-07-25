@@ -252,7 +252,12 @@ public class WesternTreasureReelManager : GoldsReelManager
             jackpotGameBack.SetActive(true);
         }
         //展示一次广告
-        ShowAD();
+        OnLineEarningMgr.Instance.JackpotCount++;
+        if (OnLineEarningMgr.Instance.CheckCanShowJackpotStartAD())
+        {
+            Debug.Log("[WesternTreasureReelManager] [OpenJackpotGame] [ShowAD]");
+            ShowAD();
+        }
     }
     
     void ShowAD()
