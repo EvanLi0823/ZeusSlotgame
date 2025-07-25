@@ -125,12 +125,12 @@ namespace Activity
         }
         private void OnClickCloseBtn()
         {
-            bool rewardADIsReady = ADManager.Instance.RewardAdIsOk(ADEntrances.REWARD_VIDEO_CONTINUE_SPIN);
+            bool rewardADIsReady = ADManager.Instance.InterstitialAdIsOk(ADEntrances.REWARD_VIDEO_CONTINUE_SPIN);
               
             if (rewardADIsReady)
             {
                 ContinueSpinActivity.IsCloseReward = true;
-                ADManager.Instance.PlayRewardVideo(ADEntrances.REWARD_VIDEO_CONTINUE_SPIN);
+                ADManager.Instance.PlayInterstitialAd(ADEntrances.REWARD_VIDEO_CONTINUE_SPIN);
             }
             else
             {
