@@ -105,6 +105,7 @@ namespace Activity
         private long lastTime = 0;
         public void OnExitH5()
         {
+            //是否被点击过
             if (!isClicked)
             {
                 return;
