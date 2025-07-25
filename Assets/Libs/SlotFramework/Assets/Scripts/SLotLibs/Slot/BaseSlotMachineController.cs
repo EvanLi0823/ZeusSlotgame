@@ -1030,6 +1030,7 @@ public class BaseSlotMachineController : MonoBehaviour
 			DataManager.GetInstance().DataMining.AddSpinTime(slotMachineConfig.Name());
 			SendSlotAutopilotLog(GameConstants.Spin_Key);
 			CoinsIn += currentBetting;
+			UserManager.GetInstance().UserProfile().AllSpinTimes += MachineSpinTime;
 		}
 
 		Messenger.Broadcast (GameConstants.DO_SPIN);

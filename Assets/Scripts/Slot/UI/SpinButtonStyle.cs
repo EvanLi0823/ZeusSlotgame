@@ -363,6 +363,7 @@ public class SpinButtonStyle : MonoBehaviour
                 }
                 else
                 {
+                    //spin按钮长按点击开启autospin
                     if(!m_isAutoSpin) return;
                     bool isLongPress = lastTime > 0 && Time.time > lastTime + 0.9;
                     if (!longPressActive && !Guide.activeInHierarchy)
@@ -606,6 +607,13 @@ public class SpinButtonStyle : MonoBehaviour
                     }
                     else
                     {
+                        //此处进行判断第一次点击时直接切换为autoSpin模式
+                        if (BaseSlotMachineController.Instance.MachineSpinTime==0)
+                        {
+                            OnAutoSpinClick();
+                            return;
+                        }
+                        //不是第一次 spin，改为正常点击 spin
                         if (BaseSlotMachineController.Instance.DoSpin())
                         {
                             WaitStopSpin();
