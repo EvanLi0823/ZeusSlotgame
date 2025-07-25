@@ -20,6 +20,7 @@ namespace Activity
 
        
         private const string CONTINUE_SPIN_COUNT = "CONTINUE_SPIN_COUNT"; //开启次数
+        private const string CONTINUE_SPIN_CLOSE = "CONTINUE_SPIN_CLOSE"; //关闭次数
         
         ContinueSpinActivity _activity;
         public void SetUIData(int activityId)
@@ -88,10 +89,21 @@ namespace Activity
 
         private void ShowVideoCallBack(int res)
         {
-            int count = SharedPlayerPrefs.GetPlayerPrefsIntValue(CONTINUE_SPIN_COUNT);
-            count++;
-            SharedPlayerPrefs.SetPlayerPrefsIntValue(CONTINUE_SPIN_COUNT,count);
-            PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"continue_spin_count",count);
+            if (ContinueSpinActivity.IsCloseReward)
+            {
+                int count = SharedPlayerPrefs.GetPlayerPrefsIntValue(CONTINUE_SPIN_CLOSE);
+                count++;
+                SharedPlayerPrefs.SetPlayerPrefsIntValue(CONTINUE_SPIN_CLOSE,count);
+                PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"continue_spin_close",count);
+            }
+            else
+            {
+                int count = SharedPlayerPrefs.GetPlayerPrefsIntValue(CONTINUE_SPIN_COUNT);
+                count++;
+                SharedPlayerPrefs.SetPlayerPrefsIntValue(CONTINUE_SPIN_COUNT,count);
+                PlatformManager.Instance.SendMsgToPlatFormByType(MessageType.BuryPoint,"continue_spin_count",count);
+            }
+            
             PlayAnim();
             //SetCoins();
             _adButton.gameObject.SetActive(false);
